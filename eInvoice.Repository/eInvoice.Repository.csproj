@@ -88,6 +88,10 @@
       <Project>{1ca6d384-731b-4bb9-85e7-a83c0e76d920}</Project>
       <Name>eInvoice.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\eInvoice.MultiLanguages\eInvoice.MultiLanguages.csproj">
+      <Project>{8610ffe1-ef07-4339-b24c-b681b9b69a15}</Project>
+      <Name>eInvoice.MultiLanguages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eInvoice.Untilities\eInvoice.Untilities.csproj">
       <Project>{29d6746e-60f9-4d53-91f5-d73968107a23}</Project>
       <Name>eInvoice.Untilities</Name>

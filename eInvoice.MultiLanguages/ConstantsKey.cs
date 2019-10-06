@@ -9,6 +9,9 @@ namespace eInvoice.MultiLanguages
     public class ConstantsKey
     {
         //Lỗi tìm kiếm hóa đơn
-        public const string ERR_SEARCH_INVOICE = "LoiTimKiemHoaDon";
+        public const string LOI_TIM_KIEM_HOA_DON = "LoiTimKiemHoaDon";
+        public const string SO_TRANG_KHONG_HOP_LE = "SoTrangLaKhongHopLe";
+        public const string DOI_TUONG_KHONG_TON_TAI = "DoiTuongKhongTonTai";
+        
     }
 }
