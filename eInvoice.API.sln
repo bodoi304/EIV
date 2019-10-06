@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.API", "eInvoice.API\eInvoice.API.csproj", "{C8F30FF9-AC6B-4F44-AA8C-D374CE8E546E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Repository", "eInvoice.Repository\eInvoice.Repository.csproj", "{E19324FD-16D5-469A-AC5B-855B24F0EC45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Model", "eInvoice.Model\eInvoice.Model.csproj", "{1CA6D384-731B-4BB9-85E7-A83C0E76D920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Services", "eInvoice.Services\eInvoice.Services.csproj", "{94937C65-C4CB-45FE-85A1-F9F4D03FF644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Untilities", "eInvoice.Untilities\eInvoice.Untilities.csproj", "{29D6746E-60F9-4D53-91F5-D73968107A23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.MultiLanguages", "eInvoice.MultiLanguages\eInvoice.MultiLanguages.csproj", "{8610FFE1-EF07-4339-B24C-B681B9B69A15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8F30FF9-AC6B-4F44-AA8C-D374CE8E546E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F30FF9-AC6B-4F44-AA8C-D374CE8E546E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F30FF9-AC6B-4F44-AA8C-D374CE8E546E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F30FF9-AC6B-4F44-AA8C-D374CE8E546E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E19324FD-16D5-469A-AC5B-855B24F0EC45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E19324FD-16D5-469A-AC5B-855B24F0EC45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E19324FD-16D5-469A-AC5B-855B24F0EC45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E19324FD-16D5-469A-AC5B-855B24F0EC45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CA6D384-731B-4BB9-85E7-A83C0E76D920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CA6D384-731B-4BB9-85E7-A83C0E76D920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CA6D384-731B-4BB9-85E7-A83C0E76D920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CA6D384-731B-4BB9-85E7-A83C0E76D920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94937C65-C4CB-45FE-85A1-F9F4D03FF644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94937C65-C4CB-45FE-85A1-F9F4D03FF644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94937C65-C4CB-45FE-85A1-F9F4D03FF644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94937C65-C4CB-45FE-85A1-F9F4D03FF644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D6746E-60F9-4D53-91F5-D73968107A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D6746E-60F9-4D53-91F5-D73968107A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D6746E-60F9-4D53-91F5-D73968107A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D6746E-60F9-4D53-91F5-D73968107A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9DAFE6A-B53E-4B52-AEC6-901DE4D1CAFF}
+	EndGlobalSection
+EndGlobal
