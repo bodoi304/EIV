@@ -8,5 +8,10 @@ namespace eInvoice.Untilities.Common
 {
    public class Constants
     {
+        public class StatusUserAPIAccess
+        {
+            public const int ACTIVE = 1;
+            public const int NONACTIVE = 0;
+        }
     }
 }

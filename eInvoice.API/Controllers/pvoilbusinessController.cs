@@ -32,7 +32,7 @@ namespace eInvoice.API.Controllers
             }
             catch (Exception ex)
             {
-                throw Logs.Error(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsKey.ERR_SEARCH_INVOICE));
+                throw Logs.Error(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsKey.LOI_TIM_KIEM_HOA_DON));
             }        
         }   
     }

@@ -51,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\DbContextSQL.cs" />
+    <Compile Include="EDM\ApiUserAccess.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDM\EinvoicesEDM.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

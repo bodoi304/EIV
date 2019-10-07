@@ -26,5 +26,6 @@ namespace eInvoice.Repository.EDM
         }
     
         public virtual DbSet<Invoice03> Invoice03 { get; set; }
+        public virtual DbSet<ApiUserAccess> ApiUserAccesses { get; set; }
     }
 }

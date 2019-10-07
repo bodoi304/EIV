@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace eInvoice.Services.Service
 {
     //impliment service danh mục
-    public class InvoiceCategorys : IInvoiceCategorys
+    public class InvoiceCategorysService : IInvoiceCategorys
     {
         private IDBContextHelper db;
         //Inject DB theo cấu hình qua Constructor
-        public InvoiceCategorys(IDBContextHelper db)
+        public InvoiceCategorysService(IDBContextHelper db)
         {
             this.db = db;
         }
