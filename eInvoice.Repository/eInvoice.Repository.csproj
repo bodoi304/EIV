@@ -42,6 +42,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\source\repos\eInvoice.API\eInvoice.API\Lib\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext\DbContextSQL.cs" />
+    <Compile Include="DataAccessBase.cs" />
+    <Compile Include="DataAccess\ApiUserAccessDA.cs" />
+    <Compile Include="DataContext\DBContextInvoiceSQL.cs" />
     <Compile Include="EDM\ApiUserAccess.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
@@ -72,7 +79,7 @@
     <Compile Include="EDM\Invoice03.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Interface\IDBContextHelper.cs" />
+    <Compile Include="Interface\IDBContextInvoiceSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

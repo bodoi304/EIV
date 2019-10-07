@@ -12,11 +12,11 @@ using eInvoice.MultiLanguages;
 namespace eInvoice.Repository.DataContext
 {
     //impliment 1 DB context SQL
-    public class DbContextSQL : IDBContextHelper 
+    public class DBContextInvoiceSQL : IDBContextInvoiceSQL 
     {
         public HDDT_pvoilEntities db;
 
-        public DbContextSQL()
+        public DBContextInvoiceSQL()
         {
             db = new HDDT_pvoilEntities();
         }

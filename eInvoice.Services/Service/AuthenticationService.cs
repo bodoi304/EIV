@@ -8,19 +8,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eInvoice.Repository.DataAccess;
 
 namespace eInvoice.Services.Service
 {
     public class AuthenticationService : IAuthentication
     {
-        private IDBContextHelper db;
+       
         //Inject DB theo cấu hình qua Constructor
-        public AuthenticationService(IDBContextHelper db)
-        {
-            this.db = db;
-        }
+       
         public bool checkAuthentication(string itemAuthentication,  string IP,int timeOutLogin)
         {
+            //khởi tao instance truy vấn kho dữ liệu
+            ApiUserAccessDA dhApiUser = new ApiUserAccessDA();
             //decode base64 thông tin user
             String[] authentication = Untility.decodeBase64(itemAuthentication).Split(':');
 
@@ -43,7 +43,7 @@ namespace eInvoice.Services.Service
             else
             {
                 //chưa được đăng nhập thì kiểm tra trong DB
-                ApiUserAccess user = db.GetOne<ApiUserAccess>(b => b.UserName.ToUpper() == UserName.ToUpper() && b.Password == Password);
+                ApiUserAccess user = dhApiUser.checkExist(UserName, Password);
                 if (user == null)
                 {
                     return false;

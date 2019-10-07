@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace eInvoice.Repository.Interface
 {
    //Các method cần có cho 1 DB context
-   public interface IDBContextHelper
+   public interface IDBContextInvoiceSQL
     {
         IQueryable<T> GetTable<T>() where T : class;
 

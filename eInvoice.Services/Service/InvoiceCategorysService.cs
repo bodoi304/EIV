@@ -12,16 +12,10 @@ namespace eInvoice.Services.Service
     //impliment service danh mục
     public class InvoiceCategorysService : IInvoiceCategorys
     {
-        private IDBContextHelper db;
-        //Inject DB theo cấu hình qua Constructor
-        public InvoiceCategorysService(IDBContextHelper db)
-        {
-            this.db = db;
-        }
         //Service đồng bộ danh mục
         public List<Invoice03> syncCategory()
         {
-           return db.Filter<Invoice03>(b => true, 1, 20, "id");
+            return new List<Invoice03>();
         }
     }
 }

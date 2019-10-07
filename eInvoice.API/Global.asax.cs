@@ -49,9 +49,8 @@ namespace eInvoice.API
             //Singleton trong suốt vòng đời ứng dụng chỉ có 1 instance duy nhất
             //Scoped: Chỉ tồn tại 1 instance trong 1 lần request (mỗi request là 1 scope).
             //Transient: Một instance mới luôn được tạo, mỗi khi được yêu cầu.
-            container.Register<IDBContextHelper, DbContextSQL>(Lifestyle.Singleton);
             container.Register<IInvoiceCategorys, InvoiceCategorysService>(Lifestyle.Scoped );
-            container.Register<IAuthentication, AuthenticationService>(Lifestyle.Singleton);
+            container.Register<IAuthentication, AuthenticationService>(Lifestyle.Scoped);
             // This is an extension method from the integration package.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
