@@ -80,7 +80,7 @@ namespace eInvoice.Repository.DataContext
         where T : class
         {
             if (pageNumber < 1)
-                throw new Exception(ConfigMultiLanguage.getMess(ConstantsKey .SO_TRANG_KHONG_HOP_LE));
+                throw new Exception(ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey .SO_TRANG_KHONG_HOP_LE));
             return db.Set<T>().Where(predicate).OrderBy<T>(namePropertyOrder).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
 
@@ -138,7 +138,7 @@ namespace eInvoice.Repository.DataContext
         {
             var t = db.Set<T>().Where(predicate).SingleOrDefault();
             if (t == null)
-                throw new NullReferenceException(ConfigMultiLanguage.getMess(ConstantsKey .DOI_TUONG_KHONG_TON_TAI ));
+                throw new NullReferenceException(ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey .DOI_TUONG_KHONG_TON_TAI ));
             if (!t.Equals(entity))
                 foreach (var p in t.GetType().GetProperties())
                     p.SetValue(t, p.GetValue(entity, null), null);

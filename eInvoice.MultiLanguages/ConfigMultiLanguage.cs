@@ -28,7 +28,7 @@ namespace eInvoice.MultiLanguages
                 }
             }
         }
-        //Hàm get Mess theo key trong file ConstantsKey.cs
+        //Hàm get Mess theo key trong file ConstantsMultiLanguageKey.cs
         public static String getMess(String key)
         {
             return messReturn[key];

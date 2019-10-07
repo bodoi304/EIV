@@ -32,7 +32,7 @@ namespace eInvoice.API.Controllers
             }
             catch (Exception ex)
             {
-                throw Logs.Error(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsKey.LOI_TIM_KIEM_HOA_DON));
+                throw Logs.Error(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_TIM_KIEM_HOA_DON));
             }        
         }   
     }

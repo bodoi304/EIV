@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eInvoice.MultiLanguages
 {
-    public class ConstantsKey
+    public class ConstantsMultiLanguageKey
     {
         //Lỗi tìm kiếm hóa đơn
         public const string LOI_TIM_KIEM_HOA_DON = "LoiTimKiemHoaDon";
