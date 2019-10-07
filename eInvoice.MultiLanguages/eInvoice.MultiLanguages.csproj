@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigMultiLanguage.cs" />
-    <Compile Include="ConstantsKey.cs" />
+    <Compile Include="ConstantsMultiLanguageKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
