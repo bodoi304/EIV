@@ -1,4 +1,4 @@
-﻿using eInvoice.Repository.EDM;
+﻿using eInvoice.Entity.EDM;
 using eInvoice.Repository.Interface;
 using System;
 using System.Collections.Generic;

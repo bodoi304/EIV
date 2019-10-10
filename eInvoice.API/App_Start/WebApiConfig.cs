@@ -21,7 +21,7 @@ namespace eInvoice.API
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.JsonFormatter.SupportedMediaTypes
-    .Add(new MediaTypeHeaderValue("text/html"));
+    .Add(new MediaTypeHeaderValue("text/plan"));
         }
     }
 }

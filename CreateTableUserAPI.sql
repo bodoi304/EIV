@@ -4,5 +4,6 @@ Create table ApiUserAccess
    [Password] varchar(30),
    TaxCode varchar(20),
    CreateDate DateTime default getdate(),
-   IpMachine varchar(150)
+   IpMachine varchar(150),
+   Status int
 )

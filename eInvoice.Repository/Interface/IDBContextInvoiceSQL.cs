@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 namespace eInvoice.Repository.Interface
 {
    //Các method cần có cho 1 DB context
-   public interface IDBContextInvoiceSQL
+   public interface IDBContextInvoiceSQL<GDBConText>
     {
+        GDBConText db { get; set; }
         IQueryable<T> GetTable<T>() where T : class;
 
         /// <summary>

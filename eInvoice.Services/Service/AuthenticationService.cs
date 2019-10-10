@@ -1,4 +1,4 @@
-﻿using eInvoice.Repository.EDM;
+﻿
 using eInvoice.Repository.Interface;
 using eInvoice.Services.Interface;
 using eInvoice.Untilities.Common;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eInvoice.Repository.DataAccess;
+using eInvoice.Entity.EDM;
 
 namespace eInvoice.Services.Service
 {

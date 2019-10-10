@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eInvoice.Repository.EDM
+namespace eInvoice.Entity.EDM
 {
     using System;
     using System.Collections.Generic;

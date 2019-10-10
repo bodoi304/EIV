@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Untilities", "eInv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.MultiLanguages", "eInvoice.MultiLanguages\eInvoice.MultiLanguages.csproj", "{8610FFE1-EF07-4339-B24C-B681B9B69A15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInvoice.Entity", "eInvoice.Entity\eInvoice.Entity.csproj", "{5CB1FBFC-BB71-4214-B80B-6DF1A735F62D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8610FFE1-EF07-4339-B24C-B681B9B69A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB1FBFC-BB71-4214-B80B-6DF1A735F62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB1FBFC-BB71-4214-B80B-6DF1A735F62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB1FBFC-BB71-4214-B80B-6DF1A735F62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB1FBFC-BB71-4214-B80B-6DF1A735F62D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

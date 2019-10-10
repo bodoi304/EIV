@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Data.Entity;
 using eInvoice.Repository.Interface;
-using eInvoice.Repository.EDM;
+
 using eInvoice.Untilities;
 using eInvoice.MultiLanguages;
+using eInvoice.Entity.EDM;
 
 namespace eInvoice.Repository.DataContext
 {
     //impliment 1 DB context SQL
-    public class DBContextInvoiceSQL : IDBContextInvoiceSQL 
+    public class DBContextInvoiceSQL : IDBContextInvoiceSQL<HDDT_pvoilEntities>
     {
-        public HDDT_pvoilEntities db;
-
+        public HDDT_pvoilEntities db { get; set ; }
         public DBContextInvoiceSQL()
         {
             db = new HDDT_pvoilEntities();
@@ -198,6 +198,8 @@ namespace eInvoice.Repository.DataContext
 
         #region Transaction Controller
         private DbContextTransaction Transaction { get; set; }
+
+
         public void BeginTransaction()
         {
             if (this.Transaction == null)

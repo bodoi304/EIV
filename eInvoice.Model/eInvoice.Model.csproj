@@ -34,11 +34,16 @@
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -56,7 +61,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Category\Response\syncCategory\NghiepVuModel.cs" />
+    <Compile Include="Category\Response\syncCategory\DmNghiepVuModel.cs" />
+    <Compile Include="Category\Response\syncCategory\DMDiemXuatModel.cs" />
+    <Compile Include="Category\Response\syncCategory\DMKhoModel.cs" />
+    <Compile Include="Category\Response\syncCategory\DMMaKeToanModel.cs" />
+    <Compile Include="Category\Response\syncCategory\DiemXuatModel.cs" />
+    <Compile Include="Category\Response\syncCategory\KhoModel.cs" />
+    <Compile Include="Category\Response\syncCategory\MaKeToanModel.cs" />
+    <Compile Include="Category\Response\syncCategory\SyncCategoryResponse.cs" />
+    <Compile Include="Invoice\Request\SearchInvoiceRequest.cs" />
+    <Compile Include="Category\Request\SyncCategoryRequest.cs" />
+    <Compile Include="Invoice\Response\searchInvoice\searchInvoiceModel.cs" />
+    <Compile Include="Invoice\Response\searchInvoice\searchInvoiceResponse.cs" />
+    <Compile Include="ModelBase.cs" />
+    <Compile Include="ModelValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +85,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\" />
+    <ProjectReference Include="..\eInvoice.Entity\eInvoice.Entity.csproj">
+      <Project>{5cb1fbfc-bb71-4214-b80b-6df1a735f62d}</Project>
+      <Name>eInvoice.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eInvoice.MultiLanguages\eInvoice.MultiLanguages.csproj">
+      <Project>{8610ffe1-ef07-4339-b24c-b681b9b69a15}</Project>
+      <Name>eInvoice.MultiLanguages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

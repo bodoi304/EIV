@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -42,6 +45,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,45 +61,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="DataAccessBase.cs" />
     <Compile Include="DataAccess\ApiUserAccessDA.cs" />
+    <Compile Include="DataAccess\SearchInvoiceDA.cs" />
+    <Compile Include="DataAccess\SyncCategoryDA.cs" />
     <Compile Include="DataContext\DBContextInvoiceSQL.cs" />
-    <Compile Include="EDM\ApiUserAccess.cs">
-      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDM\EinvoicesEDM.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EinvoicesEDM.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDM\EinvoicesEDM.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDM\EinvoicesEDM.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EinvoicesEDM.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EDM\Invoice03.cs">
-      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Interface\IDBContextInvoiceSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="EDM\EinvoicesEDM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EinvoicesEDM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EDM\EinvoicesEDM.edmx.diagram">
-      <DependentUpon>EinvoicesEDM.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eInvoice.Entity\eInvoice.Entity.csproj">
+      <Project>{5cb1fbfc-bb71-4214-b80b-6df1a735f62d}</Project>
+      <Name>eInvoice.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eInvoice.Model\eInvoice.Model.csproj">
       <Project>{1ca6d384-731b-4bb9-85e7-a83c0e76d920}</Project>
       <Name>eInvoice.Model</Name>
@@ -109,18 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EDM\EinvoicesEDM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EinvoicesEDM.edmx</DependentUpon>
-      <LastGenOutput>EinvoicesEDM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EDM\EinvoicesEDM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EinvoicesEDM.edmx</DependentUpon>
-      <LastGenOutput>EinvoicesEDM.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

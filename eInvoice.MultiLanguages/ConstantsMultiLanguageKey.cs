@@ -8,10 +8,11 @@ namespace eInvoice.MultiLanguages
 {
     public class ConstantsMultiLanguageKey
     {
-        //Lỗi tìm kiếm hóa đơn
-        public const string LOI_TIM_KIEM_HOA_DON = "LoiTimKiemHoaDon";
+
+        public const string LOI_CHUNG = "Loichung";
         public const string SO_TRANG_KHONG_HOP_LE = "SoTrangLaKhongHopLe";
         public const string DOI_TUONG_KHONG_TON_TAI = "DoiTuongKhongTonTai";
-        
+        public const string TRUONG_MAP_JSON_KHONG_DUOC_DE_TRONG_OBJ = "MapJSONKhongDuocDeTrongObj";
+        public const string TRUONG_MAP_JSON_KHONG_DUOC_DE_TRONG_LIST = "MapJSONKhongDuocDeTrongList";
     }
 }
