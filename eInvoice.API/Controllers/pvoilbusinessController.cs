@@ -82,7 +82,11 @@ namespace eInvoice.API.Controllers
                 throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
             }
         }
-
+        /// <summary>
+        /// API them hóa đơn : api/pvoilbusiness/createInvoice
+        /// </summary>
+        /// <param name="objRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         public bool createInvoice(CreateInvoiceRequest objRequest)
         {

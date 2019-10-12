@@ -11,6 +11,11 @@ namespace eInvoice.Repository.DataAccess
 {
     public class CRUDInvoices : DataAccessBase
     {
+        /// <summary>
+        /// them invoice
+        /// </summary>
+        /// <param name="invoiceObj"></param>
+        /// <returns></returns>
         public int  insertInvoices(PVOILInvoice invoiceObj)
         {
             dbInvoice.Insert<PVOILInvoice>(invoiceObj);
@@ -18,7 +23,12 @@ namespace eInvoice.Repository.DataAccess
         }
 
 
-
+        /// <summary>
+        /// Thêm invoice kèm product
+        /// </summary>
+        /// <param name="invoiceObj"></param>
+        /// <param name="lstProductObj"></param>
+        /// <returns></returns>
         public bool insertInvoiceProduct(PVOILInvoice invoiceObj,List <ProductInv> lstProductObj)
         {
             ProductInvDA cPro = new ProductInvDA();
