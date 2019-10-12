@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Model
 {
-    public abstract  class ModelBase
+    public abstract class ModelBase
     {
+        private static MapperConfiguration configuration;
         /// <summary>
         /// check required cho model
         /// </summary>
@@ -41,10 +42,13 @@ namespace eInvoice.Model
         {
             return ModelValidate.validateRequiredList<ModelBase>(lstObject, arr);
         }
-
+    
         public static IMapper mapperStatic<S,D>()
         {
-            var configuration = new MapperConfiguration(cfg => { cfg.CreateMap<S, D>().ReverseMap (); });
+            if (configuration==null)
+            {
+                configuration = new MapperConfiguration(cfg => { cfg.CreateMap<S, D>().ReverseMap(); });
+            }
             return configuration.CreateMapper();
         }
 
