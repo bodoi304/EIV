@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="413bd4e1fff3434fbedb5d41f3b8459f" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="413bd4e1fff3434fbedb5d41f3b8459f" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="HDDT_pvoilModel.ApiUserAccess" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.BusinessDepartment" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.UserDepartment" Width="1.5" PointX="2.75" PointY="0.75" />

@@ -2,6 +2,7 @@
 using eInvoice.Model;
 using eInvoice.Model.Category.Response.syncCategory;
 using eInvoice.Model.DTOs.Invoice;
+using eInvoice.Model.Invoice;
 using eInvoice.Model.Invoice.Request;
 using eInvoice.Model.Invoice.Response.searchInvoice;
 using eInvoice.MultiLanguages;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 
 namespace eInvoice.API.Controllers
 {
@@ -32,41 +34,68 @@ namespace eInvoice.API.Controllers
             this.invoice = invoice;
         }
         /// <summary>
-        /// API kiểm tra kết quả xử lý hóa đơn dự thảo từ FAST
+        /// API trả về danh mục: api/pvoilbusiness/syncCategory
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
         [HttpPost]
-        public SyncCategoryResponse syncCategory(SyncCategoryRequest objRequest)
+        public List<SyncCategoryResponse> syncCategory(SyncCategoryRequest objRequest)
         {
-
-            String validateRequest = ModelBase.validateRequiredObject(objRequest, new string[] { "userName", "taxCode" });
-            if (!String.IsNullOrEmpty(validateRequest))
+            if (ModelState.IsValid)
             {
-                throw Logs.Error(HttpStatusCode.BadRequest, validateRequest);
+                try
+                {
+                    return invoiceCategory.syncCategory(objRequest);
+                }
+                catch (Exception ex)
+                {
+                    throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
+                }
+
             }
+            else
+            {
+                throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+            }
+        }
+        /// <summary>
+        /// API kiểm tra kết quả xử lý hóa đơn dự thảo từ FAST: api/pvoilbusiness/searchInvoice
+        /// </summary>
+        /// <param name="objRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
+        {
             try
             {
-                return invoiceCategory.syncCategory(objRequest);
+                if (ModelState.IsValid)
+                {
+                    return invoice.searchInvoice(objRequest);
+                }
+                else
+                {
+                    throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+                }
             }
             catch (Exception ex)
             {
                 throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
             }
         }
-      
-        [HttpPost]
-        public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
-        {
 
-            String validateRequest = ModelBase.validateRequiredObject(objRequest, new string[] { "from", "to", "taxCode" });
-            if (!String.IsNullOrEmpty(validateRequest))
-            {
-                throw Logs.Error(HttpStatusCode.BadRequest, validateRequest);
-            }
+        [HttpPost]
+        public bool createInvoice(CreateInvoiceRequest objRequest)
+        {
             try
             {
-                return invoice.searchInvoice (objRequest);
+                if (ModelState.IsValid)
+                {
+                    return invoice.createInvoice(objRequest);
+                }
+                else
+                {
+                    throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+                }
             }
             catch (Exception ex)
             {

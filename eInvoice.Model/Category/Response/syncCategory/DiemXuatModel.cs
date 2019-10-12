@@ -10,10 +10,11 @@ namespace eInvoice.Model.Category.Response.syncCategory
 {
     public class DiemXuatModel : ModelBase 
     {
-        public string Ma { get; set; }
-        public string Ten { get; set; }
-        public string DiaChi { get; set; }
-        public string MaDV { get; set; }
+        public int id { get; set; }
+        public string ma { get; set; }
+        public string mota { get; set; }
+        public string diachi { get; set; }
+        public string donvi { get; set; }
 
         public override IMapper mapper()
         {

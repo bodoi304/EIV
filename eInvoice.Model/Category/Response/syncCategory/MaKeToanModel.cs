@@ -11,9 +11,11 @@ namespace eInvoice.Model.Category.Response.syncCategory
 {
     public class MaKeToanModel : ModelBase
     {
-        [JsonProperty("Ma")]
+        [JsonProperty("id")]
+        public int AccountingAccID { get; set; }
+        [JsonProperty("ma")]
         public string AccountingAccCode{ get; set; }
-        [JsonProperty("MoTa")]
+        [JsonProperty("mota")]
         public string Description   { get; set; }
 
         public override IMapper mapper()

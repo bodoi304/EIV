@@ -10,11 +10,11 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
     public class searchInvoiceModel
     {
         public string key;
-        public PVOILInvoice invoice;
+        public InvoicesModel invoice;
 
         public searchInvoiceModel()
         {
-            this.invoice = new PVOILInvoice();
+            this.invoice = new InvoicesModel();
         }
     }
 }

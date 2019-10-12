@@ -62,14 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category\Response\syncCategory\NghiepVuModel.cs" />
-    <Compile Include="Category\Response\syncCategory\DmNghiepVuModel.cs" />
-    <Compile Include="Category\Response\syncCategory\DMDiemXuatModel.cs" />
-    <Compile Include="Category\Response\syncCategory\DMKhoModel.cs" />
-    <Compile Include="Category\Response\syncCategory\DMMaKeToanModel.cs" />
     <Compile Include="Category\Response\syncCategory\DiemXuatModel.cs" />
     <Compile Include="Category\Response\syncCategory\KhoModel.cs" />
     <Compile Include="Category\Response\syncCategory\MaKeToanModel.cs" />
     <Compile Include="Category\Response\syncCategory\SyncCategoryResponse.cs" />
+    <Compile Include="Invoice\InvoicesModel.cs" />
+    <Compile Include="Invoice\Request\CreateInvoiceRequest.cs" />
     <Compile Include="Invoice\Request\SearchInvoiceRequest.cs" />
     <Compile Include="Category\Request\SyncCategoryRequest.cs" />
     <Compile Include="Invoice\Response\searchInvoice\searchInvoiceModel.cs" />

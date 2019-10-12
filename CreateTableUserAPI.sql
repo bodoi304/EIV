@@ -7,3 +7,6 @@ Create table ApiUserAccess
    IpMachine varchar(150),
    Status int
 )
+go
+--them key cho table productinv
+  alter table ProductInv add primary key (id)

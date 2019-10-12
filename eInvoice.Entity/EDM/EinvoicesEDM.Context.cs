@@ -36,15 +36,6 @@ namespace eInvoice.Entity.EDM
         public virtual DbSet<PVOILInvoice> PVOILInvoices { get; set; }
         public virtual DbSet<ProductInv> ProductInvs { get; set; }
     
-        public virtual ObjectResult<Warehouse_SelectByTaxCode_Result> Warehouse_SelectByTaxCode(string taxCode)
-        {
-            var taxCodeParameter = taxCode != null ?
-                new ObjectParameter("TaxCode", taxCode) :
-                new ObjectParameter("TaxCode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Warehouse_SelectByTaxCode_Result>("Warehouse_SelectByTaxCode", taxCodeParameter);
-        }
-    
         public virtual ObjectResult<SyncCategory_DiemXuat_Result> SyncCategory_DiemXuat(string username, string taxCode)
         {
             var usernameParameter = username != null ?
@@ -69,6 +60,15 @@ namespace eInvoice.Entity.EDM
                 new ObjectParameter("TaxCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SyncCategory_NghiepVu_Result>("SyncCategory_NghiepVu", usernameParameter, taxCodeParameter);
+        }
+    
+        public virtual ObjectResult<Warehouse_SelectByTaxCode_Result> Warehouse_SelectByTaxCode(string taxCode)
+        {
+            var taxCodeParameter = taxCode != null ?
+                new ObjectParameter("TaxCode", taxCode) :
+                new ObjectParameter("TaxCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Warehouse_SelectByTaxCode_Result>("Warehouse_SelectByTaxCode", taxCodeParameter);
         }
     }
 }

@@ -222,7 +222,5 @@ namespace eInvoice.Entity.EDM
         public string WOutputWarehouse { get; set; }
         public string CTransportVehicle { get; set; }
         public string TransportAgentCode { get; set; }
-        public List<ProductInv> products { get; set; }
-        public String key { get; set; }
-}
+    }
 }

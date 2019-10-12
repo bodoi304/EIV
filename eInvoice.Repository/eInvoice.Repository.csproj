@@ -64,6 +64,8 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="DataAccessBase.cs" />
     <Compile Include="DataAccess\ApiUserAccessDA.cs" />
+    <Compile Include="DataAccess\CRUDInvoices.cs" />
+    <Compile Include="DataAccess\ProductInvDA.cs" />
     <Compile Include="DataAccess\SearchInvoiceDA.cs" />
     <Compile Include="DataAccess\SyncCategoryDA.cs" />
     <Compile Include="DataContext\DBContextInvoiceSQL.cs" />

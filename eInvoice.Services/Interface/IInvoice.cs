@@ -1,4 +1,6 @@
 ﻿using eInvoice.Model.DTOs.Invoice;
+using eInvoice.Model.Invoice;
+using eInvoice.Model.Invoice.Request;
 using eInvoice.Model.Invoice.Response.searchInvoice;
 using System;
 using System.Collections.Generic;
@@ -11,5 +13,7 @@ namespace eInvoice.Services.Interface
     public interface IInvoice
     {
         searchInvoiceResponse searchInvoice(SearchInvoiceRequest searchInvoice);
+
+        bool createInvoice(CreateInvoiceRequest createInvoiceModel);
     }
 }

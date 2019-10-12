@@ -12,7 +12,7 @@ namespace eInvoice.Model.DTOs.Invoice
     /// <summary>
     /// Đối tượng Request cho API: api/pvoilbusiness/searchInvoice
     /// </summary>
-    public class SearchInvoiceRequest : ModelBase
+    public class SearchInvoiceRequest : ModelBase,IValidatableObject
     {
 
         public string maDiemxuatHD { get; set; }
@@ -26,6 +26,20 @@ namespace eInvoice.Model.DTOs.Invoice
         public override IMapper mapper()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// ham validate model
+        /// </summary>
+        /// <param name="validationContext"></param>
+        /// <returns></returns>
+        public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
+        {
+            String validateRequest = ModelBase.validateRequiredObject(new string[] { "from","to", "taxCode" }, new object[] { from, to, taxCode });
+            if (!String.IsNullOrEmpty(validateRequest))
+            {
+                yield return new ValidationResult(validateRequest);
+            }
         }
     }
 }

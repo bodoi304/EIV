@@ -186,6 +186,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eInvoice.Entity\eInvoice.Entity.csproj">
+      <Project>{5cb1fbfc-bb71-4214-b80b-6df1a735f62d}</Project>
+      <Name>eInvoice.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eInvoice.Model\eInvoice.Model.csproj">
       <Project>{1ca6d384-731b-4bb9-85e7-a83c0e76d920}</Project>
       <Name>eInvoice.Model</Name>

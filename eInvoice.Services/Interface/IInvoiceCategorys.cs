@@ -16,6 +16,6 @@ namespace eInvoice.Services.Interface
         /// Service lấy danh mục trả về cho FAST api/pvoilbusiness/syncCategory
         /// </summary>
         /// <returns></returns>
-        SyncCategoryResponse syncCategory(SyncCategoryRequest syncCategory);
+        List<SyncCategoryResponse> syncCategory(SyncCategoryRequest syncCategory);
     }
 }

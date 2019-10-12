@@ -42,6 +42,30 @@ namespace eInvoice.Model
             return null;
         }
 
+        public static String validateRequiredObject( string[] name,params object[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {              
+                if (arr[i].GetType() == typeof(String))
+                {
+                    String objTmp = (String)arr[i];
+                    if (objTmp == null || String.IsNullOrEmpty(objTmp))
+                    {
+                        return String.Format(ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.TRUONG_MAP_JSON_KHONG_DUOC_DE_TRONG_OBJ), name[i] );
+                    }
+                }
+                if (arr[i].GetType() == typeof(DateTime))
+                {
+                    DateTime objTmp = (DateTime)arr[i];
+                    if (arr[i] == null || objTmp == DateTime.MinValue)
+                    {
+                        return String.Format(ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.TRUONG_MAP_JSON_KHONG_DUOC_DE_TRONG_OBJ), name[i]);
+                    }
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// check required cho list model
         /// </summary>

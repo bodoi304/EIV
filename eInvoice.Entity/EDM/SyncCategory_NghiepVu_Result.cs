@@ -13,6 +13,7 @@ namespace eInvoice.Entity.EDM
     
     public partial class SyncCategory_NghiepVu_Result
     {
+        public int id { get; set; }
         public string Ten { get; set; }
         public string Ma { get; set; }
     }

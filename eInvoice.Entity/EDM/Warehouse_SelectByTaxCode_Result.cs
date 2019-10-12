@@ -13,6 +13,7 @@ namespace eInvoice.Entity.EDM
     
     public partial class Warehouse_SelectByTaxCode_Result
     {
+        public int Id { get; set; }
         public string TenKho { get; set; }
         public string MaKho { get; set; }
         public string DiaChi { get; set; }

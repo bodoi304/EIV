@@ -30,17 +30,21 @@ namespace eInvoice.API.Filter
             {
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
             }
-            foreach (String item in authenHeader)
+            if (authenHeader != null)
             {
-                //check Authentication
-                Boolean isLogin = auth.checkAuthentication(item, actionContext.Request.GetClientIpAddress(), timeOutLogin);
-                //login không thành công
-                if (!isLogin)
+                foreach (String item in authenHeader)
                 {
-                    actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    //check Authentication
+                    Boolean isLogin = auth.checkAuthentication(item, actionContext.Request.GetClientIpAddress(), timeOutLogin);
+                    //login không thành công
+                    if (!isLogin)
+                    {
+                        actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    }
+                    break;
                 }
-                break;
             }
+          
 
         }
 

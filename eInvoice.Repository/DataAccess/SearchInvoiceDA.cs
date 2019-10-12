@@ -1,5 +1,6 @@
 ﻿using eInvoice.Entity.EDM;
 using eInvoice.Model.DTOs.Invoice;
+using eInvoice.Model.Invoice;
 using eInvoice.Untilities.EFUntility;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace eInvoice.Repository.DataAccess
             {
                 predicate = predicate.And(t => t.ArisingDate <= searchInvoice.to);
             }
-            return dbInvoice.Filter<PVOILInvoice>(predicate).ToList ();
+            return  dbInvoice.Filter<PVOILInvoice>(predicate).ToList ();
         }
         /// <summary>
         /// Select product by invoce

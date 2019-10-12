@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
 
 namespace eInvoice.Untilities.Common
 {
@@ -22,6 +23,20 @@ namespace eInvoice.Untilities.Common
             byte[] data = Convert.FromBase64String(str);
             string decodedString = Encoding.UTF8.GetString(data);
             return decodedString;
+        }
+
+        //Summary: get error tuwf model state
+        public static String getError(ModelStateDictionary model)
+        {
+            var errors = new StringBuilder ();
+            foreach (var state in model)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    errors.Append (error.ErrorMessage + "\n");
+                }
+            }
+            return errors.ToString ();
         }
     }
 }

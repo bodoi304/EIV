@@ -63,8 +63,6 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.AccountingAccount' does not h
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Phone" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'test_hddt_pvoil3.dbo.ProductInv' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProductInv">
           <Key>
             <PropertyRef Name="id" />
@@ -359,6 +357,7 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <EntitySet Name="ApiUserAccess" EntityType="Self.ApiUserAccess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusinessDepartment" EntityType="Self.BusinessDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInv" EntityType="Self.ProductInv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PVOILInvoice" EntityType="Self.PVOILInvoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDepartment" EntityType="Self.UserDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingAccount" EntityType="Self.AccountingAccount" store:Type="Tables" store:Schema="dbo">
@@ -369,39 +368,6 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
     [AccountingAccount].[AccountingAccName] AS [AccountingAccName], 
     [AccountingAccount].[Description] AS [Description]
     FROM [dbo].[AccountingAccount] AS [AccountingAccount]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ProductInv" EntityType="Self.ProductInv" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ProductInv].[id] AS [id], 
-    [ProductInv].[InvID] AS [InvID], 
-    [ProductInv].[Code] AS [Code], 
-    [ProductInv].[Name] AS [Name], 
-    [ProductInv].[Remark] AS [Remark], 
-    [ProductInv].[Price] AS [Price], 
-    [ProductInv].[Quantity] AS [Quantity], 
-    [ProductInv].[Unit] AS [Unit], 
-    [ProductInv].[Total] AS [Total], 
-    [ProductInv].[VATRate] AS [VATRate], 
-    [ProductInv].[Discount] AS [Discount], 
-    [ProductInv].[VATAmount] AS [VATAmount], 
-    [ProductInv].[DiscountAmount] AS [DiscountAmount], 
-    [ProductInv].[Amount] AS [Amount], 
-    [ProductInv].[ProdType] AS [ProdType], 
-    [ProductInv].[IsSum] AS [IsSum], 
-    [ProductInv].[CreateDate] AS [CreateDate], 
-    [ProductInv].[Extra] AS [Extra], 
-    [ProductInv].[ComID] AS [ComID], 
-    [ProductInv].[ImportQuantity] AS [ImportQuantity], 
-    [ProductInv].[ExportQuantity] AS [ExportQuantity], 
-    [ProductInv].[InvoiceNo] AS [InvoiceNo], 
-    [ProductInv].[ProductId] AS [ProductId], 
-    [ProductInv].[ConvertUnit] AS [ConvertUnit], 
-    [ProductInv].[ConvertQuantity] AS [ConvertQuantity], 
-    [ProductInv].[DraftQuantity] AS [DraftQuantity], 
-    [ProductInv].[DraftAmount] AS [DraftAmount], 
-    [ProductInv].[ConvertUnit2] AS [ConvertUnit2], 
-    [ProductInv].[ConvertQuantity2] AS [ConvertQuantity2]
-    FROM [dbo].[ProductInv] AS [ProductInv]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -429,9 +395,8 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <EntitySet Name="AccountingAccounts" EntityType="HDDT_pvoilModel.AccountingAccount" />
           <EntitySet Name="Warehouses" EntityType="HDDT_pvoilModel.Warehouse" />
           <EntitySet Name="Departments" EntityType="HDDT_pvoilModel.Department" />
-          <FunctionImport Name="Warehouse_SelectByTaxCode" ReturnType="Collection(HDDT_pvoilModel.Warehouse_SelectByTaxCode_Result)">
-          <Parameter Name="TaxCode" Mode="In" Type="String" />
-          </FunctionImport>
+          <EntitySet Name="PVOILInvoices" EntityType="HDDT_pvoilModel.PVOILInvoice" />
+          <EntitySet Name="ProductInvs" EntityType="HDDT_pvoilModel.ProductInv" />
           <FunctionImport Name="SyncCategory_DiemXuat" ReturnType="Collection(HDDT_pvoilModel.SyncCategory_DiemXuat_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="TaxCode" Mode="In" Type="String" />
@@ -440,8 +405,9 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="TaxCode" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="PVOILInvoices" EntityType="HDDT_pvoilModel.PVOILInvoice" />
-          <EntitySet Name="ProductInvs" EntityType="HDDT_pvoilModel.ProductInv" />
+          <FunctionImport Name="Warehouse_SelectByTaxCode" ReturnType="Collection(HDDT_pvoilModel.Warehouse_SelectByTaxCode_Result)">
+          <Parameter Name="TaxCode" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ApiUserAccess">
           <Key>
@@ -529,22 +495,6 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="Warehouse_SelectByTaxCode_Result">
-          <Property Type="String" Name="TenKho" Nullable="false" MaxLength="250" />
-          <Property Type="String" Name="MaKho" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="550" />
-          <Property Type="String" Name="MaDV" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="SyncCategory_DiemXuat_Result">
-          <Property Type="String" Name="MaDV" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Ten" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Ma" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="SyncCategory_NghiepVu_Result">
-          <Property Type="String" Name="Ten" Nullable="false" MaxLength="350" />
-          <Property Type="String" Name="Ma" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <EntityType Name="PVOILInvoice">
           <Key>
             <PropertyRef Name="id" />
@@ -792,6 +742,25 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <Property Name="ConvertUnit2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ConvertQuantity2" Type="Decimal" Precision="27" Scale="9" />
         </EntityType>
+        <ComplexType Name="SyncCategory_DiemXuat_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="MaDV" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ten" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Ma" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="SyncCategory_NghiepVu_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Ten" Nullable="false" MaxLength="350" />
+          <Property Type="String" Name="Ma" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Warehouse_SelectByTaxCode_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TenKho" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="MaKho" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="MaDV" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -883,34 +852,6 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Warehouse_SelectByTaxCode" FunctionName="HDDT_pvoilModel.Store.Warehouse_SelectByTaxCode">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HDDT_pvoilModel.Warehouse_SelectByTaxCode_Result">
-                <ScalarProperty Name="TenKho" ColumnName="TenKho" />
-                <ScalarProperty Name="MaKho" ColumnName="MaKho" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SyncCategory_DiemXuat" FunctionName="HDDT_pvoilModel.Store.SyncCategory_DiemXuat">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HDDT_pvoilModel.SyncCategory_DiemXuat_Result">
-                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Ma" ColumnName="Ma" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SyncCategory_NghiepVu" FunctionName="HDDT_pvoilModel.Store.SyncCategory_NghiepVu">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="HDDT_pvoilModel.SyncCategory_NghiepVu_Result">
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Ma" ColumnName="Ma" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="PVOILInvoices">
             <EntityTypeMapping TypeName="HDDT_pvoilModel.PVOILInvoice">
               <MappingFragment StoreEntitySet="PVOILInvoice">
@@ -1160,6 +1101,37 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SyncCategory_DiemXuat" FunctionName="HDDT_pvoilModel.Store.SyncCategory_DiemXuat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDT_pvoilModel.SyncCategory_DiemXuat_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SyncCategory_NghiepVu" FunctionName="HDDT_pvoilModel.Store.SyncCategory_NghiepVu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDT_pvoilModel.SyncCategory_NghiepVu_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Warehouse_SelectByTaxCode" FunctionName="HDDT_pvoilModel.Store.Warehouse_SelectByTaxCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDT_pvoilModel.Warehouse_SelectByTaxCode_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenKho" ColumnName="TenKho" />
+                <ScalarProperty Name="MaKho" ColumnName="MaKho" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

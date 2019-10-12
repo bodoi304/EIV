@@ -10,8 +10,9 @@ namespace eInvoice.Model.Category.Response.syncCategory
 {
     public class NghiepVuModel : ModelBase 
     {
-        public string Ma { get; set; }
-        public string Ten { get; set; }
+        public int id { get; set; }
+        public string ma { get; set; }
+        public string mota { get; set; }
 
         public override IMapper mapper()
         {
