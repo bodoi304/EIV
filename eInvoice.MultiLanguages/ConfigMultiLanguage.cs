@@ -31,7 +31,13 @@ namespace eInvoice.MultiLanguages
         //Hàm get Mess theo key trong file ConstantsMultiLanguageKey.cs
         public static String getMess(String key)
         {
-            return messReturn[key];
+            return  messReturn[key];
+        }
+
+        //Hàm get Mess theo key trong file dùng cho các mess càn dùng String.format
+        public static String getMessWithKey(String key)
+        {
+            return key+ "@" + messReturn[key];
         }
 
         //Hàm load file theo file mess được cấu hình

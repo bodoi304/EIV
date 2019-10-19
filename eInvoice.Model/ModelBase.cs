@@ -27,7 +27,7 @@ namespace eInvoice.Model
         /// <param name="name">Tap hop ten các thuộc tính cần required theo thu tự</param>
         /// <param name="arr">các properties cần required</param>
         /// <returns></returns>
-        public static String validateRequiredObject( string[] name,object[] arr)
+        public static List<String> validateRequiredObject( string[] name,object[] arr)
         {
             return ModelValidate.validateRequiredObject(name, arr);
         }

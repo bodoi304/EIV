@@ -1,6 +1,7 @@
 ﻿using eInvoice.Model.DTOs.Invoice;
 using eInvoice.Model.Invoice;
 using eInvoice.Model.Invoice.Request;
+using eInvoice.Model.Invoice.Response.createInvoice;
 using eInvoice.Model.Invoice.Response.searchInvoice;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace eInvoice.Services.Interface
     {
         searchInvoiceResponse searchInvoice(SearchInvoiceRequest searchInvoice);
 
-        bool createInvoice(CreateInvoiceRequest createInvoiceModel);
+        createInvoiceResponse createInvoice(CreateInvoiceRequest createInvoiceModel);
+
+        byte[] exportPDF(ExportInvoiceRequest exportObj);
     }
 }

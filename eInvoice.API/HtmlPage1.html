@@ -1,0 +1,480 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>VAT</title>
+    <div style="display:none">
+
+        if (lt IE 9)
+        &lt;script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"&gt;&lt;/script&gt;
+
+    </div>
+    <style type="text/css">
+        @charset "utf-8";
+
+        .VATTEMP #main-content,
+        .VATTEMP .cus {
+        }
+
+            .VATTEMP .border-label,
+            .VATTEMP .comp span,
+            .VATTEMP .cus span {
+                display: block;
+                float: left
+            }
+
+        * html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            line-height: 1.42857143
+        }
+
+        .VATTEMP * {
+            box-sizing: border-box
+        }
+
+        #main {
+            margin: 0 auto
+        }
+
+        .VATTEMP {
+            background-color: #fff;
+            font-family: 'Time New Roman';
+            padding: 0;
+            width: 800px;
+            font-size: 14px !important
+        }
+
+            .VATTEMP #header,
+            .VATTEMP #main-content {
+                width: 100%;
+                clear: left;
+                overflow: hidden !important
+            }
+
+            .VATTEMP #main-content {
+                margin-top: 5px
+            }
+
+            .VATTEMP .content {
+                clear: left;
+                overflow: hidden;
+                margin: 0 auto
+            }
+
+            .VATTEMP .dotted {
+                border: none;
+                background: 0 0;
+                border-bottom: 2px dotted #000;
+                height: 14px
+            }
+
+            .VATTEMP .header-title {
+                float: left;
+                width: 300px;
+                overflow: hidden;
+                text-align: center
+            }
+
+                .VATTEMP .header-title p {
+                    margin: 0
+                }
+
+                .VATTEMP .header-title h3 {
+                    margin: 0;
+                    text-transform: uppercase;
+                    color: #06066F
+                }
+
+            .VATTEMP .header-right {
+                float: right;
+                overflow: hidden
+            }
+
+                .VATTEMP .header-right p {
+                    margin: 0 10px 10px;
+                    width: 100%
+                }
+
+            .VATTEMP #header .date {
+                clear: left;
+                margin: 15px auto 0;
+                color: #06066F
+            }
+
+            .VATTEMP.text-upper {
+                text-transform: uppercase
+            }
+
+            .VATTEMP .text-strong {
+                font-weight: 700 padding-left:107px;
+            }
+
+            .VATTEMP .invtable {
+                width: 100%;
+                border-collapse: collapse;
+                border: 1px solid #000;
+                text-align: center
+            }
+
+                .VATTEMP .invtable td {
+                    border-bottom: 1px solid #000;
+                    border-right: 1px solid #000;
+                    height: 25px
+                }
+
+            .VATTEMP .noborder td {
+                border-bottom: none
+            }
+
+            .VATTEMP .invtable .data td {
+                border-right: 1px solid #000
+            }
+
+            .VATTEMP .fl-l {
+                float: left;
+                width: 164px;
+                text-align: center
+            }
+
+            .VATTEMP .fl-r {
+                float: right;
+                width: 300px;
+                text-align: center
+            }
+
+            .VATTEMP .bgimg {
+                cursor: pointer
+            }
+
+                .VATTEMP .bgimg p {
+                    color: #000;
+                    padding-left: 13px;
+                    text-align: left
+                }
+
+            .VATTEMP .inv-serial p {
+                margin: 0 0 3px
+            }
+
+            .VATTEMP #wemail {
+                ;
+                margin-right: 0;
+            }
+
+            .VATTEMP #wfax,
+            #wphone {
+                margin-right: 15px;
+            }
+
+            .VATTEMP .comp {
+                float: left;
+                overflow: hidden;
+                width: 80%
+            }
+
+                .VATTEMP .comp h2 {
+                    font-weight: 700;
+                    font-size: 22px;
+                    margin: 0 0 5px;
+                    padding: 0
+                }
+
+            .VATTEMP .border-label {
+                border-bottom: 1px dotted;
+                padding-bottom: 1px;
+                height: 18px
+            }
+
+            .VATTEMP .comp p,
+            .VATTEMP .cus p {
+                position: relative;
+                margin: 0 0 4px;
+                padding-bottom: 1px;
+                display: block;
+                overflow: hidden;
+            }
+
+            .VATTEMP .comp p {
+                margin: 0
+            }
+
+                .VATTEMP .comp p strong,
+                .VATTEMP .cus p strong {
+                    border: 1px solid #000;
+                    padding: 0 5px 2px;
+                    float: left;
+                    display: block;
+                    width: 20px;
+                    height: 22px
+                }
+
+            .VATTEMP .comp b,
+            .VATTEMP .cus b {
+                padding-bottom: 1px;
+                word-wrap: break-word
+            }
+
+                .VATTEMP .cus b:after,
+                .VATTEMP .nextpage b:after {
+                    content: "";
+                    position: absolute;
+                    height: 6px;
+                    margin-left: 0;
+                    border-bottom: 1px dotted #000;
+                    width: 100%;
+                    bottom: 2.5px;
+                }
+
+            .VATTEMP .summary {
+                text-align: right
+            }
+
+            #author-inv,
+            .VATTEMP .cus b:after,
+            .VATTEMP .nextpage b:after {
+                content: "";
+                position: absolute;
+                height: 6px;
+                margin-left: 0;
+                border-bottom: 1px dotted #000;
+                width: 100%;
+                bottom: 2.5px;
+            }
+
+            .VATTEMP .nextpage b:after {
+                bottom: 0
+            }
+
+        #author-inv {
+            text-align: center;
+            padding-bottom: 5px;
+            margin-bottom: 0
+        }
+
+        @media print {
+            #printView {
+                font-size: 14.5px;
+                min-width: 850px !important;
+                margin-left: 35px
+            }
+        }
+
+        .VATTEMP #logo {
+            float: left;
+            width: 11%;
+            height: 100px;
+            background: url('data:image/png;base64,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') no-repeat
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        function displayCert(serialCert) {
+            try {
+                var obj = document.TestCert;
+                if (obj) {
+                    obj.showCertInfo(serialCert);
+                }
+                else {
+                }
+            } catch (ex) {
+                alert("ActiveX chưa được cho phép hoặc đang sử dụng trình duyệt khác IE!");
+            }
+        }
+        function htmlEncode(value) {
+            return $('<div />').text(value).html();
+        }
+        function htmlDecode(value) {
+            return $('<div />').html(value).text();
+        }
+    </script>
+</head>
+<body>
+    <div id="printView" style="clear:both;background-color: white;">
+        <div class="VATTEMP" style="min-height: 1100px;   border: 1px double; border-style: double;border-width: 4px;">
+            <div class="content">
+                <div id="header">
+                    <div id="logo"> </div><div id="winfo" style="width:84%;float:left;overflow:hidden;padding-top:2px" class="comp">
+                        <h2 style="text-align:center;font-size:20px;color:#000">
+                            TỔNG CÔNG TY DẦU VIỆT NAM - CÔNG TY CỔ PHẦN
+                            <br /><i>(PETROVIETNAM OIL CORPORATION)</i>
+                        </h2><p style="clear:both;font-weight: 700;">
+                            <span>
+                                Địa chỉ <i>(Address)</i>: 
+                                <b style="padding-bottom: 2px;word-wrap:break-word;font-weight: 100;">
+                                    Tầng 14-18, Tòa nhà PetroVietnam Tower, Số 1-5 Lê Duẩn , P Bến Nghé, Q 1, TP Hồ Chí Minh
+
+                                </b>
+                            </span>
+                        </p><span style="clear:both;float:left;">
+                            <span id="wphone" style="height: 20px;">
+                                <strong>Điện thoại <i>(Tel)</i>:</strong>
+
+                                (+84) 028 39106990
+
+                            </span><span id="wfax" style="height: 20px;">
+                                <strong>Fax:</strong>
+
+                                (+84) 028 39106980
+
+                            </span>
+                        </span>
+                    </div>
+                </div><div id="main-content" style="margin-top:5px;border-top: 1px solid grey;">
+                    <div style="float:left;width:100%;margin-top: 15px;">
+                        <div class="Invoice-qrCode" style="width:19%;float:left">
+
+                        </div><div class="header-title" style="width:57%;float:left">
+                            <h2>
+                                <strong style="text-transform: uppercase;font-size: 20px;font-weight: 700; color: #000;">
+                                    Hóa đơn giá trị gia tăng<BR /><i>(VAT INVOICE)</i>
+                                </strong>
+                            </h2><p style="margin-top:5px;font-size:14px!important;text-align: center!important;margin: inherit!important;" />
+                        </div><div style="width:24%;float:left" class="inv-serial">
+                            <p>
+                                Mẫu số <i>(Form)</i>: 01GTKT0/001
+                            </p><p>
+                                Ký hiệu <i>(Serial)</i>: PA/19E
+                            </p><p>
+                                Số <i>(No.)</i>: <strong style="color:red;">0000002</strong>
+                            </p><p>
+                                Ngày <i>(Date)</i>:
+                                01/07/2019
+                            </p>
+                        </div>
+                    </div><div style="clear: both; width:100%;border-top: 1px solid;&#xD;&#xA;    padding: 8px;" class="cus">
+                        <p style="">
+                            <span style=" font-weight: 700;">
+                                Đơn vị bán hàng <i style="font-style: italic;">(Seller)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">TỔNG CÔNG TY DẦU VIỆT NAM - CÔNG TY CỔ PHẦN</b>
+                        </p><p style="clear:both">
+                            <span style=" font-weight: 700;">
+                                Địa chỉ <i style="font-style: italic;">(Address)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">Tầng 14 - 18, Tòa nhà PetroVietnam Tower, Số 1 - 5 Lê Duẩn, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh </b>
+                        </p><p style="clear:both">
+                            <span style=" font-weight: 700;">
+                                Số tài khoản <i style="font-style: italic;">(Account No.)</i>:
+                            </span><label class="border-label text-strong" style="width:23%;margin:0;font-weight: 100;"></label><span style="font-weight: 700;">
+                                Tại ngân hàng <i style="font-style: italic;">(At Bank)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;"></b>
+                        </p><p style="">
+                            <span style="font-weight: 700;">
+                                Điện thoại <i style="font-style: italic;">(Tel)</i>:
+                            </span><label class="border-label text-strong" style="width:32%;margin:0px;font-weight: 100;">(+84) 028 39106990</label><span style="font-weight: 700;">
+                                Fax:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">(+84) 028 39106980</b>
+                        </p><p style="">
+                            <span style="font-weight: 700;">
+                                Mã số thuế <i style="font-style: italic;">(Tax Code)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">0305795054</b>
+                        </p>
+                    </div><div style="clear: both; width:100%;border-top: 1px solid;&#xD;&#xA;    padding: 8px;" class="cus">
+                        <p style="">
+                            <span style=" font-weight: 700;">
+                                Họ tên người mua <i style="font-style: italic;">(Customer)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;"></b>
+                        </p><p style="">
+                            <span style=" font-weight: 700;">
+                                Tên đơn vị <i style="font-style: italic;">(Company)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">CÔNG TY CỔ PHẦN XĂNG DẦU DẦU KHÍ TÂY NINH</b>
+                        </p><p style="clear:both">
+                            <span style="font-weight: 700;">
+                                Mã số thuế <i style="font-style: italic;">(Tax Code)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 1px;word-wrap:break-word;font-weight: 100;">3900937898</b>
+                        </p><p style="clear:both">
+                            <span style="font-weight: 700;">
+                                Địa chỉ <i style="font-style: italic;">(Address)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 1px;word-wrap:break-word;font-weight: 100;">Số 1/40 Quốc lộ 22B, Ấp Long Bình, xã Long Thành Nam, huyện Hòa Thành, tỉnh Tây Ninh, Việt Nam</b>
+                        </p>
+                    </div><div style="clear: both; width:100%;border-top: 1px solid;&#xD;&#xA;    padding: 8px;" class="cus">
+                        <p style="">
+                            <span style="font-weight: 700;">
+                                Số hợp đồng <i style="font-style: italic;">(Contract No.)</i>:
+                            </span><label class="border-label text-strong" style="min-width:33%;margin:0px;font-weight: 100;font-size:11px">287/PVOIL.KDSPD-PVOILTN/12-18/B</label><span style=" float:left; font-weight: 700;">
+                                Ngày hợp đồng <i style="font-style: italic;">(Date)</i>:
+
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;">28/12/2018</b>
+                        </p><p style="">
+                            <span style=" font-weight: 700;">
+                                Hình thức thanh toán <i style="font-style: italic;">(Payment term)</i>:
+                            </span><label class="border-label text-strong" style="width:25%;margin:0px;font-weight: 100;">C/K</label><span style=" font-weight: 700;">
+                                Xuất tại kho <i style="font-style: italic;">(Delivered at storage)</i>:
+                            </span><b style="border-bottom: 1px dotted black;padding-bottom: 0px;word-wrap:break-word;font-weight: 100;"></b>
+                        </p><p style="">
+                            <span style=" font-weight: 700;">
+                                Số tham chiếu <i style="font-style: italic;">(Ref. No.)</i>:
+                            </span><label class="border-label text-strong" style="width:79.7%;margin:0px;font-weight: 100;">CV 4393/DVN-KDSPD ngày 01/07/2019; CV giá 4371/DVN-KDSPD/C ngày 28/06/2019</label>
+                        </p>
+                    </div><div style="clear: both;padding:8px" class="nenhd_bg">
+                        <table class="invtable">
+                            <thead><tr><td width="30px"><b>STT</b><br /><i>(No.)</i></td><td width="450px"><b>Diễn giải</b><br /><i>(Description)</i></td><td width="110px"><b>Đơn vị tính</b><br /><i>(UOM)</i></td><td width="110px"><b>Số lượng</b><br /><i>(Quantity)</i></td><td width="120px"><b>Đơn giá</b><br /><i>(Unit price)</i></td><td width="120px"><b>Thành tiền</b><br /><i>(Amount)</i></td></tr><tr class="data"><td style="text-align:center;font-weight:700">1</td><td style="text-align:center;font-weight:700">2</td><td style="text-align:center;font-weight:700">3</td><td style="text-align:center;font-weight:700">4</td><td style="text-align:center;font-weight:700">5</td><td style="text-align:center;font-weight:700">6=4x5</td></tr></thead>
+                            <tbody class="prds" id="bd"><tr class="data"><td class="stt">1</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">155,04</td><td class="back-bold" style="text-align:right">17.590,91</td><td class="back-bold" style="text-align:right">2.727.273,00</td></tr><tr class="data"><td class="stt">2</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">233,00</td><td class="back-bold" style="text-align:right">17.481,82</td><td class="back-bold" style="text-align:right">4.073.264,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">12345bủied jkss</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt">3</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II (NK)</td><td class="back-bold">Lít 15°C</td><td class="back-bold" style="text-align:right;">10.000,00</td><td class="back-bold" style="text-align:right">12.240,77</td><td class="back-bold" style="text-align:right">122.407.700,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">(Lít thực tế: 10.133)</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt">4</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít thực tế</td><td class="back-bold" style="text-align:right;">153,09</td><td class="back-bold" style="text-align:right">14.845,45</td><td class="back-bold" style="text-align:right">2.272.727,00</td></tr><tr class="data"><td class="stt">5</td><td style="text-align:left;padding-left:5px">Xăng RON95-III</td><td class="back-bold">Lít </td><td class="back-bold" style="text-align:right;">2.951,00</td><td class="back-bold" style="text-align:right">19.009,09</td><td class="back-bold" style="text-align:right">56.095.827,00</td></tr><tr class="data"><td class="stt">6</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít TT</td><td class="back-bold" style="text-align:right;">14.430,00</td><td class="back-bold" style="text-align:right">18.068,18</td><td class="back-bold" style="text-align:right">243.998.182,00</td></tr><tr class="data"><td class="stt">7</td><td style="text-align:left;padding-left:5px">Xăng RON95-III</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">890,00</td><td class="back-bold" style="text-align:right">18.391,00</td><td class="back-bold" style="text-align:right">16.367.990,00</td></tr><tr class="data"><td class="stt">8</td><td style="text-align:left;padding-left:5px">Chiết khấu bl,f;ldư;'d;ư'ưd</td><td class="back-bold"></td><td class="back-bold" style="text-align:right;"></td><td class="back-bold" style="text-align:right"></td><td class="back-bold" style="text-align:right">7.524.008,00</td></tr><tr class="data"><td class="stt">9</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II (TN)</td><td class="back-bold">Lít 15°C</td><td class="back-bold" style="text-align:right;">1.700.000,00</td><td class="back-bold" style="text-align:right">12.793,55</td><td class="back-bold" style="text-align:right">21.749.035.000,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">(Lít thực tế: 1.721.868)</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt">10</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít </td><td class="back-bold" style="text-align:right;">85,00</td><td class="back-bold" style="text-align:right">15.000,00</td><td class="back-bold" style="text-align:right">1.275.000,00</td></tr><tr class="data"><td class="stt">11</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">748,00</td><td class="back-bold" style="text-align:right">17.818,18</td><td class="back-bold" style="text-align:right">13.328.000,00</td></tr><tr class="data"><td class="stt">12</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">14,00</td><td class="back-bold" style="text-align:right">17.472,73</td><td class="back-bold" style="text-align:right">244.618,00</td></tr><tr class="data"><td class="stt">13</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">112,50</td><td class="back-bold" style="text-align:right">14.663,64</td><td class="back-bold" style="text-align:right">1.649.659,00</td></tr><tr class="data"><td class="stt">14</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">261,00</td><td class="back-bold" style="text-align:right">14.846,00</td><td class="back-bold" style="text-align:right">3.874.806,00</td></tr><tr class="data"><td class="stt">15</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít thực tế</td><td class="back-bold" style="text-align:right;">100,00</td><td class="back-bold" style="text-align:right">17.472,73</td><td class="back-bold" style="text-align:right">1.747.273,00</td></tr><tr class="data"><td class="stt">16</td><td style="text-align:left;padding-left:5px">Xăng RON95-III (NK)</td><td class="back-bold">Lít 15°C</td><td class="back-bold" style="text-align:right;">150.000,00</td><td class="back-bold" style="text-align:right">13.678,07</td><td class="back-bold" style="text-align:right">2.051.710.500,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">(Lít thực tế: 152.796)</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt">17</td><td style="text-align:left;padding-left:5px">Xăng RON95-III (NK)</td><td class="back-bold">Lít 15°C</td><td class="back-bold" style="text-align:right;">200.000,00</td><td class="back-bold" style="text-align:right">13.759,42</td><td class="back-bold" style="text-align:right">2.751.884.000,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">(Lít thực tế: 203.728)</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt">18</td><td style="text-align:left;padding-left:5px">Xăng RON95-III</td><td class="back-bold">Lít</td><td class="back-bold" style="text-align:right;">50,00</td><td class="back-bold" style="text-align:right">18.390,91</td><td class="back-bold" style="text-align:right">919.545,00</td></tr><tr class="data"><td class="stt">19</td><td style="text-align:left;padding-left:5px">Thép vằn D12 CB300V</td><td class="back-bold">kg</td><td class="back-bold" style="text-align:right;">890,00</td><td class="back-bold" style="text-align:right">13.136,00</td><td class="back-bold" style="text-align:right">11.691.040,00</td></tr><tr class="data"><td class="stt">20</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II</td><td class="back-bold">Lít </td><td class="back-bold" style="text-align:right;">30,00</td><td class="back-bold" style="text-align:right">15.000,00</td><td class="back-bold" style="text-align:right">450.000,00</td></tr><tr class="data"><td class="stt">21</td><td style="text-align:left;padding-left:5px">Xăng E5 RON92-II</td><td class="back-bold">Lít </td><td class="back-bold" style="text-align:right;">2.355,00</td><td class="back-bold" style="text-align:right">18.090,91</td><td class="back-bold" style="text-align:right">42.604.091,00</td></tr><tr class="data"><td class="stt">22</td><td style="text-align:left;padding-left:5px">Dầu DO 0,05S-II (TN)</td><td class="back-bold">Lít 15°C</td><td class="back-bold" style="text-align:right;">100.000,00</td><td class="back-bold" style="text-align:right">12.469,04</td><td class="back-bold" style="text-align:right">1.246.904.000,00</td></tr><tr class="data"><td class="stt" /><td style="padding-left: 5px;text-align:left;white-space:pre-wrap;">( lít thực tê: 101.327)</td><td class="back-bold" /><td class="back-bold" style="text-align:right;" /><td class="back-bold" style="text-align:right" /><td class="back-bold" style="text-align:right" /></tr><tr class="data"><td class="stt"></td><td></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td></tr><tr class="data"><td class="stt"></td><td></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td></tr><tr class="data"><td class="stt"></td><td></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td><td class="back-bold"></td></tr></tbody>
+                            <tfoot class="nextpage">
+                                <tr style="border-top:1px solid #000;border-bottom: 1px solid #000;border-right:none;">
+                                    <td colspan="5" style="padding :8px; border-right:1px solid black;text-align:right">
+                                        <div class="summary">
+                                            Cộng tiền hàng <i>(Total)</i>:
+                                        </div>
+                                    </td>
+                                    <td align="right"><label style="width:100%;text-align:right">1.246.904.000,00</label></td>
+                                </tr>
+                                <tr style="border-top:1px solid #000;border-bottom: 1px solid #000;border-right:none;">
+                                    <td colspan="2" style="padding:8px;border-right:1px solid black;text-align:left;">
+                                        <span style="float: left; ">
+                                            Thuế suất GTGT <i>(VAT rate)</i>:
+                                        </span><label class="border-label text-strong" style="width:95px;text-align:right">
+                                            10 %
+                                        </label>
+                                    </td>
+                                    <td colspan="3" style="padding:8px;border-right:1px solid black;">
+                                        <div style="text-align: right;">
+                                            Tiền thuế GTGT <i>(VAT amount)</i>:
+                                        </div>
+                                    </td>
+                                    <td style="text-align:right"><label style="width:100%;">124.690.400,00</label></td>
+                                </tr>
+                                <tr style="border-top:1px solid #000;border-bottom: 1px solid #000;border-right:none">
+                                    <td colspan="5" style="padding :8px; border-right:1px solid black;" align="right">
+                                        <div class="summary">
+                                            <strong>
+                                                Tổng cộng tiền thanh toán <i>(Total payable amount )</i>
+                                            </strong>:
+                                        </div>
+                                    </td>
+                                    <td style="text-align:right"><label class="" style="width:100%;">1.371.594.400</label></td>
+                                </tr>
+                                <tr style="text-align: justify;">
+                                    <td colspan="6" style="padding:8px 0px 8px 8px;position:relative">
+                                        <span style="float:left;display:block; font-weight: 700;">
+                                            Số tiền viết bằng chữ <i>(By words)</i>:
+                                        </span><div style="width: 70%;height: auto;float: left;position: relative;overflow: hidden;min-height: 20px;line-height:22px"><span style="padding-bottom: 1px;word-wrap:break-word;font-weight: 700;">Một tỷ, ba trăm bảy mươi mốt triệu, năm trăm chín mươi bốn nghìn, bốn trăm đồng.</span></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div><div><p style="text-align:right" id="countPage" /></div><div id="footer" style="clear:both;margin-top:5px;min-height:105px;padding-right:15px;">
+                    <div class="fl-l" style="width:300px;margin-left:10px;">
+                        <p style="font-size:16px; margin:0px"><strong>Người mua hàng (Customer)</strong></p><br />
+
+                    </div><div class="fl-r" style=""><p style="font-size:16px; margin:0px"><strong>Người bán hàng (Seller)</strong></p><br /></div><div id="dialogServer" style="background-color:white;display:none"><div style="color:blue" id="messSer">Unknown!</div><br /><br /><a href="#" onclick="displayCert('')"><div style="color:#184D4E">Xem thông tin chứng thư</div></a></div><div id="dialogClient" style="background-color:white;display:none"><div style="color:blue" id="messClt">Unknown!</div><br /><br /><a href="#" onclick="displayCert('')"><div style="color:#184D4E">Xem thông tin chứng thư</div></a></div>
+                </div>
+            </div><div style="clear:both;text-align:center;width:100%">
+                <i>
+
+
+                    (Tra cứu hóa đơn điện tử tại: <a href="https://hoadon.pvoil.vn">https://hoadon.pvoil.vn</a>, mã tra cứu:   QlhRGnqfB029jrkg/sTjg)
+
+
+
+
+
+
+                </i>
+            </div>
+        </div><div style="margin-top:10px;font-size:11px;width:100%; text-align: center;font-family: Arial!important;"><i>Giải pháp Hóa đơn Điện tử được cung cấp bởi: Công ty Cổ phần Dịch vụ T-VAN HILO, MST: 0106713804, ĐT: 1900292962</i></div>
+    </div>
+</body>
+</html>

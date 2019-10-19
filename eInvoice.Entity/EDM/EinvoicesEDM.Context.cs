@@ -35,6 +35,9 @@ namespace eInvoice.Entity.EDM
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<PVOILInvoice> PVOILInvoices { get; set; }
         public virtual DbSet<ProductInv> ProductInvs { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<userdata> userdatas { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     
         public virtual ObjectResult<SyncCategory_DiemXuat_Result> SyncCategory_DiemXuat(string username, string taxCode)
         {
@@ -69,6 +72,19 @@ namespace eInvoice.Entity.EDM
                 new ObjectParameter("TaxCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Warehouse_SelectByTaxCode_Result>("Warehouse_SelectByTaxCode", taxCodeParameter);
+        }
+    
+        public virtual ObjectResult<InvTemplate_GetTemplateInvoice_Result> InvTemplate_GetTemplateInvoice(string pattern, string taxCode)
+        {
+            var patternParameter = pattern != null ?
+                new ObjectParameter("pattern", pattern) :
+                new ObjectParameter("pattern", typeof(string));
+    
+            var taxCodeParameter = taxCode != null ?
+                new ObjectParameter("TaxCode", taxCode) :
+                new ObjectParameter("TaxCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvTemplate_GetTemplateInvoice_Result>("InvTemplate_GetTemplateInvoice", patternParameter, taxCodeParameter);
         }
     }
 }

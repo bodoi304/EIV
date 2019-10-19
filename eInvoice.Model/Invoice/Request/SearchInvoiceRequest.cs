@@ -35,11 +35,20 @@ namespace eInvoice.Model.DTOs.Invoice
         /// <returns></returns>
         public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
         {
-            String validateRequest = ModelBase.validateRequiredObject(new string[] { "from","to", "taxCode" }, new object[] { from, to, taxCode });
-            if (!String.IsNullOrEmpty(validateRequest))
+            List<String> validateRequest = ModelBase.validateRequiredObject(new string[] { "from","to", "taxCode" , "username" }, new object[] { from, to, taxCode,username  });
+            foreach (String item in validateRequest)
             {
-                yield return new ValidationResult(validateRequest);
+                yield return new ValidationResult(item);
             }
+            yield return ModelValidate.checkDateTuQuaNgayHienTai(from);
+
+            yield return ModelValidate.checkDateDenQuaNgayHienTai(to);
+
+            yield return ModelValidate.checkDateTuDenVuotQuaXNgay(7,from,to);
+
+            yield return ModelValidate.checkDateDenLonHonTu(from,to);
+
+
         }
     }
 }

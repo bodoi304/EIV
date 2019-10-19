@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Format.cs" />
+    <Compile Include="Common\GenerateXMLInvoice.cs" />
+    <Compile Include="Common\ImageGenerator.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\MemoryCacher.cs" />
     <Compile Include="Common\Untility.cs" />
@@ -75,6 +78,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eInvoice.Entity\eInvoice.Entity.csproj">
+      <Project>{5cb1fbfc-bb71-4214-b80b-6df1a735f62d}</Project>
+      <Name>eInvoice.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

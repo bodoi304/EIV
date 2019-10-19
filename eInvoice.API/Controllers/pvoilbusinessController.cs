@@ -4,18 +4,22 @@ using eInvoice.Model.Category.Response.syncCategory;
 using eInvoice.Model.DTOs.Invoice;
 using eInvoice.Model.Invoice;
 using eInvoice.Model.Invoice.Request;
+using eInvoice.Model.Invoice.Response.createInvoice;
 using eInvoice.Model.Invoice.Response.searchInvoice;
 using eInvoice.MultiLanguages;
 using eInvoice.Services.Interface;
 using eInvoice.Untilities.Common;
 using eInvoice.Untilities.LogsModule;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 
@@ -38,9 +42,16 @@ namespace eInvoice.API.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
+        /// {
+        ///  "username":"huyhq",
+        ///  "taxCode":"1900291730",
+        ///  "CatType": "ALL"
+        ///}
+
         [HttpPost]
         public List<SyncCategoryResponse> syncCategory(SyncCategoryRequest objRequest)
         {
+
             if (ModelState.IsValid)
             {
                 try
@@ -49,46 +60,58 @@ namespace eInvoice.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
+                    throw Logs.ErrorException(ex, HttpStatusCode.BadGateway, UtilitesModel.getError(ConstantsMultiLanguageKey.E_COMMON));
                 }
-
             }
             else
             {
-                throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+                throw Logs.Error(HttpStatusCode.BadRequest, UtilitesModel.getError(ModelState));
             }
         }
+
+
         /// <summary>
         /// API kiểm tra kết quả xử lý hóa đơn dự thảo từ FAST: api/pvoilbusiness/searchInvoice
         /// </summary>
         /// <param name="objRequest"></param>
         /// <returns></returns>
+        /// {
+        ///  "maDiemxuatHD": "",
+        /// "username": "",
+        ///  "taxCode": "10008081411",
+        ///  "buyerTaxCode": "",
+        ///  "from": "Apr 9, 2019 12:00:00 AM",
+        ///  "to": "Mar 10, 2019 12:00:00 AM",
+        /// "reSynInvoice": "true"
         [HttpPost]
         public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
                     return invoice.searchInvoice(objRequest);
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+                    throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
                 }
             }
-            catch (Exception ex)
+            else
             {
-                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
+                throw Logs.Error(HttpStatusCode.BadRequest, UtilitesModel.getError(ModelState).ToString());
             }
         }
+
+
         /// <summary>
         /// API them hóa đơn : api/pvoilbusiness/createInvoice
         /// </summary>
         /// <param name="objRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public bool createInvoice(CreateInvoiceRequest objRequest)
+        public createInvoiceResponse createInvoice(CreateInvoiceRequest objRequest)
         {
             try
             {
@@ -98,13 +121,38 @@ namespace eInvoice.API.Controllers
                 }
                 else
                 {
-                    throw Logs.Error(HttpStatusCode.BadRequest, Untility.getError(ModelState).ToString());
+                    createInvoiceResponse returnObj = new createInvoiceResponse();
+                    returnObj.key = objRequest.key ;
+                    returnObj.taxCode  = objRequest.invoice.ComTaxCode;
+                    returnObj.result = false;
+                    returnObj.error = UtilitesModel.getErrorList(ModelState);
+                    return returnObj;
                 }
             }
             catch (Exception ex)
             {
-                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.LOI_CHUNG));
+                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
             }
         }
+
+
+        [HttpGet]
+        public HttpResponseMessage exportPDF(ExportInvoiceRequest objRequest)
+        {
+
+           byte[] invoicePdf= invoice.exportPDF(objRequest);
+
+            HttpResponseMessage result = null;
+            result = Request.CreateResponse(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(invoicePdf);
+            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            result.Content.Headers.ContentDisposition.FileName = "invoice_DuThao" + ".pdf";
+
+            return result;
+
+        }
+
+
+
     }
 }

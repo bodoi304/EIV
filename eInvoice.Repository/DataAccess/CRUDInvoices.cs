@@ -1,5 +1,4 @@
 ﻿using eInvoice.Entity.EDM;
-using eInvoice.Model.Invoice;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,7 +31,7 @@ namespace eInvoice.Repository.DataAccess
         public bool insertInvoiceProduct(PVOILInvoice invoiceObj,List <ProductInv> lstProductObj)
         {
             ProductInvDA cPro = new ProductInvDA();
-            using (DbContextTransaction transaction = dbInvoice.db.Database .BeginTransaction())
+            using (DbContextTransaction transaction = dbInvoice.db.Database.BeginTransaction())
             {
                 try
                 {

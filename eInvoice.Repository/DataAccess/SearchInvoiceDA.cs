@@ -1,6 +1,5 @@
 ﻿using eInvoice.Entity.EDM;
-using eInvoice.Model.DTOs.Invoice;
-using eInvoice.Model.Invoice;
+using eInvoice.Untilities.Common;
 using eInvoice.Untilities.EFUntility;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Repository.DataAccess
 {
-   public class SearchInvoiceDA : DataAccessBase 
+    public class SearchInvoiceDA : DataAccessBase
     {
         /// <summary>
         /// Select invoice cho API api/pvoilbusiness/searchInvoice
@@ -22,34 +21,44 @@ namespace eInvoice.Repository.DataAccess
         /// <param name="ComTaxCode"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        public List<PVOILInvoice> selectListInvoice(SearchInvoiceRequest searchInvoice)
+        public List<PVOILInvoice> selectListInvoice(String maDiemxuatHD, String username, String taxCode, String buyerTaxCode,
+            DateTime from, DateTime to)
         {
             var predicate = PredicateBuilder.True<PVOILInvoice>();
-            if (!string.IsNullOrEmpty(searchInvoice.maDiemxuatHD))
+            if (!string.IsNullOrEmpty(maDiemxuatHD))
             {
-                predicate = predicate.And(t => t.BranchCode == searchInvoice.maDiemxuatHD);
+                predicate = predicate.And(t => t.BranchCode == maDiemxuatHD);
             }
-            if (!string.IsNullOrEmpty(searchInvoice.username))
+            if (!string.IsNullOrEmpty(username))
             {
-                predicate = predicate.And(t => t.CreateBy == searchInvoice.username);
+                predicate = predicate.And(t => t.CreateBy == username);
             }
-            if (!string.IsNullOrEmpty(searchInvoice.taxCode))
+            if (!string.IsNullOrEmpty(taxCode))
             {
-                predicate = predicate.And(t => t.ComTaxCode == searchInvoice.taxCode);
+                predicate = predicate.And(t => t.ComTaxCode == taxCode);
             }
-            if (!string.IsNullOrEmpty(searchInvoice.buyerTaxCode))
+            if (!string.IsNullOrEmpty(buyerTaxCode))
             {
-                predicate = predicate.And(t => t.CusTaxCode == searchInvoice.buyerTaxCode);
+                predicate = predicate.And(t => t.CusTaxCode == buyerTaxCode);
             }
-            if (!(searchInvoice.from == DateTime .MinValue ))
+            if (!(from == DateTime.MinValue))
             {
-                predicate = predicate.And(t => t.ArisingDate >= searchInvoice.from);
+                predicate = predicate.And(t => t.ArisingDate >= from);
             }
-            if (!(searchInvoice.to == DateTime.MinValue))
+            if (!(to == DateTime.MinValue))
             {
-                predicate = predicate.And(t => t.ArisingDate <= searchInvoice.to);
+                predicate = predicate.And(t => t.ArisingDate <= to);
             }
-            return  dbInvoice.Filter<PVOILInvoice>(predicate).ToList ();
+
+            predicate = predicate.And(t => t.Status == (int)Constants.InvoiceStatus.Phat_Hanh);
+
+            return dbInvoice.Filter<PVOILInvoice>(predicate).ToList();
+        }
+
+        public PVOILInvoice selectItemInvoiceByFKey(String Fkey)
+        {
+
+            return dbInvoice.GetOne<PVOILInvoice>(b => b.Fkey == Fkey);
         }
         /// <summary>
         /// Select product by invoce
@@ -58,38 +67,13 @@ namespace eInvoice.Repository.DataAccess
         /// <returns></returns>
         public List<ProductInv> selectProductByInvoice(int invID)
         {
-            return dbInvoice.Filter<ProductInv>(b => b.InvID  == invID).ToList();
+            return dbInvoice.Filter<ProductInv>(b => b.InvID == invID).ToList();
         }
 
-        public Expression<Func<PVOILInvoice, bool>> predecateString(String[] buildWhere,Object[] objectWhere)
+        public InvTemplate_GetTemplateInvoice_Result InvTemplate_GetTemplateInvoice(String pattern, String taxCode)
         {
-            var predicate = PredicateBuilder.True<PVOILInvoice>();
-          
-            for (int i = 0; i < buildWhere.Length; i++)
-            {
-                if (objectWhere[i].GetType().Equals(typeof(String)))
-                {
-                    String objTmp = (String)objectWhere[i];
-                    if (!string.IsNullOrEmpty(objTmp))
-                    {
-                        predicate = predicate.And(t => t.BranchCode == objTmp);
-                    }
-                }
-            }
-
-            return predicate;
-           
-        }
-
-        private object GetValue(MemberExpression member)
-        {
-            var objectMember = Expression.Convert(member, typeof(object));
-
-            var getterLambda = Expression.Lambda<Func<object>>(objectMember);
-
-            var getter = getterLambda.Compile();
-
-            return getter();
+            InvTemplate_GetTemplateInvoice_Result obj = dbInvoice.db.InvTemplate_GetTemplateInvoice(pattern, taxCode).FirstOrDefault<InvTemplate_GetTemplateInvoice_Result>();
+            return obj;
         }
     }
 }

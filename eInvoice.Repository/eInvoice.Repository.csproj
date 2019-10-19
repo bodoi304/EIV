@@ -64,10 +64,13 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="DataAccessBase.cs" />
     <Compile Include="DataAccess\ApiUserAccessDA.cs" />
+    <Compile Include="DataAccess\CompanyDA.cs" />
     <Compile Include="DataAccess\CRUDInvoices.cs" />
+    <Compile Include="DataAccess\CustomerDA.cs" />
     <Compile Include="DataAccess\ProductInvDA.cs" />
     <Compile Include="DataAccess\SearchInvoiceDA.cs" />
     <Compile Include="DataAccess\SyncCategoryDA.cs" />
+    <Compile Include="DataAccess\UserDataDA.cs" />
     <Compile Include="DataContext\DBContextInvoiceSQL.cs" />
     <Compile Include="Interface\IDBContextInvoiceSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,10 +83,6 @@
     <ProjectReference Include="..\eInvoice.Entity\eInvoice.Entity.csproj">
       <Project>{5cb1fbfc-bb71-4214-b80b-6df1a735f62d}</Project>
       <Name>eInvoice.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eInvoice.Model\eInvoice.Model.csproj">
-      <Project>{1ca6d384-731b-4bb9-85e7-a83c0e76d920}</Project>
-      <Name>eInvoice.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\eInvoice.MultiLanguages\eInvoice.MultiLanguages.csproj">
       <Project>{8610ffe1-ef07-4339-b24c-b681b9b69a15}</Project>

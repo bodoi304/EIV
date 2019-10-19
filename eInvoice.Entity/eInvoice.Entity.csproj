@@ -57,6 +57,12 @@
     <Compile Include="EDM\BusinessDepartment.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDM\Company.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDM\Customer.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDM\Department.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
@@ -75,6 +81,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="EDM\InvTemplate_GetTemplateInvoice_Result.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDM\ProductInv.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
@@ -85,6 +94,9 @@
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\SyncCategory_NghiepVu_Result.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDM\userdata.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\UserDepartment.cs">

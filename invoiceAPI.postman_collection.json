@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "6b18a3d3-5158-409a-98b3-4b776e6dade6",
+		"name": "invoiceAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:53524/api/pvoilbusiness/searchInvoice",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authentication",
+						"value": "aHV5OjE6MzEy",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"maDiemxuatHD\": \"\",\n    \"username\": \"thuyht\",\n    \"taxCode\": \"0305795054\",\n    \"buyerTaxCode\": \"\",\n    \"from\": \"Jul 6, 2019 12:00:00 AM\",\n    \"to\": \"Jul 8, 2019 12:00:00 AM\",\n    \"reSynInvoice\": \"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53524/api/pvoilbusiness/searchInvoice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53524",
+					"path": [
+						"api",
+						"pvoilbusiness",
+						"searchInvoice"
+					]
+				},
+				"description": "adsada"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:53524/api/pvoilbusiness/syncCategory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authentication",
+						"value": "aHV5OjE6MzEy",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"username\":\"admin\",\n   \"taxCode\":\"0305795054\",\n   \"CatType\": \"ALL\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53524/api/pvoilbusiness/syncCategory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53524",
+					"path": [
+						"api",
+						"pvoilbusiness",
+						"syncCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:53524/api/pvoilbusiness/insertInvoices?Authentication=aHV5OjE6MzEy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authentication",
+						"name": "Content-Type",
+						"value": "aHV5OjE6MzEy",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n   \"key\":\"123213\",\r\n   \"invoice\":{ \r\n      \"InvCateID\":\"111111\",\r\n      \"InvoiceName\":\"\",\r\n      \"InvoicePattern\":\"\",\r\n      \"SerialNo\":\"\",\r\n      \"InvoiceNo\":\"\",\r\n      \"Data\":\"\",\r\n      \"ComID\":\"2187\",\r\n      \"ComTaxCode\":\"\",\r\n      \"ComName\":\"\",\r\n      \"ComPhone\":\"\",\r\n      \"ComFax\":\"\",\r\n      \"ComAddress\":\"\",\r\n      \"ComEmail\":\"\",\r\n      \"ComBankName\":\"\",\r\n      \"ComBankNo\":\"\",\r\n      \"CusCode\":\"\",\r\n      \"CusTaxCode\":\"\",\r\n      \"CusName\":\"\",\r\n      \"Buyer\":\"\",\r\n      \"CusAddress\":\"\",\r\n      \"CusPhone\":\"\",\r\n      \"CusEmail\":\"\",\r\n      \"CusBankName\":\"\",\r\n      \"CusBankNo\":\"\",\r\n      \"BranchCode\":\"\",\r\n      \"BranchName\":\"\",\r\n      \"BranchAddress\":\"\",\r\n      \"BranchPhone\":\"\",\r\n      \"ContractID\":\"\",\r\n      \"ContractNo\":\"\",\r\n      \"RefNo\":\"\",\r\n      \"ContractDate\":\"\",\r\n      \"InvoiceType\":\"\",\r\n      \"InvoiceStatus\":\"\",\r\n      \"PaymentMethod\":\"\",\r\n      \"PaymentStatus\":\"\",\r\n      \"ArisingDate\":\"\",\r\n      \"CreateDate\":\"\",\r\n      \"PublishDate\":\"\",\r\n      \"CreateBy\":\"\",\r\n      \"PublishBy\":\"\",\r\n      \"ModifiedDate\":\"\",\r\n      \"Total\":\"\",\r\n      \"VATRate\":\"\",\r\n      \"VATAmount\":\"\",\r\n      \"Amount\":\"\",\r\n      \"AmountInWords\":\"\",\r\n      \"DraftTotal\":\"\",\r\n      \"DraftVATAmount\":\"\",\r\n      \"DraftAmount\":\"\",\r\n      \"DraftAmountInWords\":\"\",\r\n      \"VATOther\":\"\",\r\n      \"ChangeFees\":\"\",\r\n      \"ExtraFees\":\"\",\r\n      \"Otherfees\":\"\",\r\n      \"Currency\":\"\",\r\n      \"ExchangeRate\":\"\",\r\n      \"Note\":\"\",\r\n      \"CusSignStatus\":\"\",\r\n      \"Extra\":\"\",\r\n      \"ProcessInvNote\":\"\",\r\n      \"SearchKey\":\"\",\r\n      \"PortalLink\":\"\",\r\n      \"AttachPath\":\"\",\r\n      \"CInputWarehouseID\":\"\",\r\n      \"CInputWarehouseCode\":\"\",\r\n      \"CInputWarehouse\":\"\",\r\n      \"COutputWarehouseID\":\"\",\r\n      \"COutputWarehouseCode\":\"\",\r\n      \"COutputWarehouse\":\"\",\r\n      \"ManeuverCommandNo\":\"\",\r\n      \"ManeuverCommandDate\":\"\",\r\n      \"ManeuverCommandPerson\":\"\",\r\n      \"ManeuverCommandReason\":\"\",\r\n      \"TransportAgent\":\"\",\r\n      \"TransportAgentCode\":\"\",\r\n      \"TransportContract\":\"\",\r\n      \"Ctransporter\":\"\",\r\n      \"CTransportVehicle\":\"\",\r\n      \"CLicensePlate\":\"\",\r\n      \"TankCode\":\"\",\r\n      \"WInputWarehouseID\":\"\",\r\n      \"WInputWarehouse\":\"\",\r\n      \"WOutputWarehouseID\":\"\",\r\n      \"WOutputWarehouse\":\"\",\r\n      \"WOutputWarehouseCode\":\"\",\r\n      \"FirstMeterValue\":\"\",\r\n      \"EndMeterValue\":\"\",\r\n      \"ExportTime\":\"\",\r\n      \"ExportDate\":\"\",\r\n      \"CelsiusDegree\":\"\",\r\n      \"VCFCoefficient\":\"\",\r\n      \"WCFCoefficient\":\"\",\r\n      \"StatusTransfer\":\"\",\r\n      \"WReceivingPerson\":\"\",\r\n      \"WReceivingPersonID\":\"\",\r\n      \"WReceivingPersonIDate\":\"\",\r\n      \"WReceivingReferralNo\":\"\",\r\n      \"WReceivingReferralDate\":\"\",\r\n      \"WReceivingReferralAgen\":\"\",\r\n      \"WTransportVehicle\":\"\",\r\n      \"WLicensePlate\":\"\",\r\n      \"WTransporterPerson\":\"\",\r\n      \"WTransporterPersonID\":\"\",\r\n      \"WTransporterPersonDate\":\"\",\r\n      \"WTransporterReferralNo\":\"\",\r\n      \"WTransporterReferralDate\":\"\",\r\n      \"WTransporterReferralAgen\":\"\",\r\n      \"Density\":\"\",\r\n      \"products\":[ \r\n         { \r\n            \"Code\":\"\",\r\n            \"Name\":\"1111\",\r\n            \"Price\":\"\",\r\n            \"Quantity\":\"\",\r\n            \"ConvertQuantity\":\"\",\r\n            \"Unit\":\"\",\r\n            \"ConvertUnit\":\"\",\r\n            \"Total\":\"\",\r\n            \"VATRate\":\"\",\r\n            \"Discount\":\"\",\r\n            \"VATAmount\":\"\",\r\n            \"DiscountAmount\":\"\",\r\n            \"Amount\":\"\",\r\n            \"ProdType\":\"\",\r\n            \"IsSum\":\"\",\r\n            \"Extra\":\"\",\r\n            \"ImportQuantity\":\"\",\r\n            \"ExportQuantity\":\"\",\r\n            \"InvoiceNo\":\"\",\r\n            \"ProductId\":\"\",\r\n            \"DraftQuantity\":\"\",\r\n            \"DraftAmount\":\"\"\r\n         },\r\n         { \r\n            \"Code\":\"\",\r\n            \"Name\":\"\",\r\n            \"Price\":\"\",\r\n            \"Quantity\":\"\",\r\n            \"ConvertQuantity\":\"\",\r\n            \"Unit\":\"\",\r\n            \"ConvertUnit\":\"\",\r\n            \"Total\":\"\",\r\n            \"VATRate\":\"\",\r\n            \"Discount\":\"\",\r\n            \"VATAmount\":\"\",\r\n            \"DiscountAmount\":\"\",\r\n            \"Amount\":\"\",\r\n            \"ProdType\":\"\",\r\n            \"IsSum\":\"\",\r\n            \"Extra\":\"\",\r\n            \"ImportQuantity\":\"\",\r\n            \"ExportQuantity\":\"\",\r\n            \"InvoiceNo\":\"\",\r\n            \"ProductId\":\"\",\r\n            \"DraftQuantity\":\"\",\r\n            \"DraftAmount\":\"\"\r\n         }\r\n      ]\r\n   }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53524/api/pvoilbusiness/createInvoice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53524",
+					"path": [
+						"api",
+						"pvoilbusiness",
+						"createInvoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:53524/api/pvoilbusiness/exportPDF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authentication",
+						"value": "aHV5OjE6MzEy",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"Fkey\":\"QlhRGnqfB029jrkg/sTjg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:53524/api/pvoilbusiness/exportPDF",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "53524",
+					"path": [
+						"api",
+						"pvoilbusiness",
+						"exportPDF"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -111,6 +111,7 @@ namespace eInvoice.Repository.Interface
         void RollbackTransaction();
 
         void CommitTransaction();
+        void DisposeTransaction();
         #endregion
 
         void SaveChange();

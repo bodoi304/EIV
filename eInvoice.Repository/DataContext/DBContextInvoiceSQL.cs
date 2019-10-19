@@ -92,7 +92,7 @@ namespace eInvoice.Repository.DataContext
         /// <returns></returns>
         public T GetOne<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            return db.Set<T>().Where(predicate).SingleOrDefault();
+            return db.Set<T>().Where(predicate).FirstOrDefault();
         }
         /// <summary>
         /// Check an entity is exist in database. (T parameter is a type of the entity).
@@ -217,12 +217,11 @@ namespace eInvoice.Repository.DataContext
 
         public void CommitTransaction()
         {
-            if (this.Transaction != null)
-            {
-                this.Transaction.Commit();
-      
-            }
+                if (this.Transaction != null)
+                {
+                    this.Transaction.Commit();
 
+                }        
         }
         #endregion
 
@@ -233,6 +232,14 @@ namespace eInvoice.Repository.DataContext
         public async Task<int> SaveChangeAsync()
         {
             return await db.SaveChangesAsync();
+        }
+
+        public void DisposeTransaction()
+        {
+            if (this.Transaction != null)
+            {
+                this.Transaction.Dispose();
+            }
         }
     }
 

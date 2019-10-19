@@ -13,6 +13,9 @@
         <EntityTypeShape EntityType="HDDT_pvoilModel.Department" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.PVOILInvoice" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.ProductInv" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.Company" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.userdata" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.Customer" Width="1.5" PointX="9.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -20,8 +20,8 @@ namespace eInvoice.API
                 routeTemplate: "api/{controller}/{action}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.Formatters.JsonFormatter.SupportedMediaTypes
-    .Add(new MediaTypeHeaderValue("text/plan"));
+    //        config.Formatters.JsonFormatter.SupportedMediaTypes
+    //.Add(new MediaTypeHeaderValue("application/json"));
         }
     }
 }

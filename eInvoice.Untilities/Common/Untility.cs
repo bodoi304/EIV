@@ -25,18 +25,6 @@ namespace eInvoice.Untilities.Common
             return decodedString;
         }
 
-        //Summary: get error tuwf model state
-        public static String getError(ModelStateDictionary model)
-        {
-            var errors = new StringBuilder ();
-            foreach (var state in model)
-            {
-                foreach (var error in state.Value.Errors)
-                {
-                    errors.Append (error.ErrorMessage + "\n");
-                }
-            }
-            return errors.ToString ();
-        }
+       
     }
 }
