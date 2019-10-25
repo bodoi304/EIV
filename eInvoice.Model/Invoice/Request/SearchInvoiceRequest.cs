@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eInvoice.Untilities.Common;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static eInvoice.Untilities.Common.Constants;
 
 namespace eInvoice.Model.DTOs.Invoice
 {
@@ -19,7 +21,9 @@ namespace eInvoice.Model.DTOs.Invoice
         public string username { get; set; }
         public string taxCode { get; set; }
         public string buyerTaxCode { get; set; }
+        [JsonConverter(typeof(CustomDateTimeConverter))]
         public DateTime from { get; set; }
+        [JsonConverter(typeof(CustomDateTimeConverter))]
         public DateTime to { get; set; }
         public Boolean reSynInvoice { get; set; }
 
@@ -44,7 +48,7 @@ namespace eInvoice.Model.DTOs.Invoice
 
             yield return ModelValidate.checkDateDenQuaNgayHienTai(to);
 
-            yield return ModelValidate.checkDateTuDenVuotQuaXNgay(7,from,to);
+            yield return ModelValidate.checkDateTuDenVuotQuaXNgay(DateTimeVuotQua.NGAY_7, from,to);
 
             yield return ModelValidate.checkDateDenLonHonTu(from,to);
 

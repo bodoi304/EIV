@@ -29,6 +29,27 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.AccountingAccount' does not h
           <Property Name="IpMachine" Type="varchar" MaxLength="150" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="BusinessID" />
+          </Key>
+          <Property Name="BusinessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComID" Type="int" Nullable="false" />
+          <Property Name="TaxCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BusinessCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BusinessName" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="BusinessStatus" Type="int" />
+          <Property Name="PublishInvID" Type="int" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedUserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedUserID" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="InvPattern" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="InvSerial" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="AccountingID" Type="int" />
+        </EntityType>
         <EntityType Name="BusinessDepartment">
           <Key>
             <PropertyRef Name="BusinessDepartmentID" />
@@ -80,6 +101,15 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.AccountingAccount' does not h
           <Property Name="TaxAuthorityCode" Type="nvarchar" MaxLength="50" />
           <Property Name="ContactEmail" Type="nvarchar" MaxLength="150" />
           <Property Name="ExtEmail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="ExchangeRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -160,6 +190,28 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.AccountingAccount' does not h
           <Property Name="DraftAmount" Type="decimal" Precision="27" Scale="9" />
           <Property Name="ConvertUnit2" Type="nvarchar" MaxLength="50" />
           <Property Name="ConvertQuantity2" Type="decimal" Precision="27" Scale="9" />
+        </EntityType>
+        <EntityType Name="PublishInvoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComId" Type="int" />
+          <Property Name="PublishID" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="FromNo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ToNo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CurrentNo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="InvSerial" Type="nvarchar" MaxLength="6" />
+          <Property Name="InvSerialPrefix" Type="nvarchar" MaxLength="2" />
+          <Property Name="InvSerialSuffix" Type="nvarchar" MaxLength="3" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="RegisterID" Type="int" />
+          <Property Name="RegisterName" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvPattern" Type="nvarchar" MaxLength="12" />
+          <Property Name="InvCateName" Type="nvarchar" MaxLength="200" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="PVOILInvoice">
           <Key>
@@ -445,11 +497,14 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
         </Function>
         <EntityContainer Name="HDDT_pvoilModelStoreContainer">
           <EntitySet Name="ApiUserAccess" EntityType="Self.ApiUserAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Business" EntityType="Self.Business" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusinessDepartment" EntityType="Self.BusinessDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInv" EntityType="Self.ProductInv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PublishInvoice" EntityType="Self.PublishInvoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PVOILInvoice" EntityType="Self.PVOILInvoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userdata" EntityType="Self.userdata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDepartment" EntityType="Self.UserDepartment" Schema="dbo" store:Type="Tables" />
@@ -508,6 +563,9 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
             <Parameter Name="pattern" Mode="In" Type="String" />
             <Parameter Name="TaxCode" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Currencies" EntityType="HDDT_pvoilModel.Currency" />
+          <EntitySet Name="Businesses" EntityType="HDDT_pvoilModel.Business" />
+          <EntitySet Name="PublishInvoices" EntityType="HDDT_pvoilModel.PublishInvoice" />
         </EntityContainer>
         <EntityType Name="ApiUserAccess">
           <Key>
@@ -965,6 +1023,58 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <Property Type="String" Name="CssLogo" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="CssBackgr" Nullable="true" MaxLength="Max" />
         </ComplexType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ExchangeRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="BusinessID" />
+          </Key>
+          <Property Name="BusinessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComID" Type="Int32" Nullable="false" />
+          <Property Name="TaxCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BusinessName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessStatus" Type="Int32" />
+          <Property Name="PublishInvID" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvPattern" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="InvSerial" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="AccountingID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PublishInvoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComId" Type="Int32" />
+          <Property Name="PublishID" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FromNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ToNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CurrentNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InvSerial" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="InvSerialPrefix" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="InvSerialSuffix" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="RegisterID" Type="Int32" />
+          <Property Name="RegisterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvPattern" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="InvCateName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1447,6 +1557,61 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Businesses">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.Business">
+              <MappingFragment StoreEntitySet="Business">
+                <ScalarProperty Name="AccountingID" ColumnName="AccountingID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InvSerial" ColumnName="InvSerial" />
+                <ScalarProperty Name="InvPattern" ColumnName="InvPattern" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="PublishInvID" ColumnName="PublishInvID" />
+                <ScalarProperty Name="BusinessStatus" ColumnName="BusinessStatus" />
+                <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+                <ScalarProperty Name="BusinessCode" ColumnName="BusinessCode" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublishInvoices">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.PublishInvoice">
+              <MappingFragment StoreEntitySet="PublishInvoice">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="InvCateName" ColumnName="InvCateName" />
+                <ScalarProperty Name="InvPattern" ColumnName="InvPattern" />
+                <ScalarProperty Name="RegisterName" ColumnName="RegisterName" />
+                <ScalarProperty Name="RegisterID" ColumnName="RegisterID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="InvSerialSuffix" ColumnName="InvSerialSuffix" />
+                <ScalarProperty Name="InvSerialPrefix" ColumnName="InvSerialPrefix" />
+                <ScalarProperty Name="InvSerial" ColumnName="InvSerial" />
+                <ScalarProperty Name="CurrentNo" ColumnName="CurrentNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ToNo" ColumnName="ToNo" />
+                <ScalarProperty Name="FromNo" ColumnName="FromNo" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PublishID" ColumnName="PublishID" />
+                <ScalarProperty Name="ComId" ColumnName="ComId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -50,5 +50,10 @@ namespace eInvoice.Untilities.LogsModule
             };
             return new HttpResponseException(response);
         }
+
+        public static void Error( String error)
+        {
+            log.Error(error);
+        }
     }
 }

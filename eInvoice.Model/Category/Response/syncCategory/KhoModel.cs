@@ -11,11 +11,11 @@ namespace eInvoice.Model.Category.Response.syncCategory
 {
     public class KhoModel : ModelBase 
     {
-        public int id { get; set; }
-        public string makho { get; set; }
-        public string tenkho { get; set; }
-        public string diachi { get; set; }
-        public string donvi { get; set; }
+        public int Id { get; set; }
+        public string TenKho { get; set; }
+        public string MaKho { get; set; }
+        public string DiaChi { get; set; }
+        public string MaDV { get; set; }
 
         public override IMapper mapper()
         {

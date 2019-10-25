@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,16 @@ namespace eInvoice.Untilities.Common
             string decodedString = Encoding.UTF8.GetString(data);
             return decodedString;
         }
+        /// <summary>
+        /// check gia tri ton tai trong struc
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool checkExistStrucString<T>(String str)
+        {
+           return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static).
+               Select(x => x.GetRawConstantValue().ToString()).Contains(str);
+        }
 
-       
     }
 }

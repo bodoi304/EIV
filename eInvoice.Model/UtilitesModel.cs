@@ -26,10 +26,14 @@ namespace eInvoice.Model
                         item.code = strtmp[0];
                         item.message = strtmp[1];
                     }
-                    else
+                    else if(!String.IsNullOrEmpty (error.ErrorMessage))
                     {
                         item.code = error.ErrorMessage;
                         item.message = ConfigMultiLanguage.getMess(error.ErrorMessage);
+                    }
+                    else
+                    {
+                        continue;
                     }
                     lstErrors.Add(item);
                 }

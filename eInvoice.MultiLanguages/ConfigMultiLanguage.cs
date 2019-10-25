@@ -1,7 +1,9 @@
-﻿using System;
+﻿using eInvoice.Untilities.LogsModule;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +33,16 @@ namespace eInvoice.MultiLanguages
         //Hàm get Mess theo key trong file ConstantsMultiLanguageKey.cs
         public static String getMess(String key)
         {
-            return  messReturn[key];
+            try
+            {
+                return messReturn[key];
+            }
+            catch (Exception ex)
+            {
+                Logs.Error (ex.Message + " " + ex.StackTrace );
+                throw ex;
+            }
+          
         }
 
         //Hàm get Mess theo key trong file dùng cho các mess càn dùng String.format

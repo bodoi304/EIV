@@ -50,7 +50,7 @@ namespace eInvoice.API
             //Scoped: Chỉ tồn tại 1 instance trong 1 lần request (mỗi request là 1 scope).
             //Transient: Một instance mới luôn được tạo, mỗi khi được yêu cầu.
             container.Register<IInvoiceCategorys, InvoiceCategorysService>(Lifestyle.Scoped );
-            container.Register<IInvoice, Invoice>(Lifestyle.Scoped);
+            container.Register<IInvoice, InvoiceService>(Lifestyle.Scoped);
             container.Register<IAuthentication, AuthenticationService>(Lifestyle.Scoped);
             
             // This is an extension method from the integration package.

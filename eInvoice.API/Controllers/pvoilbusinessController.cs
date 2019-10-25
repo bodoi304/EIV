@@ -86,22 +86,30 @@ namespace eInvoice.API.Controllers
         [HttpPost]
         public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
         {
+            //try
+            //{
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        return invoice.searchInvoice(objRequest);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
+                    }
+                }
+                else
+                {
+                    throw Logs.Error(HttpStatusCode.BadRequest, UtilitesModel.getError(ModelState).ToString());
+                }
+            //}
+            //catch (Exception ex)
+            //{
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    return invoice.searchInvoice(objRequest);
-                }
-                catch (Exception ex)
-                {
-                    throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
-                }
-            }
-            else
-            {
-                throw Logs.Error(HttpStatusCode.BadRequest, UtilitesModel.getError(ModelState).ToString());
-            }
+            //    throw ex;
+            //}
+           
         }
 
 

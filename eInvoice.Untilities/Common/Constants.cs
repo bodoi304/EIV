@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace eInvoice.Untilities.Common
 {
-   public class Constants
+    public class Constants
     {
         public class StatusUserAPIAccess
         {
             public const int ACTIVE = 1;
             public const int NONACTIVE = 0;
+        }
+
+        public class FormatDateTime
+        {
+            public const String DD_MM_YYYY = "dd/MM/yyyy";
+            public const String YYYY_MM_dd = "yyyy/MM/dd";
         }
 
         public class CategorySync
@@ -24,18 +30,18 @@ namespace eInvoice.Untilities.Common
             public const String ALL = "ALL";
         }
 
-        public enum InvoiceType
+        public struct InvoiceType
         {
             /// <summary>
             /// hóa đơn thông thường
             /// </summary>
             [Description("Hóa đơn thông thường")]
-            Nomal,
+            public const int Nomal = 0;
             /// <summary>
             /// hóa đơn thay thế
             /// </summary>
             [Description("Hóa đơn thay thế")]
-            ForReplace,
+            public const int ForReplace = 1;
             /// <summary>
             /// hóa đơn điều chỉnh sai sót
             /// </summary>
@@ -43,50 +49,112 @@ namespace eInvoice.Untilities.Common
             /// hóa đơn điều chỉnh sai sót tăng
             /// </summary>
             [Description("Hóa đơn điều chỉnh tăng")]
-            ForAdjustAccrete,
+            public const int ForAdjustAccrete = 2;
             /// <summary>
             /// Điều chỉnh sai sót giảm
             /// </summary>
             [Description("Hóa đơn điều chỉnh giảm")]
-            ForAdjustReduce,
+            public const int ForAdjustReduce = 3;
             /// <summary>
             /// Điều chỉnh thông tin
             /// </summary>
             [Description("Hóa đơn điều chỉnh thông tin")]
-            ForAdjustInfo,
+            public const int ForAdjustInfo = 4;
             /// <summary>
             /// Hóa đơn gửi đi phát hành
             /// </summary>
             [Description("Hóa đơn xóa bỏ")]
-            ForCancel,
+            public const int ForCancel = 5;
             /// <summary>
             /// truong hop null
             /// </summary>
-            Null = -1,
+            public const int Null = -1;
         }
 
-        public enum InvoiceStatus
+        public struct InvoiceStatus
         {
-      
+
             [Description("Hóa đơn Dự thảo")]
-            Du_Thao = 1,
+            public const int Du_Thao = 1;
 
             [Description("Hóa đơn phát ")]
-            Phat_Hanh = 2,
+            public const int Phat_Hanh = 1;
 
             [Description("Hóa đơn đã kê khai")]
-            Da_Ke_Khai = 3,
+            public const int Da_Ke_Khai = 3;
 
             [Description("Hóa đơn bị thay thế")]
-            Bi_Thay_The = 4,
+            public const int Bi_Thay_The = 4;
 
             [Description("Hóa đơn điều chỉnh thông tin")]
-            Bi_Dieu_Chinh = 5,
+            public const int Bi_Dieu_Chinh = 5;
 
             [Description("Hóa đơn xóa bỏ")]
-            Xoa_Bo = 6,
+            public const int Xoa_Bo = 6;
 
-            Null = -1,
+            public const int Null = -1;
+        }
+
+        public struct PaymentMethod
+        {
+
+
+            public const string TM = "TM";
+
+
+
+            public const string CK = "CK";
+
+
+
+            public const string TM_CK = "TM/CK";
+
+
+            public const string TTD = "TTD";
+
+
+            public const string NOI_BO = "Nội bộ";
+
+
+            public const string BU_TRU = "Bù trừ";
+
+            public const string Null = "";
+        }
+
+        public struct PaymentStatus
+        {
+            public const int CHUA_THANH_TOAN = 0;
+
+            public const int DA_THANH_TOAN = 1;
+        }
+
+        public struct LengthNumber
+        {
+            public const int DO_DAI_19 = 19;
+            public const int DO_DAI_3 = 3;
+        }
+
+        public struct DateTimeVuotQua
+        {
+            public const int NGAY_7 = 7;
+        }
+
+        public struct VATRate
+        {
+            public const int PHAN_TRAM_0 = 0;
+
+            public const int PHAN_TRAM_5 = 5;
+
+            public const int PHAN_TRAM_10 = 10;
+
+            public const int KHONG_CHIU_THUE = -1;
+        }
+
+        public struct ActiveUser
+        {
+            public const int ACTIVE = 0;
+
+            public const int INACTIVE = 1;
         }
     }
 }

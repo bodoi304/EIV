@@ -38,6 +38,9 @@ namespace eInvoice.Entity.EDM
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<userdata> userdatas { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<Business> Businesses { get; set; }
+        public virtual DbSet<PublishInvoice> PublishInvoices { get; set; }
     
         public virtual ObjectResult<SyncCategory_DiemXuat_Result> SyncCategory_DiemXuat(string username, string taxCode)
         {

@@ -49,5 +49,11 @@
     <None Include="Languages\Language.en.ini" />
     <None Include="Languages\Language.vn.ini" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eInvoice.Untilities\eInvoice.Untilities.csproj">
+      <Project>{29d6746e-60f9-4d53-91f5-d73968107a23}</Project>
+      <Name>eInvoice.Untilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

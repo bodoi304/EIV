@@ -13,7 +13,7 @@ namespace eInvoice.Services.Interface
 {
     public interface IInvoice
     {
-        searchInvoiceResponse searchInvoice(SearchInvoiceRequest searchInvoice);
+        searchInvoiceResponse searchInvoice(SearchInvoiceRequest searchInvoice) ;
 
         createInvoiceResponse createInvoice(CreateInvoiceRequest createInvoiceModel);
 

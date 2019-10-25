@@ -13,5 +13,10 @@ namespace eInvoice.Repository.DataAccess
         {
             return dbInvoice.GetOne<userdata>(b => b.username == userName && b.Type ==type );
         }
+
+        public userdata checkExistByUserID(int userID)
+        {
+            return dbInvoice.GetOne<userdata>(b => b.userid  == userID );
+        }
     }
 }

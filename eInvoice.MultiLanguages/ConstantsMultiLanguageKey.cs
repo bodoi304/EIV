@@ -23,11 +23,21 @@ namespace eInvoice.MultiLanguages
         //Ma lỗi API createInvoice
         public const string ERR_Common_001 = "ERR_Common_001";
         public const string ERR_Common_002 = "ERR_Common_002";
-
+        public const string E_InValid_Value = "E_InValid_Value";
+        public const string E_InValid_DateValue = "E_InValid_DateValue";
+        public const string E_Number_Value = "E_Number_Value";
+        public const string E_String_Length = "E_String_Length";
+        public const string E_Currency_NotExist = "E_Currency_NotExist";
+        public const string E_BusinessDepartmentID_NotExist = "E_BusinessDepartmentID_NotExist";
+        public const string E_BusinessID_NotExist = "E_BusinessID_NotExist";
+        public const string E_PublishInvoice_NotExist = "E_PublishInvoice_NotExist";
+        public const string E_Department_NotExist = "E_Department_NotExist";
+        public const string E_User_Active = "E_User_Active";
         //Ma lỗi API searchInvoice
         public const string E_FromDate_002 = "E_FromDate_002";
         public const string E_ToDate_002= "E_ToDate_002";
         public const string E_ToDate_003= "E_ToDate_003";
         public const string E_ToDate_004 = "E_ToDate_004";
+
     }
 }

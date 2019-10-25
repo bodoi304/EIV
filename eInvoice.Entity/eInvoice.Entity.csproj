@@ -54,10 +54,16 @@
     <Compile Include="EDM\ApiUserAccess.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDM\Business.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDM\BusinessDepartment.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\Company.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDM\Currency.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\Customer.cs">
@@ -85,6 +91,9 @@
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\ProductInv.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDM\PublishInvoice.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="EDM\PVOILInvoice.cs">
