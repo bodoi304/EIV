@@ -38,9 +38,9 @@ namespace eInvoice.Model
         /// <param name="lstObject">list object cần check required</param>
         /// <param name="arr">mảng chuỗi tên thuộc tính cần check required</param>
         /// <returns>Chuỗi nội dung lỗi</returns>
-        public static String validateRequiredList(List<ModelBase> lstObject, params string[] arr)
+        public static List<String> validateRequiredList<T>(List<T> lstObject, params string[] arr)
         {
-            return ModelValidate.validateRequiredList<ModelBase>(lstObject, arr);
+            return ModelValidate.validateRequiredList<T>(lstObject, arr);
         }
     
         public static IMapper mapperStatic<S,D>()

@@ -18,5 +18,11 @@ namespace eInvoice.Repository.DataAccess
         {
             return dbInvoice.GetOne<userdata>(b => b.userid  == userID );
         }
+
+        public userdata_CheckUserAPI_Result checkExistByUserNameAndPassword(String userName,String taxCode, int Type)
+        {
+            return dbInvoice.db.userdata_CheckUserAPI(userName, taxCode, Type).FirstOrDefault();
+           
+        }
     }
 }

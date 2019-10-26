@@ -9,11 +9,16 @@ namespace eInvoice.Untilities.Common
 {
     public class Constants
     {
-        public class StatusUserAPIAccess
+        public class UserDataType
         {
-            public const int ACTIVE = 1;
-            public const int NONACTIVE = 0;
+            public const int ADMIN = 0;
         }
+
+        public class EncodeSalt
+        {
+            public const int SALT_SIZE =16;
+        }
+
 
         public class FormatDateTime
         {
@@ -75,22 +80,22 @@ namespace eInvoice.Untilities.Common
         {
 
             [Description("Hóa đơn Dự thảo")]
-            public const int Du_Thao = 1;
+            public const int Du_Thao = 0;
 
             [Description("Hóa đơn phát ")]
             public const int Phat_Hanh = 1;
 
             [Description("Hóa đơn đã kê khai")]
-            public const int Da_Ke_Khai = 3;
+            public const int Da_Ke_Khai = 2;
 
             [Description("Hóa đơn bị thay thế")]
-            public const int Bi_Thay_The = 4;
+            public const int Bi_Thay_The = 3;
 
             [Description("Hóa đơn điều chỉnh thông tin")]
-            public const int Bi_Dieu_Chinh = 5;
+            public const int Bi_Dieu_Chinh = 4;
 
             [Description("Hóa đơn xóa bỏ")]
-            public const int Xoa_Bo = 6;
+            public const int Xoa_Bo = 5;
 
             public const int Null = -1;
         }
@@ -152,9 +157,9 @@ namespace eInvoice.Untilities.Common
 
         public struct ActiveUser
         {
-            public const int ACTIVE = 0;
+            public const Boolean ACTIVE = true;
 
-            public const int INACTIVE = 1;
+            public const Boolean INACTIVE = false;
         }
     }
 }

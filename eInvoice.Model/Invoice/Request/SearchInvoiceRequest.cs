@@ -44,6 +44,9 @@ namespace eInvoice.Model.DTOs.Invoice
             {
                 yield return new ValidationResult(item);
             }
+            //check tồn tại user name
+            yield return ModelValidate.checkUsers(username);
+
             yield return ModelValidate.checkDateTuQuaNgayHienTai(from);
 
             yield return ModelValidate.checkDateDenQuaNgayHienTai(to);

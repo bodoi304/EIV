@@ -27,7 +27,7 @@ namespace eInvoice.Model.Invoice.Request
 
             List<String> validateRequest = ModelBase.validateRequiredObject(new string[] { "key"
                  ,"invoice.ComtaxCode","invoice.BusinessDepartmentID","invoice.CusTaxCode","invoice.CusName","invoice.CusAddress"
-            ,"invoice.Buyer" ,"invoice.InvoiceType","invoice.InvoiceStatus"
+            ,"invoice.Buyer" ,"invoice.Type","invoice.Status"
              ,"invoice.PaymentMethod","invoice.PaymentStatus","invoice.CreateDate","invoice.CreateBy"
              ,"invoice.Total"
              ,"invoice.VATRate","invoice.VATAmount","invoice.Amount"
@@ -35,7 +35,7 @@ namespace eInvoice.Model.Invoice.Request
              ,"invoice.Otherfees"
              ,"invoice.Currency"
              ,"invoice.ExchangeRate"
-             ,"invoice.ComID","invoice.DepartmentID"}, new object[] { key
+             ,"invoice.ComID"}, new object[] { key
                  ,invoice.ComTaxCode ,invoice.BusinessDepartmentID,invoice.CusTaxCode,invoice.CusName,invoice.CusAddress
             ,invoice.Buyer ,invoice.Type,invoice.Status
              ,invoice.PaymentMethod,invoice.PaymentStatus,invoice.CreateDate,invoice.CreateBy
@@ -45,17 +45,38 @@ namespace eInvoice.Model.Invoice.Request
              ,invoice.OtherFees
              ,invoice.Currency
              ,invoice.ExchangeRate
-             ,invoice.ComID,invoice.DepartmentID });
+             ,invoice.ComID });
             foreach (String item in validateRequest)
             {
                 yield return new ValidationResult(item);
             }
+
+            //ton tai du lieu 1 trong 3 column sau CusTaxCode,CusName,CusAddress thì ca 3 column này phải có data
+            if (String.IsNullOrEmpty(invoice.Buyer))
+            {
+                List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.CusTaxCode",
+                    "invoice.CusName",
+                    "invoice.CusAddress"}, new object[] { invoice.CusTaxCode,invoice.CusName,invoice.CusAddress });
+                foreach (String item in validateRequestCus)
+                {
+                    yield return new ValidationResult(item);
+                }
+            }
+
+            //check hàng hóa
+            List<String> validateRequestProduct = ModelBase.validateRequiredList<ProductInv>(invoice.products ,
+                new string[] {"VATRate","VATAmount"});
+            foreach (String item in validateRequestProduct)
+            {
+                yield return new ValidationResult(item);
+            }
+
             int ComID = invoice.ComID ?? default(int);
 
             //Check company
             yield return ModelValidate.checkComID(ComID);
             //Check buyer
-            yield return ModelValidate.checkExistBuyer(invoice.Buyer);
+            //yield return ModelValidate.checkExistBuyer(invoice.Buyer);
 
             yield return ModelValidate.checkValueInArrayValue<InvoiceType>(invoice.Type, "Type", ConstantsMultiLanguageKey.E_InValid_Value);
 
@@ -81,8 +102,6 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkDoDaiSo(invoice.AmountInWords, LengthNumber.DO_DAI_19, "AmountInWords", ConstantsMultiLanguageKey.E_String_Length);
 
-            yield return ModelValidate.checkSoAm(invoice.AmountInWords, "AmountInWords", ConstantsMultiLanguageKey.E_Number_Value);
-
             yield return ModelValidate.checkDoDaiSo(invoice.OtherFees.ToString(), LengthNumber.DO_DAI_19, "Otherfees", ConstantsMultiLanguageKey.E_String_Length);
 
             yield return ModelValidate.checkSoAm(invoice.OtherFees, "Otherfees", ConstantsMultiLanguageKey.E_Number_Value);
@@ -93,7 +112,7 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkDoDaiSo(invoice.Currency , LengthNumber.DO_DAI_3, "Currency", ConstantsMultiLanguageKey.E_String_Length);
 
-            yield return ModelValidate.checkCurrency(invoice.Currency);
+            //yield return ModelValidate.checkCurrency(invoice.Currency);
 
             ///Check BusinessDepartment ID
             BusinessDepartment objBD =null;
@@ -111,6 +130,7 @@ namespace eInvoice.Model.Invoice.Request
                 {
                     invoice.Serial = objB.InvSerial;
                     invoice.Pattern = objB.InvPattern;
+                    invoice.BusinessID = objBD.BusinessID;
                     //Lấy thông tin Publish Invoice
                     yield return ModelValidate.checkExistPublishInvoice(objB.InvSerial, objB.InvPattern, objB.ComID, out objPInvoice);
                     if (objPInvoice != null)
@@ -121,6 +141,7 @@ namespace eInvoice.Model.Invoice.Request
                     yield return ModelValidate.checkExistDepartment(objBD.DepartmentID, out objDepartment);
                     if (objDepartment != null)
                     {
+                        invoice.DepartmentID = objBD.DepartmentID;
                         invoice.BranchCode = objDepartment.Code;
                         invoice.BranchName = objDepartment.Name;
                         invoice.BranchAddress = objDepartment.Address;
@@ -131,7 +152,7 @@ namespace eInvoice.Model.Invoice.Request
                     yield return ModelValidate.checkUsersByID(objBD.UserID, out objuser);
                     if (objuser != null)
                     {
-                        if (objuser.IsApproved ?? true)
+                        if (!objuser.IsApproved ?? !eInvoice.Untilities.Common.Constants.ActiveUser.INACTIVE)
                         {
                             yield return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_User_Active), objuser.username));
                         }

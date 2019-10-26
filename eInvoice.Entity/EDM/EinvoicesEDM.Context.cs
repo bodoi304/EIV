@@ -89,5 +89,22 @@ namespace eInvoice.Entity.EDM
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvTemplate_GetTemplateInvoice_Result>("InvTemplate_GetTemplateInvoice", patternParameter, taxCodeParameter);
         }
+    
+        public virtual ObjectResult<userdata_CheckUserAPI_Result> userdata_CheckUserAPI(string username, string taxCode, Nullable<int> type)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var taxCodeParameter = taxCode != null ?
+                new ObjectParameter("TaxCode", taxCode) :
+                new ObjectParameter("TaxCode", typeof(string));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userdata_CheckUserAPI_Result>("userdata_CheckUserAPI", usernameParameter, taxCodeParameter, typeParameter);
+        }
     }
 }

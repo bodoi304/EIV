@@ -108,6 +108,9 @@
     <Compile Include="EDM\userdata.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDM\userdata_CheckUserAPI_Result.cs">
+      <DependentUpon>EinvoicesEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDM\UserDepartment.cs">
       <DependentUpon>EinvoicesEDM.tt</DependentUpon>
     </Compile>

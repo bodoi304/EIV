@@ -492,6 +492,11 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="userdata_CheckUserAPI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+        </Function>
         <Function Name="Warehouse_SelectByTaxCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
         </Function>
@@ -566,6 +571,11 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <EntitySet Name="Currencies" EntityType="HDDT_pvoilModel.Currency" />
           <EntitySet Name="Businesses" EntityType="HDDT_pvoilModel.Business" />
           <EntitySet Name="PublishInvoices" EntityType="HDDT_pvoilModel.PublishInvoice" />
+          <FunctionImport Name="userdata_CheckUserAPI" ReturnType="Collection(HDDT_pvoilModel.userdata_CheckUserAPI_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="TaxCode" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ApiUserAccess">
           <Key>
@@ -1075,6 +1085,26 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
           <Property Name="InvCateName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="userdata_CheckUserAPI_Result">
+          <Property Type="Int32" Name="userid" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+          <Property Type="String" Name="password" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="PasswordFormat" Nullable="true" />
+          <Property Type="String" Name="PasswordSalt" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PasswordQuestion" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PasswordAnswer" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="FailedPassAttemptCount" Nullable="true" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Serials" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Position" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="TaxCode" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1612,6 +1642,30 @@ warning 6002: The table/view 'test_hddt_pvoil3.dbo.Warehouse' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="userdata_CheckUserAPI" FunctionName="HDDT_pvoilModel.Store.userdata_CheckUserAPI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDT_pvoilModel.userdata_CheckUserAPI_Result">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="FailedPassAttemptCount" ColumnName="FailedPassAttemptCount" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Serials" ColumnName="Serials" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

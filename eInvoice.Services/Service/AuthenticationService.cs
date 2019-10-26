@@ -20,8 +20,9 @@ namespace eInvoice.Services.Service
        
         public bool checkAuthentication(string itemAuthentication,  string IP,int timeOutLogin)
         {
+            //return true;
             //khởi tao instance truy vấn kho dữ liệu
-            ApiUserAccessDA dhApiUser = new ApiUserAccessDA();
+            UserDataDA dhApiUser = new UserDataDA();
             //decode base64 thông tin user
             String[] authentication = Untility.decodeBase64(itemAuthentication).Split(':');
 
@@ -32,6 +33,7 @@ namespace eInvoice.Services.Service
             }
             String UserName = authentication[0];
             String Password = authentication[1];
+            String Taxcode = authentication[2];
             //Tạo memory cache để lưu thông tin request API
             MemoryCacher cacher = new MemoryCacher();
             //Tạo token
@@ -43,21 +45,28 @@ namespace eInvoice.Services.Service
             }
             else
             {
+                // 
                 //chưa được đăng nhập thì kiểm tra trong DB
-                ApiUserAccess user = dhApiUser.checkExist(UserName, Password);
+                userdata_CheckUserAPI_Result user = dhApiUser.checkExistByUserNameAndPassword(UserName, Taxcode,Constants.UserDataType.ADMIN);
                 if (user == null)
                 {
                     return false;
                 }
                 else
                 {
-                    //Kiểm tra IP của user có được truy cập hay không
-                    if (!String.IsNullOrEmpty (user.IpMachine) && !user.IpMachine.Contains (IP))
+                    //kiem ta mat khau
+                     String encodePass=  Untility.EncodePassword(Password, 1, user.PasswordSalt );
+                    if (!user.password.Equals (encodePass))
                     {
                         return false;
                     }
+                    //Kiểm tra IP của user có được truy cập hay không
+                    //if (!String.IsNullOrEmpty (user.IpMachine) && !user.IpMachine.Contains (IP))
+                    //{
+                    //    return false;
+                    //}
                     //Kiểm tra user có được active hay không
-                    if (user.Status == Constants.StatusUserAPIAccess.NONACTIVE)
+                    if (!user.IsApproved ?? !eInvoice.Untilities.Common.Constants.ActiveUser.INACTIVE)
                     {
                         return false;
                     }

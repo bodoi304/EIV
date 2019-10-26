@@ -21,6 +21,7 @@ Begin
 	where username=@username and TaxCode = @TaxCode
 End
 
+
 go
 
 create proc [dbo].[SyncCategory_NghiepVu]
@@ -34,3 +35,46 @@ Begin
 	inner join UserDepartment  on UserDepartment.ID = BusinessDepartment.UserID
 	where username=@username and Business.TaxCode = @TaxCode
 End
+
+
+create proc [dbo].[InvTemplate_GetTemplateInvoice]
+@pattern nvarchar(12),
+@TaxCode nvarchar(20)
+As
+Begin
+	 SELECT TOP 1000 a.[Id]
+      ,a.[InvCateID]
+      ,[InvCateName]
+      ,[TemplateName]
+      ,[XsltFile]
+      ,[ServiceType]
+      ,[InvoiceType]
+      ,[InvoiceView]
+      ,[IGenerator]
+      ,[IViewer]
+      ,[ParseService]
+      ,[ImagePath]
+      ,[IsPub]
+	  ,a.CssData
+	  ,a.CssLogo
+	  ,a.CssBackgr
+  FROM InvTemplate a inner join RegisterTemp b
+  inner join Company c on  b.ComId = c.Id
+  on  a.id = b.tempID where b.InvPattern=@pattern and c.TaxCode  =@TaxCode
+End
+
+
+create procedure [dbo].[userdata_CheckUserAPI]
+@username nvarchar(50),
+@TaxCode nvarchar(20),
+@Type int
+As
+Begin
+  SELECT distinct a.*,c.TaxCode
+  FROM userdata a inner join  BusinessDepartment b
+  on  a.userid = b.UserID
+  inner join Business c
+  on  b.BusinessID = c.BusinessID where 
+  a.username =@username 
+  and a.Type= @Type
+  and c.TaxCode  =@TaxCode

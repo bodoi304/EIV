@@ -81,6 +81,22 @@ namespace eInvoice.Model
                         lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_001), name[i]));
                     }
                 }
+                else if (arr[i].GetType() == typeof(decimal?))
+                {
+                    decimal? objTmp = (decimal?)arr[i];
+                    if (objTmp == null)
+                    {
+                        lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_001), name[i]));
+                    }
+                }
+                else if (arr[i].GetType() == typeof(double?))
+                {
+                    double? objTmp = (double?)arr[i];
+                    if (objTmp == null)
+                    {
+                        lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_001), name[i]));
+                    }
+                }
             }
             return lstError;
         }
@@ -92,8 +108,9 @@ namespace eInvoice.Model
         /// <param name="lstObject">list object cần check required</param>
         /// <param name="arr">mảng chuỗi tên thuộc tính cần check required</param>
         /// <returns>Chuỗi nội dung lỗi</returns>
-        public static String validateRequiredList<T>(List<T> lstObject, params string[] arr)
+        public static List<String> validateRequiredList<T>(List<T> lstObject, params string[] arr)
         {
+            List<String> lstError = new List<String>();
             for (int i = 0; i < lstObject.Count; i++)
             {
                 foreach (String propertyName in arr)
@@ -104,7 +121,7 @@ namespace eInvoice.Model
                         object obj = pro.GetValue(lstObject[i], null);
                         if (obj == null || String.IsNullOrEmpty(obj.ToString()))
                         {
-                            return ConfigMultiLanguage.getMessWithKey(String.Format(ConstantsMultiLanguageKey.E_REQUIRED_002, propertyName));
+                            lstError.Add(ConfigMultiLanguage.getMessWithKey(String.Format(ConstantsMultiLanguageKey.E_REQUIRED_002,i+ 1, propertyName)));
                         }
                     }
                     if (pro.PropertyType == typeof(DateTime))
@@ -112,13 +129,37 @@ namespace eInvoice.Model
                         DateTime obj = (DateTime)pro.GetValue(lstObject[i], null);
                         if (obj == null || obj == DateTime.MinValue)
                         {
-                            return ConfigMultiLanguage.getMessWithKey(String.Format(ConstantsMultiLanguageKey.E_REQUIRED_002, propertyName));
+                            lstError.Add(ConfigMultiLanguage.getMessWithKey(String.Format(ConstantsMultiLanguageKey.E_REQUIRED_002, i + 1, propertyName)));
+                        }
+                    }
+                    else if (pro.PropertyType == typeof(int?))
+                    {
+                        int? objTmp = (int?)pro.GetValue(lstObject[i], null);
+                        if (objTmp == null)
+                        {
+                            lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_002), i + 1, propertyName));
+                        }
+                    }
+                    else if (pro.PropertyType == typeof(decimal?))
+                    {
+                        decimal? objTmp = (decimal?)pro.GetValue(lstObject[i], null);
+                        if (objTmp == null)
+                        {
+                            lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_002), i + 1, propertyName));
+                        }
+                    }
+                    else if (pro.PropertyType == typeof(double?))
+                    {
+                        double? objTmp = (double?)pro.GetValue(lstObject[i], null);
+                        if (objTmp == null)
+                        {
+                            lstError.Add(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_REQUIRED_002), i + 1, propertyName));
                         }
                     }
                 }
             }
 
-            return null;
+            return lstError;
         }
 
         public static ValidationResult checkComID(int ComID)

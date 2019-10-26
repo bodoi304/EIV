@@ -112,6 +112,8 @@ namespace eInvoice.Services.Service
                 String html = xMLInvoice.GetHtml(xMLInvoice.GetData(xml), template);
                 //Tạo pdf html từ html
                 var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
+                htmlToPdf.Zoom = 1.6f;
+                htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
                 htmlToPdf.Margins = new PageMargins { Left = 20 };
                 byte[] pdfBytes = htmlToPdf.GeneratePdf(html);
                 return pdfBytes;
@@ -122,5 +124,9 @@ namespace eInvoice.Services.Service
                 throw ex;
             }
         }
+
+
+      
+        
     }
 }
