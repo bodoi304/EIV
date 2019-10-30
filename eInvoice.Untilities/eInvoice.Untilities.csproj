@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\CustomDateTimeConverter.cs" />
+    <Compile Include="Common\CustomFormatDateTimeConverter.cs" />
     <Compile Include="Common\Format.cs" />
     <Compile Include="Common\GenerateXMLInvoice.cs" />
     <Compile Include="Common\ImageGenerator.cs" />

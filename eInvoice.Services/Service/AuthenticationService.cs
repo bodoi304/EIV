@@ -47,7 +47,7 @@ namespace eInvoice.Services.Service
             {
                 // 
                 //chưa được đăng nhập thì kiểm tra trong DB
-                userdata_CheckUserAPI_Result user = dhApiUser.checkExistByUserNameAndPassword(UserName, Taxcode,Constants.UserDataType.ADMIN);
+               userdata_CheckUserAPI_Result user = dhApiUser.checkExistByUserNameAndPassword(UserName, Taxcode,Constants.UserDataType.ADMIN);
                 if (user == null)
                 {
                     return false;

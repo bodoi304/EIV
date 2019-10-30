@@ -207,6 +207,21 @@ namespace eInvoice.Model
 
         }
 
+        public static ValidationResult checkExistCustaxcode(String custaxcode, out Customer objOut)
+        {
+            CustomerDA ctlCustomer = new CustomerDA();
+            objOut = ctlCustomer.checkExistCustaxcode(custaxcode);
+            if (objOut == null)
+            {
+                return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_CustomerTaxCode_Exist), custaxcode) );
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public static ValidationResult checkUsers(String userName)
         {
             UserDataDA ctlUserData = new UserDataDA();
@@ -461,6 +476,20 @@ namespace eInvoice.Model
             if (objOut == null)
             {
                 return new ValidationResult(ConstantsMultiLanguageKey.E_EMAIL_100);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static ValidationResult checkExistInvoice(String fkey)
+        {
+            PVOILInvoiceDA pvOil = new PVOILInvoiceDA();
+            PVOILInvoice objInv = pvOil.checkExistInvoice(fkey);
+            if (objInv != null)
+            {
+                return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_Invoice_Exist), fkey));
             }
             else
             {

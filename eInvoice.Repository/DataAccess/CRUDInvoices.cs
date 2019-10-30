@@ -48,7 +48,7 @@ namespace eInvoice.Repository.DataAccess
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return false;
+                    throw  ex;
                 }
             }
         }

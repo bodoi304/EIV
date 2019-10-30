@@ -33,7 +33,8 @@ namespace eInvoice.Model
                     }
                     else
                     {
-                        continue;
+                        item.code = "Exception";
+                        item.message = error.Exception.Message + " " + error.Exception.StackTrace;
                     }
                     lstErrors.Add(item);
                 }
@@ -57,10 +58,15 @@ namespace eInvoice.Model
                         item.code = strtmp[0];
                         item.message = strtmp[1];
                     }
-                    else
+                    else if (!String.IsNullOrEmpty(error.ErrorMessage))
                     {
                         item.code = error.ErrorMessage;
                         item.message = ConfigMultiLanguage.getMess(error.ErrorMessage);
+                    }
+                    else
+                    {
+                        item.code = "Exception";
+                        item.message = error.Exception.Message + " " + error.Exception.StackTrace ;
                     }
                     lstErrors.Add(item);
                 }

@@ -21,9 +21,9 @@ namespace eInvoice.Model.DTOs.Invoice
         public string username { get; set; }
         public string taxCode { get; set; }
         public string buyerTaxCode { get; set; }
-        [JsonConverter(typeof(CustomDateTimeConverter))]
+        [JsonConverter(typeof(CustomFormatDateTimeConverter))]
         public DateTime from { get; set; }
-        [JsonConverter(typeof(CustomDateTimeConverter))]
+        [JsonConverter(typeof(CustomFormatDateTimeConverter))]
         public DateTime to { get; set; }
         public Boolean reSynInvoice { get; set; }
 

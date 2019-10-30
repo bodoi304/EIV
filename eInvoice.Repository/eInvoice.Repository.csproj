@@ -73,9 +73,11 @@
     <Compile Include="DataAccess\DepartmentDA.cs" />
     <Compile Include="DataAccess\ProductInvDA.cs" />
     <Compile Include="DataAccess\PublishInvoiceDA.cs" />
+    <Compile Include="DataAccess\PVOILInvoiceDA.cs" />
     <Compile Include="DataAccess\SearchInvoiceDA.cs" />
     <Compile Include="DataAccess\SyncCategoryDA.cs" />
     <Compile Include="DataAccess\UserDataDA.cs" />
+    <Compile Include="DataAccess\WareHouseDA.cs" />
     <Compile Include="DataContext\DBContextInvoiceSQL.cs" />
     <Compile Include="Interface\IDBContextInvoiceSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

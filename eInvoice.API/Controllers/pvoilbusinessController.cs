@@ -139,7 +139,7 @@ namespace eInvoice.API.Controllers
             }
             catch (Exception ex)
             {
-                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
+                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ex.Message + " - " + ex.StackTrace);
             }
         }
 

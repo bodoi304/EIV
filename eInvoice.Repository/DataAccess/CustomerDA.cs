@@ -13,5 +13,10 @@ namespace eInvoice.Repository.DataAccess
         {
             return dbInvoice.GetOne<Customer>(b => b.Buyer  == buyer);
         }
+
+        public Customer checkExistCustaxcode(String custaxcode)
+        {
+            return dbInvoice.GetOne<Customer>(b => b.TaxCode  == custaxcode);
+        }
     }
 }

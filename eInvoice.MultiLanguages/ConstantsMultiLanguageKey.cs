@@ -39,5 +39,9 @@ namespace eInvoice.MultiLanguages
         public const string E_ToDate_003= "E_ToDate_003";
         public const string E_ToDate_004 = "E_ToDate_004";
 
+        public const string E_Invoice_Exist= "E_Invoice_Exist";
+        public const string E_CustomerTaxCode_Exist = "E_CustomerTaxCode_Exist";
+        
+
     }
 }
