@@ -225,7 +225,7 @@ namespace eInvoice.Model
         public static ValidationResult checkUsers(String userName)
         {
             UserDataDA ctlUserData = new UserDataDA();
-            userdata users = ctlUserData.checkExist(userName, 0);
+            userdata users = ctlUserData.checkExist(userName);
             if (users == null)
             {
                 return new ValidationResult(ConstantsMultiLanguageKey.E_EMAIL_100);
@@ -307,38 +307,46 @@ namespace eInvoice.Model
         /// <returns></returns>
         public static ValidationResult checkValueInArrayValue<T>(object objCheck, String nameCheck, String errorCode)
         {
-            if (objCheck == null)
+            try
             {
-                return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(errorCode), nameCheck));
-            }
-            else if (objCheck.GetType() == typeof(int))
-            {
-                int invoiceTypeInt = (int)objCheck;
-                if (!Untility.checkExistStrucString<T>(invoiceTypeInt.ToString()))
+                if (objCheck == null)
                 {
                     return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(errorCode), nameCheck));
                 }
-                else
+                else if (objCheck.GetType() == typeof(int))
                 {
-                    return null;
+                    int invoiceTypeInt = (int)objCheck;
+                    if (!Untility.checkExistStrucString<T>(invoiceTypeInt.ToString()))
+                    {
+                        return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(errorCode), nameCheck));
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
+                else if (objCheck.GetType() == typeof(String))
+                {
+                    String objCheckStr = (String)objCheck;
+
+                    if (!Untility.checkExistStrucString<T>(objCheckStr))
+                    {
+                        return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(errorCode), nameCheck));
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                    return null;
             }
-            else if (objCheck.GetType() == typeof(String))
+            catch (Exception ex)
             {
-                String objCheckStr = (String)objCheck;
 
-                if (!Untility.checkExistStrucString<T>(objCheckStr))
-                {
-                    return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(errorCode), nameCheck));
-                }
-                else
-                {
-                    return null;
-                }
-
+                throw ex;
             }
-            else
-                return null;
 
         }
 
@@ -490,6 +498,20 @@ namespace eInvoice.Model
             if (objInv != null)
             {
                 return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_Invoice_Exist), fkey));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static ValidationResult checkExistInvoiceTemplateTypeView(int Type)
+        {
+            InvTemplateDA ctlInvTemp = new InvTemplateDA();
+            InvTemplate objInv = ctlInvTemp.checkExistTypeView(Type, "XKTX");
+            if (objInv != null)
+            {
+                return new ValidationResult(ConstantsMultiLanguageKey.E_InvoiceTemplate_Type );
             }
             else
             {

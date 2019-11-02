@@ -43,5 +43,7 @@ namespace eInvoice.Entity.EDM
         public Nullable<decimal> DraftAmount { get; set; }
         public string ConvertUnit2 { get; set; }
         public Nullable<decimal> ConvertQuantity2 { get; set; }
+        public string DraftName { get; set; }
+        public Nullable<decimal> InQuantity { get; set; }
     }
 }

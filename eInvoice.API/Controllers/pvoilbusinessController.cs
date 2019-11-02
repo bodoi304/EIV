@@ -86,30 +86,24 @@ namespace eInvoice.API.Controllers
         [HttpPost]
         public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
         {
-            //try
-            //{
+            try
+            {
                 if (ModelState.IsValid)
                 {
-                    try
-                    {
-                        return invoice.searchInvoice(objRequest);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_COMMON));
-                    }
+                    return invoice.searchInvoice(objRequest);
                 }
                 else
                 {
-                    throw Logs.Error(HttpStatusCode.BadRequest, UtilitesModel.getError(ModelState).ToString());
+                    searchInvoiceResponse returnObj = new searchInvoiceResponse();
+                    returnObj.error = UtilitesModel.getErrorList(ModelState);
+                    return returnObj;
                 }
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
+                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ex.Message + " - " + ex.StackTrace);
+            }
 
-            //    throw ex;
-            //}
-           
         }
 
 
@@ -130,8 +124,8 @@ namespace eInvoice.API.Controllers
                 else
                 {
                     createInvoiceResponse returnObj = new createInvoiceResponse();
-                    returnObj.key = objRequest.key ;
-                    returnObj.taxCode  = objRequest.invoice.ComTaxCode;
+                    returnObj.key = objRequest.key;
+                    returnObj.taxCode = objRequest.invoice.ComTaxCode;
                     returnObj.result = false;
                     returnObj.error = UtilitesModel.getErrorList(ModelState);
                     return returnObj;
@@ -148,7 +142,7 @@ namespace eInvoice.API.Controllers
         public HttpResponseMessage exportPDF(ExportInvoiceRequest objRequest)
         {
 
-           byte[] invoicePdf= invoice.exportPDF(objRequest);
+            byte[] invoicePdf = invoice.exportPDF(objRequest);
 
             HttpResponseMessage result = null;
             result = Request.CreateResponse(HttpStatusCode.OK);

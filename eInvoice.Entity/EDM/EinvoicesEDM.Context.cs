@@ -31,16 +31,17 @@ namespace eInvoice.Entity.EDM
         public virtual DbSet<BusinessDepartment> BusinessDepartments { get; set; }
         public virtual DbSet<UserDepartment> UserDepartments { get; set; }
         public virtual DbSet<AccountingAccount> AccountingAccounts { get; set; }
-        public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<PVOILInvoice> PVOILInvoices { get; set; }
         public virtual DbSet<ProductInv> ProductInvs { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<userdata> userdatas { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
-        public virtual DbSet<Business> Businesses { get; set; }
         public virtual DbSet<PublishInvoice> PublishInvoices { get; set; }
+        public virtual DbSet<PVOILInvoice> PVOILInvoices { get; set; }
+        public virtual DbSet<Business> Businesses { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<InvTemplate> InvTemplates { get; set; }
     
         public virtual ObjectResult<SyncCategory_DiemXuat_Result> SyncCategory_DiemXuat(string username, string taxCode)
         {

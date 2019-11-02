@@ -9,8 +9,8 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
 {
     public class searchInvoiceResponse
     {
+        public List<ErrorModel> error;
         public List<searchInvoiceModel> invoices;
-
         public searchInvoiceResponse()
         {
             this.invoices = new List<searchInvoiceModel>();

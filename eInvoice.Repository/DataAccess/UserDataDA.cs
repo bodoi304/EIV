@@ -9,9 +9,9 @@ namespace eInvoice.Repository.DataAccess
 {
   public class UserDataDA : DataAccessBase
     {
-        public userdata checkExist(String userName , int type)
+        public userdata checkExist(String userName )
         {
-            return dbInvoice.GetOne<userdata>(b => b.username == userName && b.Type ==type );
+            return dbInvoice.GetOne<userdata>(b => b.username == userName  );
         }
 
         public userdata checkExistByUserID(int userID)

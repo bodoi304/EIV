@@ -19,7 +19,7 @@ namespace eInvoice.Model.Invoice.Request
     {
         public string userName { get; set; }
         public string taxCode { get; set; }
-        public string CatType { get; set; }
+        public string CatName { get; set; }
         
         public override IMapper mapper()
         {
@@ -32,16 +32,16 @@ namespace eInvoice.Model.Invoice.Request
         /// <returns></returns>
         public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
         {
-           List<String> validateRequest =ModelBase.validateRequiredObject(new string[] { "userName", "taxCode", "CatType" }, new object[] { userName, taxCode, CatType });
+           List<String> validateRequest =ModelBase.validateRequiredObject(new string[] { "userName", "taxCode", "CatType" }, new object[] { userName, taxCode, CatName });
             foreach (String item in validateRequest)
             {
                 yield return new ValidationResult(item);
             }
 
-            if (!CatType.Trim().ToUpper ().Equals (Constants.CategorySync .ALL) && !CatType.Trim().ToUpper().Equals(Constants.CategorySync.KHO )
-               && !CatType.Trim().ToUpper().Equals(Constants.CategorySync.MAKETOAN )
-                 && !CatType.Trim().ToUpper().Equals(Constants.CategorySync.DIEMXUAT )
-               && !CatType.Trim().ToUpper().Equals(Constants.CategorySync.NGHIEPVU))
+            if (!CatName.Trim().ToUpper ().Equals (Constants.CategorySync .ALL) && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.KHO )
+               && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.MAKETOAN )
+                 && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.DIEMXUAT )
+               && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.NGHIEPVU))
             {
                 yield return new ValidationResult(ConstantsMultiLanguageKey.E_CAT_001);
             }

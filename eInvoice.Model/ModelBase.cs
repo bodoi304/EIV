@@ -9,7 +9,6 @@ namespace eInvoice.Model
 {
     public abstract class ModelBase
     {
-        private static MapperConfiguration configuration;
         /// <summary>
         /// check required cho model
         /// </summary>
@@ -45,10 +44,7 @@ namespace eInvoice.Model
     
         public static IMapper mapperStatic<S,D>()
         {
-            if (configuration==null)
-            {
-                configuration = new MapperConfiguration(cfg => { cfg.CreateMap<S, D>().ReverseMap(); });
-            }
+            MapperConfiguration configuration = new MapperConfiguration(cfg => { cfg.CreateMap<S, D>().ReverseMap(); });
             return configuration.CreateMapper();
         }
 

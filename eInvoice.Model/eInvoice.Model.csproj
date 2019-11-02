@@ -71,6 +71,7 @@
     <Compile Include="Category\Response\syncCategory\SyncCategoryResponse.cs" />
     <Compile Include="ErrorModel.cs" />
     <Compile Include="Invoice\InvoicesModel.cs" />
+    <Compile Include="Invoice\ProductModel.cs" />
     <Compile Include="Invoice\Request\CreateInvoiceRequest.cs" />
     <Compile Include="Invoice\Request\ExportInvoiceRequest.cs" />
     <Compile Include="Invoice\Request\SearchInvoiceRequest.cs" />

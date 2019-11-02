@@ -10,11 +10,14 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
     public class searchInvoiceModel
     {
         public string key;
-        public InvoicesModel invoice;
+        public string Serial;
+        public string Pattern;
+        public decimal InvoiceNo;
+        //public InvoicesModel invoice;
 
-        public searchInvoiceModel()
-        {
-            this.invoice = new InvoicesModel();
-        }
+        //public searchInvoiceModel()
+        //{
+        //    this.invoice = new InvoicesModel();
+        //}
     }
 }

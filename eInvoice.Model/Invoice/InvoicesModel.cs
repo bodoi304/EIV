@@ -3,15 +3,13 @@ using eInvoice.Untilities.Common;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace eInvoice.Model.Invoice
 {
     public class InvoicesModel : PVOILInvoice
     {
-        public List<ProductInv> products { get; set; }
+        public List<ProductModel> products { get; set; }
         [JsonIgnore]
         public String Data { get; set; }
 
@@ -57,6 +55,14 @@ namespace eInvoice.Model.Invoice
         public Nullable<System.DateTime> ExpireDate { get; set; }
         [JsonConverter(typeof(CustomFormatDateTimeConverter))]
         public Nullable<System.DateTime> InvoiceDate { get; set; }
-        
+        [JsonConverter(typeof(CustomFormatBooleanConverter))]
+        public Nullable<bool> DraftCancel { get; set; }
+        [JsonConverter(typeof(CustomFormatBooleanConverter))]
+        public Nullable<bool> Certified { get; set; }
+        [JsonConverter(typeof(CustomFormatBooleanConverter))]
+        public Nullable<bool> IsApprove { get; set; }
+        [JsonConverter(typeof(CustomFormatBooleanConverter))]
+        public Nullable<bool> FormatNumber { get; set; }
+        public String originalKey { get; set; }
     }
 }

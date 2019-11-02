@@ -43,15 +43,17 @@ namespace eInvoice.Services.Service
                 {
                     searchInvoiceModel tmp = new searchInvoiceModel();
                     tmp.key = item.Fkey.ToString();
-                    tmp.invoice = item;
-                    tmp.invoice.products = da.selectProductByInvoice(item.id);
+                    tmp.Pattern = item.Pattern;
+                    tmp.Serial  = item.Serial ;
+                    tmp.InvoiceNo  = item.No ?? 0 ;
+                    //tmp.invoice = item;
+                    //tmp.invoice.products = da.selectProductByInvoice(item.id);
                     response.invoices.Add(tmp);
                 }
                 return response;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
@@ -70,8 +72,8 @@ namespace eInvoice.Services.Service
                 createInvoiceModel.invoice.Fkey = createInvoiceModel.key;
                 CRUDInvoices cRUD = new CRUDInvoices();
                 PVOILInvoice invoice = ModelBase.mapperStatic<InvoicesModel, PVOILInvoice>().Map<InvoicesModel, PVOILInvoice>(createInvoiceModel.invoice);
-
-                cRUD.insertInvoiceProduct(invoice, createInvoiceModel.invoice.products);
+                List<ProductInv> lstProduct =  ModelBase.mapperStatic< ProductModel,  ProductInv >().Map< List<ProductModel>, List< ProductInv >>(createInvoiceModel.invoice.products);
+                cRUD.insertInvoiceProduct(invoice, lstProduct);
                 returnObj.taxCode = createInvoiceModel.invoice.ComTaxCode;
                 returnObj.key = createInvoiceModel.invoice.Fkey;
                 returnObj.result = true;
@@ -101,22 +103,23 @@ namespace eInvoice.Services.Service
                 PVOILInvoice invoice = da.selectItemInvoiceByFKey(exportObj.FKey);
                 InvoicesModel invoiceModel = ModelBase.mapperStatic<PVOILInvoice, InvoicesModel>().Map<PVOILInvoice, InvoicesModel>(invoice);
                 searchInvoiceModel tmp = new searchInvoiceModel();
-                tmp.invoice = invoiceModel;
-                //lay san pham
-                tmp.invoice.products = da.selectProductByInvoice(invoiceModel.id);
-                InvTemplate_GetTemplateInvoice_Result template = da.InvTemplate_GetTemplateInvoice(invoice.Pattern, invoice.ComTaxCode);
+                //tmp.invoice = invoiceModel;
+                ////lay san pham
+                //tmp.invoice.products = da.selectProductByInvoice(invoiceModel.id);
+                //InvTemplate_GetTemplateInvoice_Result template = da.InvTemplate_GetTemplateInvoice(invoice.Pattern, invoice.ComTaxCode);
 
-                //Tạo data XML từ invoice và product
-                String xml = xMLInvoice.GetXMLData(tmp.invoice, tmp.invoice.products, template.TemplateName);
+                ////Tạo data XML từ invoice và product
+                //String xml = xMLInvoice.GetXMLData(tmp.invoice, tmp.invoice.products, template.TemplateName);
                 //Tạo data html từ xml
-                String html = xMLInvoice.GetHtml(xMLInvoice.GetData(xml), template);
+                //String html = xMLInvoice.GetHtml(xMLInvoice.GetData(xml), template);
                 //Tạo pdf html từ html
                 var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
                 htmlToPdf.Zoom = 1.6f;
                 htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
                 htmlToPdf.Margins = new PageMargins { Left = 20 };
-                byte[] pdfBytes = htmlToPdf.GeneratePdf(html);
-                return pdfBytes;
+                //byte[] pdfBytes = htmlToPdf.GeneratePdf(html);
+                //return pdfBytes;
+                return null;
             }
             catch (Exception ex)
             {

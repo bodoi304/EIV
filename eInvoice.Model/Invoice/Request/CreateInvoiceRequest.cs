@@ -33,8 +33,7 @@ namespace eInvoice.Model.Invoice.Request
              ,"invoice.AmountInWords"
              ,"invoice.Otherfees"
              ,"invoice.Currency"
-             ,"invoice.ExchangeRate"
-             ,"invoice.ComID"}, new object[] { key
+             ,"invoice.ExchangeRate"}, new object[] { key
                  ,invoice.ComTaxCode ,invoice.BusinessDepartmentID ,invoice.Type,invoice.Status
              ,invoice.PaymentMethod,invoice.PaymentStatus,invoice.CreateDate,invoice.CreateBy
              ,invoice.Total
@@ -42,8 +41,7 @@ namespace eInvoice.Model.Invoice.Request
              ,invoice.AmountInWords
              ,invoice.OtherFees
              ,invoice.Currency
-             ,invoice.ExchangeRate
-             ,invoice.ComID });
+             ,invoice.ExchangeRate });
             foreach (String item in validateRequest)
             {
                 yield return new ValidationResult(item);
@@ -63,6 +61,30 @@ namespace eInvoice.Model.Invoice.Request
 
 
             }
+
+            if (invoice .Status != 0)
+            {
+
+                new ValidationResult(ConstantsMultiLanguageKey.E_Invoice_Status_Create);
+            }
+
+            if (invoice.Type == InvoiceType.ForReplace || invoice.Type == InvoiceType.ForAdjustAccrete
+                || invoice.Type == InvoiceType.ForAdjustReduce
+                || invoice.Type == InvoiceType.ForAdjustInfo)
+            {     
+                if (invoice.DraftCancel == null)
+                {
+                    List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.originalKey" },
+                  new object[] { invoice.originalKey });
+                    foreach (String item in validateRequestCus)
+                    {
+                        yield return new ValidationResult(item);
+                    }
+                }
+                //check mau hoa don khong được điều chỉnh thay thế 
+                yield return ModelValidate.checkExistInvoiceTemplateTypeView(invoice.Type ?? 8);
+            }
+
             CustomerDA ctlCustomer = new CustomerDA();
             Customer objCus = ctlCustomer.checkExistCustaxcode(invoice.CusTaxCode);
             if (objCus != null)
@@ -79,7 +101,7 @@ namespace eInvoice.Model.Invoice.Request
                 invoice.COutputWarehouse = objWareHouse.Name;
             }
             //check hàng hóa
-            List<String> validateRequestProduct = ModelBase.validateRequiredList<ProductInv>(invoice.products ,
+            List<String> validateRequestProduct = ModelBase.validateRequiredList<ProductModel>(invoice.products ,
                 new string[] {"VATRate","VATAmount"});
             foreach (String item in validateRequestProduct)
             {
@@ -89,7 +111,7 @@ namespace eInvoice.Model.Invoice.Request
             int ComID = invoice.ComID ?? default(int);
 
             //Check company
-            yield return ModelValidate.checkComID(ComID);
+            //yield return ModelValidate.checkComID(ComID);
             //Check buyer
             //yield return ModelValidate.checkExistBuyer(invoice.Buyer);
 
@@ -115,7 +137,7 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkSoAm(invoice.Amount, "Amount", ConstantsMultiLanguageKey.E_Number_Value);
 
-            yield return ModelValidate.checkDoDaiSo(invoice.AmountInWords, LengthNumber.DO_DAI_19, "AmountInWords", ConstantsMultiLanguageKey.E_String_Length);
+            yield return ModelValidate.checkDoDaiSo(invoice.AmountInWords, LengthNumber.DO_DAI_255, "AmountInWords", ConstantsMultiLanguageKey.E_String_Length);
 
             yield return ModelValidate.checkDoDaiSo(invoice.OtherFees.ToString(), LengthNumber.DO_DAI_19, "Otherfees", ConstantsMultiLanguageKey.E_String_Length);
 
@@ -127,9 +149,11 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkDoDaiSo(invoice.Currency , LengthNumber.DO_DAI_3, "Currency", ConstantsMultiLanguageKey.E_String_Length);
 
-            //yield return ModelValidate.checkCurrency(invoice.Currency);
-            //check invoice co ton tai hay ko
-            yield return ModelValidate.checkExistInvoice (key  );
+         
+
+           //yield return ModelValidate.checkCurrency(invoice.Currency);
+           //check invoice co ton tai hay ko
+           yield return ModelValidate.checkExistInvoice (key  );
             ///Check BusinessDepartment ID
             BusinessDepartment objBD =null;
             Business objB = null;
@@ -155,6 +179,14 @@ namespace eInvoice.Model.Invoice.Request
                     invoice.Serial = objB.InvSerial;
                     invoice.Pattern = objB.InvPattern;
                     invoice.BusinessID = objBD.BusinessID;
+                    //lấy thông tin company
+                    CompanyDA ctlCompany = new CompanyDA();
+                    Company company = ctlCompany.checkExistByID(objB.ComID );
+                    if (company != null)
+                    {
+                        invoice.ComName = company.Name;
+                        invoice.ComAddress = company.Address;
+                    }
                     //Lấy thông tin Publish Invoice
                     yield return ModelValidate.checkExistPublishInvoice(objB.InvSerial, objB.InvPattern, objB.ComID, out objPInvoice);
                     if (objPInvoice != null)

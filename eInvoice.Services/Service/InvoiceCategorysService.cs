@@ -28,7 +28,7 @@ namespace eInvoice.Services.Service
                 List<SyncCategoryResponse> returnObj = new List<SyncCategoryResponse>();
                 SyncCategoryResponse Obj = new SyncCategoryResponse();
                 SyncCategoryDA ctl = new SyncCategoryDA();
-                String catType = syncCategory.CatType.Trim().ToUpper();
+                String catType = syncCategory.CatName.Trim().ToUpper();
                 switch (catType)
                 {
                     case Constants.CategorySync.DIEMXUAT:

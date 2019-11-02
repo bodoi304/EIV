@@ -71,6 +71,7 @@
     <Compile Include="DataAccess\CurrencyDA.cs" />
     <Compile Include="DataAccess\CustomerDA.cs" />
     <Compile Include="DataAccess\DepartmentDA.cs" />
+    <Compile Include="DataAccess\InvTemplateDA.cs" />
     <Compile Include="DataAccess\ProductInvDA.cs" />
     <Compile Include="DataAccess\PublishInvoiceDA.cs" />
     <Compile Include="DataAccess\PVOILInvoiceDA.cs" />

@@ -135,6 +135,7 @@ namespace eInvoice.Untilities.Common
 
         public struct LengthNumber
         {
+            public const int DO_DAI_255 = 255;
             public const int DO_DAI_19 = 19;
             public const int DO_DAI_3 = 3;
         }

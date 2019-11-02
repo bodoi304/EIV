@@ -95,7 +95,15 @@ namespace eInvoice.Entity.EDM
         public Nullable<int> COutputWarehouseID { get; set; }
         public string COutputWarehouseCode { get; set; }
         public string COutputWarehouse { get; set; }
-        public string HeSoVCF { get; set; }
+        public Nullable<decimal> DraftTotal { get; set; }
+        public Nullable<decimal> DraftVATAmount { get; set; }
+        public Nullable<decimal> DraftAmount { get; set; }
+        public string DraftAmountInWords { get; set; }
+        public Nullable<double> DraftVATRate { get; set; }
+        public Nullable<int> WOutputWarehouseID { get; set; }
+        public Nullable<int> StatusTransfer { get; set; }
+        public Nullable<bool> FormatNumber { get; set; }
+        public string WSymbol { get; set; }
         public string TyTrong15 { get; set; }
         public string SLXuatThuc { get; set; }
         public string SLQuyChuan15 { get; set; }
@@ -124,6 +132,7 @@ namespace eInvoice.Entity.EDM
         public Nullable<int> LastestUpdateUserID { get; set; }
         public Nullable<System.DateTime> LastestUpdateDate { get; set; }
         public string RefNo { get; set; }
+        public Nullable<System.DateTime> RefNoExpired { get; set; }
         public Nullable<int> CheckedUserID4 { get; set; }
         public Nullable<System.DateTime> CheckedDate4 { get; set; }
         public Nullable<int> StatusChecked1 { get; set; }
@@ -169,24 +178,36 @@ namespace eInvoice.Entity.EDM
         public string InvCommandTicket { get; set; }
         public string InvImportAddress { get; set; }
         public string InvExportAddress { get; set; }
+        public string TankCode { get; set; }
         public string ExportCode { get; set; }
         public string ExportItems { get; set; }
+        public Nullable<double> FirstMeterValue { get; set; }
+        public Nullable<double> EndMeterValue { get; set; }
         public Nullable<int> QuantityTT { get; set; }
+        public string CelsiusDegree { get; set; }
         public string Density { get; set; }
+        public string VCFCoefficient { get; set; }
+        public string WCFCoefficient { get; set; }
         public Nullable<int> QuantityExport15 { get; set; }
         public Nullable<decimal> Kg { get; set; }
         public string ReceiptPerson { get; set; }
         public string LetterNo { get; set; }
         public Nullable<System.DateTime> LetterDate { get; set; }
+        public string TransportAgent { get; set; }
+        public string CLicensePlate { get; set; }
+        public string CTransporter { get; set; }
         public Nullable<int> VehiclePersonId { get; set; }
         public Nullable<System.DateTime> VehiclePersonDate { get; set; }
         public string InvRefNo { get; set; }
+        public string WOutputWarehouseCode { get; set; }
         public string ExportTime { get; set; }
         public Nullable<System.DateTime> ExportDate { get; set; }
+        public string WOutputWarehouse { get; set; }
         public Nullable<int> ReceiptPersonId { get; set; }
         public string ReceiptNo { get; set; }
         public Nullable<System.DateTime> ReceiptDate { get; set; }
         public string ReceiptDepartment { get; set; }
+        public string CTransportVehicle { get; set; }
         public string TransportContract { get; set; }
         public Nullable<System.DateTime> ReceiptPersonDate { get; set; }
         public string BDCode { get; set; }
@@ -200,27 +221,45 @@ namespace eInvoice.Entity.EDM
         public string SealNo { get; set; }
         public string NoPerVehicle { get; set; }
         public string AmountInWordsGlobal { get; set; }
-        public Nullable<decimal> DraftTotal { get; set; }
-        public Nullable<decimal> DraftVATAmount { get; set; }
-        public Nullable<decimal> DraftAmount { get; set; }
-        public string DraftAmountInWords { get; set; }
-        public Nullable<double> DraftVATRate { get; set; }
-        public Nullable<bool> DraftCancel { get; set; }
-        public Nullable<bool> FormatNumber { get; set; }
-        public Nullable<int> WOutputWarehouseID { get; set; }
-        public Nullable<int> StatusTransfer { get; set; }
-        public string TankCode { get; set; }
-        public Nullable<double> FirstMeterValue { get; set; }
-        public Nullable<double> EndMeterValue { get; set; }
-        public string CelsiusDegree { get; set; }
-        public string VCFCoefficient { get; set; }
-        public string WCFCoefficient { get; set; }
-        public string TransportAgent { get; set; }
-        public string CLicensePlate { get; set; }
-        public string CTransporter { get; set; }
-        public string WOutputWarehouseCode { get; set; }
-        public string WOutputWarehouse { get; set; }
-        public string CTransportVehicle { get; set; }
         public string TransportAgentCode { get; set; }
+        public Nullable<bool> DraftCancel { get; set; }
+        public string WReceivingPerson { get; set; }
+        public string WReceivingPersonID { get; set; }
+        public string WReceivingPersonIDate { get; set; }
+        public string WReceivingReferralNo { get; set; }
+        public string WReceivingReferralDate { get; set; }
+        public string WReceivingReferralAgen { get; set; }
+        public string WTransportVehicle { get; set; }
+        public string WLicensePlate { get; set; }
+        public string WTransporterPerson { get; set; }
+        public string WTransporterPersonID { get; set; }
+        public string WTransporterPersonDate { get; set; }
+        public string WTransporterReferralNo { get; set; }
+        public string WTransporterReferralDate { get; set; }
+        public string WTransporterReferralAgen { get; set; }
+        public string ManeuverCommandNo { get; set; }
+        public string ManeuverCommandDate { get; set; }
+        public string ManeuverCommandPerson { get; set; }
+        public string ManeuverCommandReason { get; set; }
+        public string Owner { get; set; }
+        public string ContractOwner { get; set; }
+        public string CReceivingReportNo { get; set; }
+        public Nullable<System.DateTime> CReceivingReportDate { get; set; }
+        public string CReceivingReportAgent { get; set; }
+        public string VATInvoiceNo { get; set; }
+        public string VATInvoiceSign { get; set; }
+        public string VATInvoiceDate { get; set; }
+        public string CReceivingAgent { get; set; }
+        public string CReceivingReferralNo { get; set; }
+        public Nullable<System.DateTime> CReceivingReferralDate { get; set; }
+        public Nullable<int> CInputWarehouseID { get; set; }
+        public string CInputWarehouse { get; set; }
+        public string CInputWarehouseAddress { get; set; }
+        public string COutputWarehouseAddress { get; set; }
+        public string OutputCode { get; set; }
+        public string CelsiusDegreeRequire { get; set; }
+        public Nullable<int> VehicleValue { get; set; }
+        public string CReceivingPerson { get; set; }
+        public string CReceivingPersonID { get; set; }
     }
 }

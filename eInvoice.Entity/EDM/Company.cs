@@ -39,5 +39,6 @@ namespace eInvoice.Entity.EDM
         public string TaxAuthorityCode { get; set; }
         public string ContactEmail { get; set; }
         public string ExtEmail { get; set; }
+        public Nullable<int> SignedDateOption { get; set; }
     }
 }

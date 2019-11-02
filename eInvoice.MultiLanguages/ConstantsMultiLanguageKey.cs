@@ -41,7 +41,9 @@ namespace eInvoice.MultiLanguages
 
         public const string E_Invoice_Exist= "E_Invoice_Exist";
         public const string E_CustomerTaxCode_Exist = "E_CustomerTaxCode_Exist";
-        
+        public const string E_Invoice_Status_Create = "E_Invoice_Status_Create";
+        public const string E_InvoiceTemplate_Type = "E_InvoiceTemplate_Type";
+
 
     }
 }
