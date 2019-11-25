@@ -13,6 +13,10 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
         public string Serial;
         public string Pattern;
         public decimal InvoiceNo;
+
+        public int Soduthao;
+        public int Trangthaikiemtra;
+        public String Ghichu;
         //public InvoicesModel invoice;
 
         //public searchInvoiceModel()

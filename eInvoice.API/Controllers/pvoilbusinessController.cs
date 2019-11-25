@@ -84,7 +84,7 @@ namespace eInvoice.API.Controllers
         ///  "to": "Mar 10, 2019 12:00:00 AM",
         /// "reSynInvoice": "true"
         [HttpPost]
-        public searchInvoiceResponse searchInvoice(SearchInvoiceRequest objRequest)
+        public object searchInvoice(SearchInvoiceRequest objRequest)
         {
             try
             {

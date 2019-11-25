@@ -44,6 +44,8 @@ namespace eInvoice.MultiLanguages
         public const string E_Invoice_Status_Create = "E_Invoice_Status_Create";
         public const string E_InvoiceTemplate_Type = "E_InvoiceTemplate_Type";
 
-
+        public const string E_InvoiceDelete_Draft = "E_InvoiceDelete_Draft";
+        public const string E_InvoiceDelete_NotExist = "E_InvoiceDelete_NotExist";
+        public const string E_Invoice_Status_Delete = "E_Invoice_Status_Delete";
     }
 }

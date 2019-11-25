@@ -261,5 +261,7 @@ namespace eInvoice.Entity.EDM
         public Nullable<int> VehicleValue { get; set; }
         public string CReceivingPerson { get; set; }
         public string CReceivingPersonID { get; set; }
+        public string SysSource { get; set; }
+        public string CTransporterId { get; set; }
     }
 }

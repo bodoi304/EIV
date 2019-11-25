@@ -41,7 +41,8 @@ namespace eInvoice.Model.Invoice.Request
             if (!CatName.Trim().ToUpper ().Equals (Constants.CategorySync .ALL) && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.KHO )
                && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.MAKETOAN )
                  && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.DIEMXUAT )
-               && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.NGHIEPVU))
+               && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.NGHIEPVU)
+               && !CatName.Trim().ToUpper().Equals(Constants.CategorySync.QUYTRINHPHATHANH ))
             {
                 yield return new ValidationResult(ConstantsMultiLanguageKey.E_CAT_001);
             }

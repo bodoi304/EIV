@@ -52,7 +52,7 @@ namespace eInvoice.Model
                 {
                     ErrorModel item = new ErrorModel();
                     //Check độ dài mess lỗi xem mess có chưa code lỗi không nếu có thì dùng trong chuỗi
-                    if (error.ErrorMessage.Length > 25)
+                    if (error.ErrorMessage.Contains('@'))
                     {
                         String[] strtmp = error.ErrorMessage.Split('@');
                         item.code = strtmp[0];

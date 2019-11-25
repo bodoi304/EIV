@@ -25,6 +25,7 @@ namespace eInvoice.Model.DTOs.Invoice
         public DateTime from { get; set; }
         [JsonConverter(typeof(CustomFormatDateTimeConverter))]
         public DateTime to { get; set; }
+        public String type { get; set; }
         public Boolean reSynInvoice { get; set; }
 
         public override IMapper mapper()
@@ -39,7 +40,7 @@ namespace eInvoice.Model.DTOs.Invoice
         /// <returns></returns>
         public IEnumerable<ValidationResult> Validate(System.ComponentModel.DataAnnotations.ValidationContext validationContext)
         {
-            List<String> validateRequest = ModelBase.validateRequiredObject(new string[] { "from","to", "taxCode" , "username" }, new object[] { from, to, taxCode,username  });
+            List<String> validateRequest = ModelBase.validateRequiredObject(new string[] { "from","to", "taxCode" , "username","type" }, new object[] { from, to, taxCode,username, type });
             foreach (String item in validateRequest)
             {
                 yield return new ValidationResult(item);

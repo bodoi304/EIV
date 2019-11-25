@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category\Response\syncCategory\QuyTrinhPhatHanhModel.cs" />
     <Compile Include="Category\Response\syncCategory\NghiepVuModel.cs" />
     <Compile Include="Category\Response\syncCategory\DiemXuatModel.cs" />
     <Compile Include="Category\Response\syncCategory\KhoModel.cs" />

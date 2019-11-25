@@ -86,8 +86,22 @@ namespace eInvoice.Services.Service
                         Obj.catName = "NGHIEPVU";
                         Obj.data = lstNghiepVu.Cast<Object>().ToList();
                         returnObj.Add(Obj);
+                        if (catType.Equals(Constants.CategorySync.ALL))
+                        {
+                            goto case Constants.CategorySync.QUYTRINHPHATHANH;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    case Constants.CategorySync.QUYTRINHPHATHANH:
+                        List<SyncCategory_QuyTrinhPhatHanh_Result> lstQTPH = ctl.BusinessDepartment_SelectList(syncCategory.taxCode,"duthao");
+                        List<QuyTrinhPhatHanhModel> lstQTPHanh= (new QuyTrinhPhatHanhModel()).mapper().Map<List<SyncCategory_QuyTrinhPhatHanh_Result>, List<QuyTrinhPhatHanhModel>>(lstQTPH);
+                        Obj = new SyncCategoryResponse();
+                        Obj.catName = "QUYTRINHPHATHANH";
+                        Obj.data = lstQTPHanh.Cast<Object>().ToList();
+                        returnObj.Add(Obj);
                         break;
-
                     default:
                         break;
                 }

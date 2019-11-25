@@ -11,6 +11,7 @@ namespace eInvoice.Model.Invoice.Response.createInvoice
         public string key;
         public string taxCode;
         public Boolean result;
+        public int SoDuThao;
         public List<ErrorModel> error;
     }
 }

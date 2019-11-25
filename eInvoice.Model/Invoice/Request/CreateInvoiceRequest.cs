@@ -12,7 +12,7 @@ using static eInvoice.Untilities.Common.Constants;
 
 namespace eInvoice.Model.Invoice.Request
 {
-   public class CreateInvoiceRequest : IValidatableObject
+    public class CreateInvoiceRequest : IValidatableObject
     {
         public String key;
         public InvoicesModel invoice;
@@ -50,10 +50,10 @@ namespace eInvoice.Model.Invoice.Request
             //ton tai du lieu 1 trong 3 column sau CusTaxCode,CusName,CusAddress thì ca 3 column này phải có data
             if (String.IsNullOrEmpty(invoice.Buyer))
             {
-               
+
                 List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.CusTaxCode",
                     "invoice.CusName",
-                    "invoice.CusAddress"}, new object[] { invoice.CusTaxCode,invoice.CusName,invoice.CusAddress });
+                    "invoice.CusAddress"}, new object[] { invoice.CusTaxCode, invoice.CusName, invoice.CusAddress });
                 foreach (String item in validateRequestCus)
                 {
                     yield return new ValidationResult(item);
@@ -62,47 +62,81 @@ namespace eInvoice.Model.Invoice.Request
 
             }
 
-            if (invoice .Status != 0)
+
+            if (invoice.Status != 0)
             {
 
                 new ValidationResult(ConstantsMultiLanguageKey.E_Invoice_Status_Create);
             }
-
-            if (invoice.Type == InvoiceType.ForReplace || invoice.Type == InvoiceType.ForAdjustAccrete
-                || invoice.Type == InvoiceType.ForAdjustReduce
-                || invoice.Type == InvoiceType.ForAdjustInfo)
-            {     
-                if (invoice.DraftCancel == null)
+            else
+            {
+                if ((invoice.Type == InvoiceType.Nomal ||
+          invoice.Type == InvoiceType.ForReplace || invoice.Type == InvoiceType.ForAdjustAccrete
+          || invoice.Type == InvoiceType.ForAdjustReduce
+          || invoice.Type == InvoiceType.ForAdjustInfo) && invoice.DraftCancel != null)
                 {
-                    List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.originalKey" },
-                  new object[] { invoice.originalKey });
-                    foreach (String item in validateRequestCus)
+                    Boolean draftCancel = invoice.DraftCancel ?? false;
+                    if (!(invoice.Type == InvoiceType.Nomal && !draftCancel))
                     {
-                        yield return new ValidationResult(item);
+                            List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.originalKey" },
+          new object[] { invoice.originalKey });
+                            foreach (String item in validateRequestCus)
+                            {
+                                yield return new ValidationResult(item);
+                            }
+                    }
+                    if (!draftCancel)
+                    {
+                        //check invoice co ton tai hay ko
+                        yield return ModelValidate.checkExistInvoice(key);
+                        if (invoice.Status != 0)
+                        {
+
+                            new ValidationResult(ConstantsMultiLanguageKey.E_Invoice_Status_Create);
+                        }
+                    }
+                    else if (draftCancel)
+                    {
+                        if (invoice.Status != 1)
+                        {
+                            new ValidationResult(ConstantsMultiLanguageKey.E_Invoice_Status_Delete);
+                        }
+                    }
+                    //check mau hoa don khong được điều chỉnh thay thế 
+                    if ((invoice.Type == InvoiceType.ForReplace || invoice.Type == InvoiceType.ForAdjustAccrete
+                   || invoice.Type == InvoiceType.ForAdjustReduce
+                   || invoice.Type == InvoiceType.ForAdjustInfo) && invoice.DraftCancel != null)
+                    {
+                        yield return ModelValidate.checkExistInvoiceTemplateTypeView(invoice.Type ?? 8);
                     }
                 }
-                //check mau hoa don khong được điều chỉnh thay thế 
-                yield return ModelValidate.checkExistInvoiceTemplateTypeView(invoice.Type ?? 8);
+                else
+                {
+                    //check invoice co ton tai hay ko
+                    yield return ModelValidate.checkExistInvoice(key);
+                }
             }
+
+
 
             CustomerDA ctlCustomer = new CustomerDA();
             Customer objCus = ctlCustomer.checkExistCustaxcode(invoice.CusTaxCode);
             if (objCus != null)
             {
                 invoice.CusAddress = objCus.Address;
-                invoice.CusName = objCus.Name ;
+                invoice.CusName = objCus.Name;
             }
 
             WareHouseDA ctlWareHouse = new WareHouseDA();
-            Warehouse objWareHouse = ctlWareHouse.checkExistWarehouse (invoice.COutputWarehouseID??0);
+            Warehouse objWareHouse = ctlWareHouse.checkExistWarehouse(invoice.COutputWarehouseID ?? 0);
             if (objWareHouse != null)
             {
-                invoice.COutputWarehouseCode = objWareHouse.Code ;
+                invoice.COutputWarehouseCode = objWareHouse.Code;
                 invoice.COutputWarehouse = objWareHouse.Name;
             }
             //check hàng hóa
-            List<String> validateRequestProduct = ModelBase.validateRequiredList<ProductModel>(invoice.products ,
-                new string[] {"VATRate","VATAmount"});
+            List<String> validateRequestProduct = ModelBase.validateRequiredList<ProductModel>(invoice.products,
+                new string[] { "VATRate", "VATAmount" });
             foreach (String item in validateRequestProduct)
             {
                 yield return new ValidationResult(item);
@@ -117,17 +151,17 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkValueInArrayValue<InvoiceType>(invoice.Type, "Type", ConstantsMultiLanguageKey.E_InValid_Value);
 
-            yield return ModelValidate.checkValueInArrayValue<PaymentMethod>(invoice.PaymentMethod , "PaymentMethod", ConstantsMultiLanguageKey.E_InValid_Value);
+            yield return ModelValidate.checkValueInArrayValue<PaymentMethod>(invoice.PaymentMethod, "PaymentMethod", ConstantsMultiLanguageKey.E_InValid_Value);
 
-            yield return ModelValidate.checkValueInArrayValue<InvoiceStatus>(invoice.Status , "Status", ConstantsMultiLanguageKey.E_InValid_Value);
+            yield return ModelValidate.checkValueInArrayValue<InvoiceStatus>(invoice.Status, "Status", ConstantsMultiLanguageKey.E_InValid_Value);
 
-            yield return ModelValidate.checkValueInArrayValue<PaymentStatus>(invoice.PaymentStatus , "PaymentStatus", ConstantsMultiLanguageKey.E_InValid_Value);
+            yield return ModelValidate.checkValueInArrayValue<PaymentStatus>(invoice.PaymentStatus, "PaymentStatus", ConstantsMultiLanguageKey.E_InValid_Value);
 
-            yield return ModelValidate.checkValueInArrayValue<VATRate>(invoice.VATRate , "VATRate", ConstantsMultiLanguageKey.E_InValid_Value);
+            yield return ModelValidate.checkValueInArrayValue<VATRate>(invoice.VATRate, "VATRate", ConstantsMultiLanguageKey.E_InValid_Value);
 
-            yield return ModelValidate.checkDoDaiSo(invoice.Total.ToString (), LengthNumber.DO_DAI_19 , "Total", ConstantsMultiLanguageKey.E_String_Length);
+            yield return ModelValidate.checkDoDaiSo(invoice.Total.ToString(), LengthNumber.DO_DAI_19, "Total", ConstantsMultiLanguageKey.E_String_Length);
 
-            yield return ModelValidate.checkSoAm(invoice.Total, "Total", ConstantsMultiLanguageKey.E_Number_Value );
+            yield return ModelValidate.checkSoAm(invoice.Total, "Total", ConstantsMultiLanguageKey.E_Number_Value);
 
             yield return ModelValidate.checkDoDaiSo(invoice.VATAmount.ToString(), LengthNumber.DO_DAI_19, "VATAmount", ConstantsMultiLanguageKey.E_String_Length);
 
@@ -147,33 +181,34 @@ namespace eInvoice.Model.Invoice.Request
 
             yield return ModelValidate.checkSoAm(invoice.ExchangeRate, "ExchangeRate", ConstantsMultiLanguageKey.E_Number_Value);
 
-            yield return ModelValidate.checkDoDaiSo(invoice.Currency , LengthNumber.DO_DAI_3, "Currency", ConstantsMultiLanguageKey.E_String_Length);
+            yield return ModelValidate.checkDoDaiSo(invoice.Currency, LengthNumber.DO_DAI_3, "Currency", ConstantsMultiLanguageKey.E_String_Length);
 
-         
 
-           //yield return ModelValidate.checkCurrency(invoice.Currency);
-           //check invoice co ton tai hay ko
-           yield return ModelValidate.checkExistInvoice (key  );
+
+            //yield return ModelValidate.checkCurrency(invoice.Currency);
+
             ///Check BusinessDepartment ID
-            BusinessDepartment objBD =null;
+            BusinessDepartment objBD = null;
             Business objB = null;
             PublishInvoice objPInvoice = null;
             Department objDepartment = null;
-            userdata  objuser = null;
+            userdata objuser = null;
             //Lấy BusinessID
-            yield return ModelValidate.checkExistBussinessDepartment(invoice.BusinessDepartmentID,out objBD);
+            yield return ModelValidate.checkExistBussinessDepartment(invoice.BusinessDepartmentID, out objBD);
             if (objBD != null)
             {
                 //Lấy thông tin Business
-                yield return ModelValidate.checkExistBussiness(objBD.BusinessID , out objB);
-                if (invoice.ModifiedDate == null )
+                yield return ModelValidate.checkExistBussiness(objBD.BusinessID, out objB);
+                if (invoice.ModifiedDate == null)
                 {
                     invoice.ModifiedDate = DateTime.Now;
                 }
                 if (invoice.PublishDate == null)
                 {
-                    invoice.PublishDate  = DateTime.Now;
+                    invoice.PublishDate = DateTime.Now;
                 }
+                //lay tax code
+                invoice.ComTaxCode = objB.TaxCode;
                 if (objB != null)
                 {
                     invoice.Serial = objB.InvSerial;
@@ -181,7 +216,7 @@ namespace eInvoice.Model.Invoice.Request
                     invoice.BusinessID = objBD.BusinessID;
                     //lấy thông tin company
                     CompanyDA ctlCompany = new CompanyDA();
-                    Company company = ctlCompany.checkExistByID(objB.ComID );
+                    Company company = ctlCompany.checkExistByID(objB.ComID);
                     if (company != null)
                     {
                         invoice.ComName = company.Name;

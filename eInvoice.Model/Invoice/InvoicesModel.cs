@@ -64,5 +64,9 @@ namespace eInvoice.Model.Invoice
         [JsonConverter(typeof(CustomFormatBooleanConverter))]
         public Nullable<bool> FormatNumber { get; set; }
         public String originalKey { get; set; }
+
+        public int Soduthao;
+        public int Trangthaikiemtra;
+        public String Ghichu;
     }
 }

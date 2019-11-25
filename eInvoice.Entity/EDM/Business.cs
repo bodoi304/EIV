@@ -29,6 +29,6 @@ namespace eInvoice.Entity.EDM
         public string InvPattern { get; set; }
         public string InvSerial { get; set; }
         public Nullable<int> Type { get; set; }
-        public Nullable<int> AccountingID { get; set; }
+        public Nullable<int> AccountingAccID { get; set; }
     }
 }

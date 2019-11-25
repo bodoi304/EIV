@@ -17,9 +17,11 @@
         <EntityTypeShape EntityType="HDDT_pvoilModel.Currency" Width="1.5" PointX="11.375" PointY="3.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.PublishInvoice" Width="1.5" PointX="9.375" PointY="11.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.PVOILInvoice" Width="1.5" PointX="11.375" PointY="12.75" />
-        <EntityTypeShape EntityType="HDDT_pvoilModel.Business" Width="1.5" PointX="11.375" PointY="6.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.Warehouse" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="HDDT_pvoilModel.InvTemplate" Width="1.5" PointX="13.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.AdjustInv" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.Business" Width="1.5" PointX="13.375" PointY="10.75" />
+        <EntityTypeShape EntityType="HDDT_pvoilModel.InvBusinessProcess" Width="1.5" PointX="0.75" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

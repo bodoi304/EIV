@@ -32,6 +32,7 @@ namespace eInvoice.Untilities.Common
             public const String MAKETOAN = "MAKETOAN";
             public const String DIEMXUAT = "DIEMXUAT";
             public const String NGHIEPVU = "NGHIEPVU";
+            public const String QUYTRINHPHATHANH = "QUYTRINHPHATHANH";
             public const String ALL = "ALL";
         }
 
@@ -98,6 +99,21 @@ namespace eInvoice.Untilities.Common
             public const int Xoa_Bo = 5;
 
             public const int Null = -1;
+        }
+
+        public struct StatusAdj
+        {
+
+            [Description("dự thảo thay thế")]
+            public const int Du_Thao_Thay_The = 10;
+
+            [Description("dự thảo điều chỉnh")]
+            public const int Du_Thao_Dieu_Chinh = 11;
+
+            [Description("dự thảo hủy")]
+            public const int Du_Thao_Huy = 12;
+
+       
         }
 
         public struct PaymentMethod

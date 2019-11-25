@@ -18,6 +18,20 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="AccountingAccName" Type="nvarchar" MaxLength="250" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="AdjustInv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvId" Type="int" />
+          <Property Name="AdjustInvId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Pattern" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProcessDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ComID" Type="int" />
+          <Property Name="Attachefile" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="ApiUserAccess">
           <Key>
             <PropertyRef Name="UserName" />
@@ -48,7 +62,7 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="InvPattern" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="InvSerial" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Type" Type="int" />
-          <Property Name="AccountingID" Type="int" />
+          <Property Name="AccountingAccID" Type="int" />
         </EntityType>
         <EntityType Name="BusinessDepartment">
           <Key>
@@ -157,6 +171,22 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="InvBusinessProcess">
+          <Key>
+            <PropertyRef Name="InvBusinessProcessID" />
+          </Key>
+          <Property Name="InvBusinessProcessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvID" Type="int" Nullable="false" />
+          <Property Name="BusinessID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="BusinessDepartmentID" Type="int" Nullable="false" />
+          <Property Name="StepNo" Type="int" Nullable="false" />
+          <Property Name="JobType" Type="nchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="StatusApprove" Type="bit" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+          <Property Name="InvBPType" Type="int" />
         </EntityType>
         <EntityType Name="InvTemplate">
           <Key>
@@ -490,6 +520,8 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="VehicleValue" Type="int" />
           <Property Name="CReceivingPerson" Type="nvarchar" MaxLength="50" />
           <Property Name="CReceivingPersonID" Type="nvarchar" MaxLength="250" />
+          <Property Name="SysSource" Type="nvarchar" MaxLength="50" />
+          <Property Name="CTransporterId" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="userdata">
           <Key>
@@ -549,6 +581,10 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SyncCategory_QuyTrinhPhatHanh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="JobType" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="userdata_CheckUserAPI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
@@ -558,6 +594,7 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Parameter Name="TaxCode" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="HDDT_pvoilModelStoreContainer">
+          <EntitySet Name="AdjustInv" EntityType="Self.AdjustInv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApiUserAccess" EntityType="Self.ApiUserAccess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Business" EntityType="Self.Business" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusinessDepartment" EntityType="Self.BusinessDepartment" Schema="dbo" store:Type="Tables" />
@@ -565,6 +602,7 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvBusinessProcess" EntityType="Self.InvBusinessProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvTemplate" EntityType="Self.InvTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInv" EntityType="Self.ProductInv" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PublishInvoice" EntityType="Self.PublishInvoice" Schema="dbo" store:Type="Tables" />
@@ -619,9 +657,15 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
             <Parameter Name="Type" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="PVOILInvoices" EntityType="HDDT_pvoilModel.PVOILInvoice" />
-          <EntitySet Name="Businesses" EntityType="HDDT_pvoilModel.Business" />
           <EntitySet Name="Warehouses" EntityType="HDDT_pvoilModel.Warehouse" />
           <EntitySet Name="InvTemplates" EntityType="HDDT_pvoilModel.InvTemplate" />
+          <EntitySet Name="AdjustInvs" EntityType="HDDT_pvoilModel.AdjustInv" />
+          <EntitySet Name="Businesses" EntityType="HDDT_pvoilModel.Business" />
+          <FunctionImport Name="SyncCategory_QuyTrinhPhatHanh" ReturnType="Collection(HDDT_pvoilModel.SyncCategory_QuyTrinhPhatHanh_Result)">
+            <Parameter Name="TaxCode" Mode="In" Type="String" />
+            <Parameter Name="JobType" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="InvBusinessProcesses" EntityType="HDDT_pvoilModel.InvBusinessProcess" />
         </EntityContainer>
         <EntityType Name="ApiUserAccess">
           <Key>
@@ -1150,27 +1194,8 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="VehicleValue" Type="Int32" />
           <Property Name="CReceivingPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CReceivingPersonID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Business">
-          <Key>
-            <PropertyRef Name="BusinessID" />
-          </Key>
-          <Property Name="BusinessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ComID" Type="Int32" Nullable="false" />
-          <Property Name="TaxCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BusinessName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessStatus" Type="Int32" />
-          <Property Name="PublishInvID" Type="Int32" Nullable="false" />
-          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedUserID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdatedUserID" Type="Int32" Nullable="false" />
-          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="InvPattern" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="InvSerial" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="AccountingID" Type="Int32" />
+          <Property Name="SysSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CTransporterId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -1209,6 +1234,63 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsPub" Type="Boolean" />
           <Property Name="IsCertify" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="AdjustInv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvId" Type="Int32" />
+          <Property Name="AdjustInvId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Pattern" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ComID" Type="Int32" />
+          <Property Name="Attachefile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="BusinessID" />
+          </Key>
+          <Property Name="BusinessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComID" Type="Int32" Nullable="false" />
+          <Property Name="TaxCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BusinessName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessStatus" Type="Int32" />
+          <Property Name="PublishInvID" Type="Int32" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedUserID" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvPattern" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="InvSerial" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="AccountingAccID" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="SyncCategory_QuyTrinhPhatHanh_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Ten" Nullable="false" MaxLength="350" />
+          <Property Type="String" Name="Ma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Loai" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <EntityType Name="InvBusinessProcess">
+          <Key>
+            <PropertyRef Name="InvBusinessProcessID" />
+          </Key>
+          <Property Name="InvBusinessProcessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvID" Type="Int32" Nullable="false" />
+          <Property Name="BusinessID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="BusinessDepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="StepNo" Type="Int32" Nullable="false" />
+          <Property Name="JobType" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="StatusApprove" Type="Boolean" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InvBPType" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1525,6 +1607,8 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
           <EntitySetMapping Name="PVOILInvoices">
             <EntityTypeMapping TypeName="HDDT_pvoilModel.PVOILInvoice">
               <MappingFragment StoreEntitySet="PVOILInvoice">
+                <ScalarProperty Name="CTransporterId" ColumnName="CTransporterId" />
+                <ScalarProperty Name="SysSource" ColumnName="SysSource" />
                 <ScalarProperty Name="CReceivingPersonID" ColumnName="CReceivingPersonID" />
                 <ScalarProperty Name="CReceivingPerson" ColumnName="CReceivingPerson" />
                 <ScalarProperty Name="VehicleValue" ColumnName="VehicleValue" />
@@ -1775,28 +1859,6 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Businesses">
-            <EntityTypeMapping TypeName="HDDT_pvoilModel.Business">
-              <MappingFragment StoreEntitySet="Business">
-                <ScalarProperty Name="AccountingID" ColumnName="AccountingID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="InvSerial" ColumnName="InvSerial" />
-                <ScalarProperty Name="InvPattern" ColumnName="InvPattern" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="PublishInvID" ColumnName="PublishInvID" />
-                <ScalarProperty Name="BusinessStatus" ColumnName="BusinessStatus" />
-                <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
-                <ScalarProperty Name="BusinessCode" ColumnName="BusinessCode" />
-                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
-                <ScalarProperty Name="ComID" ColumnName="ComID" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="HDDT_pvoilModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouse">
@@ -1834,6 +1896,70 @@ warning 6002: The table/view 'test_hddt_pvoil6.dbo.AccountingAccount' does not h
                 <ScalarProperty Name="InvCateName" ColumnName="InvCateName" />
                 <ScalarProperty Name="InvCateID" ColumnName="InvCateID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdjustInvs">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.AdjustInv">
+              <MappingFragment StoreEntitySet="AdjustInv">
+                <ScalarProperty Name="Attachefile" ColumnName="Attachefile" />
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="Pattern" ColumnName="Pattern" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdjustInvId" ColumnName="AdjustInvId" />
+                <ScalarProperty Name="InvId" ColumnName="InvId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Businesses">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.Business">
+              <MappingFragment StoreEntitySet="Business">
+                <ScalarProperty Name="AccountingAccID" ColumnName="AccountingAccID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InvSerial" ColumnName="InvSerial" />
+                <ScalarProperty Name="InvPattern" ColumnName="InvPattern" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUserID" ColumnName="UpdatedUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="PublishInvID" ColumnName="PublishInvID" />
+                <ScalarProperty Name="BusinessStatus" ColumnName="BusinessStatus" />
+                <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+                <ScalarProperty Name="BusinessCode" ColumnName="BusinessCode" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SyncCategory_QuyTrinhPhatHanh" FunctionName="HDDT_pvoilModel.Store.SyncCategory_QuyTrinhPhatHanh">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDT_pvoilModel.SyncCategory_QuyTrinhPhatHanh_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="InvBusinessProcesses">
+            <EntityTypeMapping TypeName="HDDT_pvoilModel.InvBusinessProcess">
+              <MappingFragment StoreEntitySet="InvBusinessProcess">
+                <ScalarProperty Name="InvBPType" ColumnName="InvBPType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="StatusApprove" ColumnName="StatusApprove" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="StepNo" ColumnName="StepNo" />
+                <ScalarProperty Name="BusinessDepartmentID" ColumnName="BusinessDepartmentID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="InvID" ColumnName="InvID" />
+                <ScalarProperty Name="InvBusinessProcessID" ColumnName="InvBusinessProcessID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -22,7 +22,7 @@ namespace eInvoice.Repository.DataAccess
         /// <param name="username"></param>
         /// <returns></returns>
         public List<PVOILInvoice> selectListInvoice(String maDiemxuatHD, String username, String taxCode, String buyerTaxCode,
-            DateTime from, DateTime to)
+            DateTime from, DateTime to,String type)
         {
             var predicate = PredicateBuilder.True<PVOILInvoice>();
             if (!string.IsNullOrEmpty(maDiemxuatHD))
@@ -43,14 +43,25 @@ namespace eInvoice.Repository.DataAccess
             }
             if (!(from == DateTime.MinValue))
             {
+                from= from.Date ;
                 predicate = predicate.And(t => t.ArisingDate >= from);
             }
+               
             if (!(to == DateTime.MinValue))
             {
+                to = to.Add(DateTime.MaxValue.TimeOfDay);
                 predicate = predicate.And(t => t.ArisingDate <= to);
             }
+            if (type.ToUpper().Equals("ORTHER"))
+            {
+                predicate = predicate.And(t => t.Type == 1 || t.Type == 0 || t.Status == 5 );
+            }
+            else
+            {
+                predicate = predicate.And(t => t.Type == 2 || t.Type == 3 || t.Type == 4);
+                predicate = predicate.And(t => t.Status != 5);
+            }
 
-            predicate = predicate.And(t => t.Status == (int)Constants.InvoiceStatus.Phat_Hanh);
 
             return dbInvoice.Filter<PVOILInvoice>(predicate).ToList();
         }

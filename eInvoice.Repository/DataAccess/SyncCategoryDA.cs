@@ -31,5 +31,11 @@ namespace eInvoice.Repository.DataAccess
         {
           return   dbInvoice.GetAll<AccountingAccount>().ToList();
         }
+
+        public List<SyncCategory_QuyTrinhPhatHanh_Result> BusinessDepartment_SelectList(String taxcode ,String  jobType)
+        {
+            List<SyncCategory_QuyTrinhPhatHanh_Result> lst = dbInvoice.db.SyncCategory_QuyTrinhPhatHanh(taxcode, jobType).ToList<SyncCategory_QuyTrinhPhatHanh_Result>();
+            return lst;
+        }
     }
 }

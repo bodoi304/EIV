@@ -14,5 +14,11 @@ namespace eInvoice.Repository.DataAccess
 
             return dbInvoice.GetOne<PVOILInvoice>(b => b.Fkey == fkey );
         }
+
+        public PVOILInvoice checkExistInvoice(String fkey,String taxCode)
+        {
+
+            return dbInvoice.GetOne<PVOILInvoice>(b => b.Fkey == fkey && b.ComTaxCode== taxCode);
+        }
     }
 }

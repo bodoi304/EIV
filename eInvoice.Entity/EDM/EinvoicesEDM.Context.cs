@@ -39,9 +39,11 @@ namespace eInvoice.Entity.EDM
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<PublishInvoice> PublishInvoices { get; set; }
         public virtual DbSet<PVOILInvoice> PVOILInvoices { get; set; }
-        public virtual DbSet<Business> Businesses { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<InvTemplate> InvTemplates { get; set; }
+        public virtual DbSet<AdjustInv> AdjustInvs { get; set; }
+        public virtual DbSet<Business> Businesses { get; set; }
+        public virtual DbSet<InvBusinessProcess> InvBusinessProcesses { get; set; }
     
         public virtual ObjectResult<SyncCategory_DiemXuat_Result> SyncCategory_DiemXuat(string username, string taxCode)
         {
@@ -106,6 +108,19 @@ namespace eInvoice.Entity.EDM
                 new ObjectParameter("Type", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userdata_CheckUserAPI_Result>("userdata_CheckUserAPI", usernameParameter, taxCodeParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<SyncCategory_QuyTrinhPhatHanh_Result> SyncCategory_QuyTrinhPhatHanh(string taxCode, string jobType)
+        {
+            var taxCodeParameter = taxCode != null ?
+                new ObjectParameter("TaxCode", taxCode) :
+                new ObjectParameter("TaxCode", typeof(string));
+    
+            var jobTypeParameter = jobType != null ?
+                new ObjectParameter("JobType", jobType) :
+                new ObjectParameter("JobType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SyncCategory_QuyTrinhPhatHanh_Result>("SyncCategory_QuyTrinhPhatHanh", taxCodeParameter, jobTypeParameter);
         }
     }
 }

@@ -31,26 +31,66 @@ namespace eInvoice.Services.Service
         /// </summary>
         /// <param name="searchInvoice"></param>
         /// <returns></returns>
-        public searchInvoiceResponse searchInvoice(SearchInvoiceRequest searchInvoice)
+        public object searchInvoice(SearchInvoiceRequest searchInvoice)
         {
             try
             {
                 SearchInvoiceDA da = new SearchInvoiceDA();
+                InvBusinessProcessDA daInvProcess = new InvBusinessProcessDA();
                 searchInvoiceResponse response = new searchInvoiceResponse();
-                List<PVOILInvoice> lstInvoice = da.selectListInvoice(searchInvoice.maDiemxuatHD, searchInvoice.username, searchInvoice.taxCode, searchInvoice.buyerTaxCode, searchInvoice.from, searchInvoice.to);
+                List<PVOILInvoice> lstInvoice = da.selectListInvoice(searchInvoice.maDiemxuatHD, searchInvoice.username, searchInvoice.taxCode, searchInvoice.buyerTaxCode, searchInvoice.from, searchInvoice.to, searchInvoice.type );
                 List<InvoicesModel> lstInvoiceModel = ModelBase.mapperStatic<PVOILInvoice, InvoicesModel>().Map<List<PVOILInvoice>, List<InvoicesModel>>(lstInvoice);
-                foreach (InvoicesModel item in lstInvoiceModel)
+                if (searchInvoice .type.ToUpper ().Equals("ORTHER"))
                 {
-                    searchInvoiceModel tmp = new searchInvoiceModel();
-                    tmp.key = item.Fkey.ToString();
-                    tmp.Pattern = item.Pattern;
-                    tmp.Serial  = item.Serial ;
-                    tmp.InvoiceNo  = item.No ?? 0 ;
-                    //tmp.invoice = item;
-                    //tmp.invoice.products = da.selectProductByInvoice(item.id);
-                    response.invoices.Add(tmp);
+                    foreach (InvoicesModel item in lstInvoiceModel)
+                    {
+                        searchInvoiceModel tmp = new searchInvoiceModel();
+                        InvBusinessProcess objInvProcess= daInvProcess.checkExist(item.id);
+                        tmp.key = item.Fkey.ToString();
+                        tmp.Pattern = item.Pattern;
+                        tmp.Serial = item.Serial;
+                        tmp.InvoiceNo = item.No ?? 0;
+                        tmp.Soduthao = item.id;
+                        int objStatusApprove=0;
+                        if (objInvProcess?.StatusApprove == null)
+                        {
+                            objStatusApprove = 0;
+                        }
+                        else
+                        {
+                            objStatusApprove = (bool)objInvProcess?.StatusApprove ? 1 : 0;
+                        }
+                        tmp.Trangthaikiemtra = objStatusApprove;
+                        tmp.Ghichu = objInvProcess?.Comment;
+                        response.invoices.Add(tmp);
+                    }
+                    return response;
                 }
-                return response;
+                else if (searchInvoice.type.ToUpper().Equals("DC"))
+                {
+                    foreach (InvoicesModel item in lstInvoiceModel)
+                    {
+                        InvBusinessProcess objInvProcess = daInvProcess.checkExist(item.id);
+                        item.Soduthao = item.id;
+                        int objStatusApprove = 0;
+                        if (objInvProcess?.StatusApprove == null)
+                        {
+                            objStatusApprove = 0;
+                        }
+                        else
+                        {
+                            objStatusApprove = (bool)objInvProcess?.StatusApprove ? 1 : 0;
+                        }
+                        item.Trangthaikiemtra = objStatusApprove;
+                        item.Ghichu = objInvProcess?.Comment;
+                    }
+                    return lstInvoiceModel;
+                }
+                else
+                {
+                    return null;
+                }
+             
             }
             catch (Exception ex)
             {
@@ -64,7 +104,7 @@ namespace eInvoice.Services.Service
         /// <param name="createInvoiceModel"></param>
         /// <returns></returns>
         public createInvoiceResponse createInvoice(CreateInvoiceRequest createInvoiceModel)
-        {
+        {      
             try
             {
                 createInvoiceResponse returnObj = new createInvoiceResponse();
@@ -73,9 +113,12 @@ namespace eInvoice.Services.Service
                 CRUDInvoices cRUD = new CRUDInvoices();
                 PVOILInvoice invoice = ModelBase.mapperStatic<InvoicesModel, PVOILInvoice>().Map<InvoicesModel, PVOILInvoice>(createInvoiceModel.invoice);
                 List<ProductInv> lstProduct =  ModelBase.mapperStatic< ProductModel,  ProductInv >().Map< List<ProductModel>, List< ProductInv >>(createInvoiceModel.invoice.products);
-                cRUD.insertInvoiceProduct(invoice, lstProduct);
+                invoice.InvCateID = 1;
+                invoice.SysSource = "Auto";
+                int idInvoice= cRUD.insertInvoiceProduct(invoice, lstProduct, createInvoiceModel.invoice.originalKey);
                 returnObj.taxCode = createInvoiceModel.invoice.ComTaxCode;
                 returnObj.key = createInvoiceModel.invoice.Fkey;
+                returnObj.SoDuThao = idInvoice;
                 returnObj.result = true;
                 return returnObj;
             }
