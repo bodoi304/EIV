@@ -2,12 +2,14 @@
 using eInvoice.Entity.EDM;
 using eInvoice.MultiLanguages;
 using eInvoice.Repository.DataAccess;
+using eInvoice.Untilities.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using static eInvoice.Untilities.Common.Constants;
 
 namespace eInvoice.Model.Invoice.Request
@@ -78,12 +80,16 @@ namespace eInvoice.Model.Invoice.Request
                     Boolean draftCancel = invoice.DraftCancel ?? false;
                     if (!(invoice.Type == InvoiceType.Nomal && !draftCancel))
                     {
+                        String noCheckOk = HttpContext.Current.Request.QueryString["NoCheckOK"];
+                        if ((!(invoice.Type == InvoiceType.ForReplace && draftCancel)) || noCheckOk == null)
+                        {
                             List<String> validateRequestCus = ModelBase.validateRequiredObject(new string[] { "invoice.originalKey" },
-          new object[] { invoice.originalKey });
+new object[] { invoice.originalKey });
                             foreach (String item in validateRequestCus)
                             {
                                 yield return new ValidationResult(item);
                             }
+                        }
                     }
                     if (!draftCancel)
                     {
@@ -207,6 +213,11 @@ namespace eInvoice.Model.Invoice.Request
                 {
                     invoice.PublishDate = DateTime.Now;
                 }
+                //check khac nhau giua tax code dang nhap va bussinessDepartment
+                if (!invoice.ComTaxCode.Equals(objB.TaxCode))
+                {
+                    yield return new ValidationResult(ConstantsMultiLanguageKey.E_TAXCODEDANGNHAP_TAXCODEBUSINESSDEPARTMENT);
+                }
                 //lay tax code
                 invoice.ComTaxCode = objB.TaxCode;
                 if (objB != null)
@@ -243,6 +254,17 @@ namespace eInvoice.Model.Invoice.Request
                     yield return ModelValidate.checkUsersByID(objBD.UserID, out objuser);
                     if (objuser != null)
                     {
+                        if (HttpContext.Current.Request.Headers["Authentication"] != null)
+                        {
+                            String[] authentication = Untility.decodeBase64(HttpContext.Current.Request.Headers["Authentication"]).Split(':');
+                            String userNameLogin = authentication[0];
+                            //check khac nhau giua username dang nhap va bussinessDepartment
+                            if (!objuser.username.Equals(userNameLogin))
+                            {
+                                yield return new ValidationResult(ConstantsMultiLanguageKey.E_USERNAMEDANGNHAP_USERNAMEBUSINESSDEPARTMENT);
+                            }
+                        }
+
                         if (!objuser.IsApproved ?? !eInvoice.Untilities.Common.Constants.ActiveUser.INACTIVE)
                         {
                             yield return new ValidationResult(String.Format(ConfigMultiLanguage.getMessWithKey(ConstantsMultiLanguageKey.E_User_Active), objuser.username));

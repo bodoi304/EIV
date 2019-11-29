@@ -12,11 +12,14 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
         public string key;
         public string Serial;
         public string Pattern;
-        public decimal InvoiceNo;
+        public int InvoiceNo;
 
         public int Soduthao;
         public int Trangthaikiemtra;
         public String Ghichu;
+        public int? Type;
+        public int? Status;
+        public bool? Draftcancel;
         //public InvoicesModel invoice;
 
         //public searchInvoiceModel()

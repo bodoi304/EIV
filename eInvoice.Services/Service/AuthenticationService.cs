@@ -34,6 +34,7 @@ namespace eInvoice.Services.Service
             String UserName = authentication[0];
             String Password = authentication[1];
             String Taxcode = authentication[2];
+        
             //Tạo memory cache để lưu thông tin request API
             MemoryCacher cacher = new MemoryCacher();
             //Tạo token

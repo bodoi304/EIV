@@ -137,6 +137,35 @@ namespace eInvoice.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API them hóa đơn : api/pvoilbusiness/createInvoice
+        /// </summary>
+        /// <param name="objRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public createInvoiceResponse createInvoiceNooriginalKey(CreateInvoiceRequest objRequest)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    return invoice.createInvoice(objRequest);
+                }
+                else
+                {
+                    createInvoiceResponse returnObj = new createInvoiceResponse();
+                    returnObj.key = objRequest.key;
+                    returnObj.taxCode = objRequest.invoice.ComTaxCode;
+                    returnObj.result = false;
+                    returnObj.error = UtilitesModel.getErrorList(ModelState);
+                    return returnObj;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw Logs.ErrorException(ex, HttpStatusCode.BadRequest, ex.Message + " - " + ex.StackTrace);
+            }
+        }
 
         [HttpGet]
         public HttpResponseMessage exportPDF(ExportInvoiceRequest objRequest)

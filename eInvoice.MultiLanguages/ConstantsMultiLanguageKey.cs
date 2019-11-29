@@ -47,5 +47,8 @@ namespace eInvoice.MultiLanguages
         public const string E_InvoiceDelete_Draft = "E_InvoiceDelete_Draft";
         public const string E_InvoiceDelete_NotExist = "E_InvoiceDelete_NotExist";
         public const string E_Invoice_Status_Delete = "E_Invoice_Status_Delete";
+
+        public const string E_TAXCODEDANGNHAP_TAXCODEBUSINESSDEPARTMENT = "E_TAXCODEDANGNHAP_TAXCODEBUSINESSDEPARTMENT";
+        public const string E_USERNAMEDANGNHAP_USERNAMEBUSINESSDEPARTMENT = "E_USERNAMEDANGNHAP_USERNAMEBUSINESSDEPARTMENT";
     }
 }
