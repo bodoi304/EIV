@@ -505,6 +505,22 @@ namespace eInvoice.Model
             }
         }
 
+        public static ValidationResult checkExistNoInvoice(String fkey, out PVOILInvoice objOut)
+        {
+            PVOILInvoiceDA pvOil = new PVOILInvoiceDA();
+            PVOILInvoice objInv = pvOil.checkExistInvoice(fkey);
+            if (objInv == null)
+            {
+                objOut = null;
+                return new ValidationResult(ConfigMultiLanguage.getMess(ConstantsMultiLanguageKey.E_InvoiceDelete_NotExist));
+            }
+            else
+            {
+                objOut = objInv;
+                return null;
+            }
+        }
+
         public static ValidationResult checkExistInvoiceTemplateTypeView(int Type)
         {
             InvTemplateDA ctlInvTemp = new InvTemplateDA();

@@ -14,5 +14,17 @@ namespace eInvoice.Repository.DataAccess
             dbInvoice.Insert<AdjustInv>(adjustInv);
 
         }
+
+        public AdjustInv CheckExists(Int64 invId)
+        {
+          return  dbInvoice.GetOne<AdjustInv>(b => b.InvId == invId);
+
+        }
+
+        public AdjustInv CheckExistsAdj(Int64 adjustInvId)
+        {
+            return dbInvoice.GetOne<AdjustInv>(b => b.AdjustInvId == adjustInvId);
+
+        }
     }
 }

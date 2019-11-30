@@ -43,7 +43,7 @@ namespace eInvoice.Repository.DataAccess
             int idInvoice = 0;
             Boolean draftCancel = invoiceObj.DraftCancel ?? false;
             PVOILInvoice objInv = ctlPvoil.checkExistInvoice(originKey, invoiceObj.ComTaxCode);
-            PVOILInvoice objAdjInv = ctlPvoil.checkExistInvoice(invoiceObj.Fkey, invoiceObj.ComTaxCode);  
+            PVOILInvoice objAdjInv = ctlPvoil.checkExistInvoice(invoiceObj.Fkey, invoiceObj.ComTaxCode);
             int adjustInvId = objAdjInv != null ? objAdjInv.id : 0;
             //Set status cho table AdjustInv 
             if (draftCancel)
@@ -52,21 +52,21 @@ namespace eInvoice.Repository.DataAccess
           || invoiceObj.Type == InvoiceType.ForAdjustReduce
           || invoiceObj.Type == InvoiceType.ForAdjustInfo)
                 {
-                    objAdj.Status = StatusAdj.Du_Thao_Huy ;
+                    objAdj.Status = StatusAdj.Du_Thao_Huy;
                 }
             }
             else
             {
                 if (invoiceObj.Type == InvoiceType.ForReplace)
                 {
-                    objAdj.Status = StatusAdj.Du_Thao_Thay_The ;
+                    objAdj.Status = StatusAdj.Du_Thao_Thay_The;
                 }
 
                 else if (invoiceObj.Type == InvoiceType.ForAdjustAccrete
           || invoiceObj.Type == InvoiceType.ForAdjustReduce
           || invoiceObj.Type == InvoiceType.ForAdjustInfo)
                 {
-                    objAdj.Status = StatusAdj.Du_Thao_Dieu_Chinh ;
+                    objAdj.Status = StatusAdj.Du_Thao_Dieu_Chinh;
                 }
                 else
                 {
@@ -88,8 +88,16 @@ namespace eInvoice.Repository.DataAccess
                         objAdjInv.Status = invoiceObj.Status;
                         objAdjInv.DraftCancel = invoiceObj.DraftCancel;
                         updateInvoices(objAdjInv);
-                        objAdj.InvId = objInv.id;
                         objAdj.AdjustInvId = adjustInvId;
+                        if (objInv == null)
+                        {
+                            invoiceObj = objAdjInv;
+                            objAdj.InvId = invoiceObj.id;
+                        }
+                        else
+                        {
+                            objAdj.InvId = objInv.id;
+                        }
                         objAdj.Description = invoiceObj.Name;
                         objAdj.Pattern = invoiceObj.Pattern;
                         objAdj.ProcessDate = DateTime.Now;
@@ -108,12 +116,18 @@ namespace eInvoice.Repository.DataAccess
                         objAdj.ProcessDate = DateTime.Now;
                         objAdj.ComID = invoiceObj.ComID;
 
-                        foreach (ProductInv item in lstProductObj)
+                        //Type =4 khoong nhan product
+                        if (invoiceObj.Type != InvoiceType.ForAdjustInfo)
                         {
-                            item.id = Guid.NewGuid();
-                            item.InvID = idInvoice;
+                            foreach (ProductInv item in lstProductObj)
+                            {
+                                item.id = Guid.NewGuid();
+                                item.InvID = idInvoice;
+                            }
+
+                            cPro.insertProduct(lstProductObj);
                         }
-                        cPro.insertProduct(lstProductObj);
+
                     }
                     //check insert table AdjustInv type=0 and status=0 and daftcancel=0  thì ko insert
                     if (invoiceObj.Type == InvoiceType.Nomal)

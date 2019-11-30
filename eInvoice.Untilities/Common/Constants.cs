@@ -113,7 +113,15 @@ namespace eInvoice.Untilities.Common
             [Description("dự thảo hủy")]
             public const int Du_Thao_Huy = 12;
 
-       
+            [Description("dự thảo thay thế")]
+            public const int Adj_0 = 0;
+
+            [Description("dự thảo điều chỉnh")]
+            public const int Adj_1 = 1;
+
+            [Description("dự thảo hủy")]
+            public const int Adj_2 = 2;
+
         }
 
         public struct PaymentMethod
