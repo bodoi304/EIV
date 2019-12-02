@@ -49,7 +49,7 @@ namespace eInvoice.Services.Service
                         tmp.key = item.Fkey.ToString();
                         tmp.Pattern = item.Pattern;
                         tmp.Serial = item.Serial;
-                        tmp.InvoiceNo = Convert.ToInt32(item.No ?? 0) ;
+                        tmp.InvoiceNo = Convert.ToInt32(item.No ?? 0).ToString().PadLeft(7,'0') ;
                         tmp.Soduthao = item.id;
                         int objStatusApprove=0;
                         if (objInvProcess?.StatusApprove == null)

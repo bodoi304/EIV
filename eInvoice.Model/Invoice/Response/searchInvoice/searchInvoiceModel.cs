@@ -12,7 +12,7 @@ namespace eInvoice.Model.Invoice.Response.searchInvoice
         public string key;
         public string Serial;
         public string Pattern;
-        public int InvoiceNo;
+        public string InvoiceNo;
 
         public int Soduthao;
         public int Trangthaikiemtra;
