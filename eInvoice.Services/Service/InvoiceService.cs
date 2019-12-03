@@ -5,6 +5,7 @@ using eInvoice.Model.Invoice;
 using eInvoice.Model.Invoice.Request;
 using eInvoice.Model.Invoice.Response.createInvoice;
 using eInvoice.Model.Invoice.Response.searchInvoice;
+using eInvoice.Repository;
 using eInvoice.Repository.DataAccess;
 using eInvoice.Services.Interface;
 using eInvoice.Untilities.Common;
@@ -39,10 +40,10 @@ namespace eInvoice.Services.Service
                 InvBusinessProcessDA daInvProcess = new InvBusinessProcessDA();
                 searchInvoiceResponse response = new searchInvoiceResponse();
                 List<PVOILInvoice> lstInvoice = da.selectListInvoice(searchInvoice.maDiemxuatHD, searchInvoice.username, searchInvoice.taxCode, searchInvoice.buyerTaxCode, searchInvoice.from, searchInvoice.to, searchInvoice.type );
-                List<InvoicesModel> lstInvoiceModel = ModelBase.mapperStatic<PVOILInvoice, InvoicesModel>().Map<List<PVOILInvoice>, List<InvoicesModel>>(lstInvoice);
+              List<InvoicesModel> lstInvoiceModel = ModelBase.mapperStatic<PVOILInvoice, InvoicesModel>().Map<List<PVOILInvoice>, List<InvoicesModel>>(lstInvoice);
                 if (searchInvoice .type.ToUpper ().Equals("ORTHER"))
                 {
-                    foreach (InvoicesModel item in lstInvoiceModel)
+                    foreach (PVOILInvoice item in lstInvoice)
                     {
                         searchInvoiceModel tmp = new searchInvoiceModel();
                         InvBusinessProcess objInvProcess= daInvProcess.checkExist(item.id);
@@ -62,6 +63,7 @@ namespace eInvoice.Services.Service
                         }
                         tmp.Trangthaikiemtra = objStatusApprove;
                         tmp.Ghichu = objInvProcess?.Comment;
+                        //tmp.Ghichu = $"Dữ liệu invoice lấy ra từ DB: {item.No} {item.Status} {DataAccessBase.dbInvoice.db.Database.Connection.ConnectionString}";
                         tmp.Type = item.Type ;
                         tmp.Status  = item.Status ;
                         tmp.Draftcancel = item.DraftCancel;
